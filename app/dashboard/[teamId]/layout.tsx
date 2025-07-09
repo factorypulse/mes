@@ -1,8 +1,18 @@
-'use client';
+"use client";
 
 import SidebarLayout, { SidebarItem } from "@/components/sidebar-layout";
 import { SelectedTeamSwitcher, useUser } from "@stackframe/stack";
-import { BarChart4, Factory, Globe, Route, Settings2, ShoppingCart, Timer, Users } from "lucide-react";
+import {
+  BarChart4,
+  Factory,
+  Globe,
+  Route,
+  Settings2,
+  ShoppingCart,
+  Timer,
+  User,
+  Users,
+} from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 const navigationItems: SidebarItem[] = [
@@ -13,8 +23,8 @@ const navigationItems: SidebarItem[] = [
     type: "item",
   },
   {
-    type: 'label',
-    name: 'Production',
+    type: "label",
+    name: "Production",
   },
   {
     name: "Routings",
@@ -35,14 +45,20 @@ const navigationItems: SidebarItem[] = [
     type: "item",
   },
   {
+    name: "Operator",
+    href: "/operator",
+    icon: User,
+    type: "item",
+  },
+  {
     name: "Departments",
     href: "/departments",
     icon: Factory,
     type: "item",
   },
   {
-    type: 'label',
-    name: 'Management',
+    type: "label",
+    name: "Management",
   },
   {
     name: "People",
@@ -57,8 +73,8 @@ const navigationItems: SidebarItem[] = [
     type: "item",
   },
   {
-    type: 'label',
-    name: 'Settings',
+    type: "label",
+    name: "Settings",
   },
   {
     name: "Configuration",
@@ -70,27 +86,31 @@ const navigationItems: SidebarItem[] = [
 
 export default function Layout(props: { children: React.ReactNode }) {
   const params = useParams<{ teamId: string }>();
-  const user = useUser({ or: 'redirect' });
+  const user = useUser({ or: "redirect" });
   const team = user.useTeam(params.teamId);
   const router = useRouter();
 
   if (!team) {
-    router.push('/dashboard');
+    router.push("/dashboard");
     return null;
   }
 
   return (
-    <SidebarLayout 
+    <SidebarLayout
       items={navigationItems}
       basePath={`/dashboard/${team.id}`}
-      sidebarTop={<SelectedTeamSwitcher 
-        selectedTeam={team}
-        urlMap={(team) => `/dashboard/${team.id}`}
-      />}
-      baseBreadcrumb={[{
-        title: team.displayName,
-        href: `/dashboard/${team.id}`,
-      }]}
+      sidebarTop={
+        <SelectedTeamSwitcher
+          selectedTeam={team}
+          urlMap={(team) => `/dashboard/${team.id}`}
+        />
+      }
+      baseBreadcrumb={[
+        {
+          title: team.displayName,
+          href: `/dashboard/${team.id}`,
+        },
+      ]}
     >
       {props.children}
     </SidebarLayout>
