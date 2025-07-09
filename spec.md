@@ -156,7 +156,7 @@ To create a user-friendly Manufacturing Execution System (MES) focused on produc
         As a Planner/Manager, I want an Order Schedule Adherence View that lists orders filterable by launch_date (e.g., "Launching Today", "Launching This Week", "Overdue Launch") and their current status.
     Technical Considerations:
         Data derived from MES_Orders, MES_Work_Order_Operations, and MES_Pause_Reasons.
-        Use Chartkick for visualizations, leveraging its compatibility with React (or consider a React charting library such as Recharts or Chart.js).
+        Use Chart.js for visualizations, leveraging its compatibility with React (or consider a React charting library such as Recharts or Chart.js).
         Backend will perform necessary aggregations. Initial versions may use direct queries; consider database views or materialized views if performance becomes an issue with larger datasets.
 
 4. Technical Implementation Stack & Notes (V1)
