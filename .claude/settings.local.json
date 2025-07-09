@@ -31,7 +31,8 @@
       "Bash(npx:*)",
       "Bash(DATABASE_URL=postgresql://mes_user:mes_password@localhost:5432/mes_db tsx scripts/test-auth-flow.ts)",
       "Bash(curl:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(sed:*)"
     ],
     "deny": []
   }

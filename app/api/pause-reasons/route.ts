@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    if (!user.selectedTeamId) {
+    if (!user.selectedTeam?.id) {
       return NextResponse.json({ error: 'No team selected' }, { status: 400 })
     }
 
@@ -21,13 +21,13 @@ export async function GET(request: NextRequest) {
 
     if (category) {
       pauseReasons = await PauseReasonsService.getPauseReasonsByCategory(
-        user.selectedTeamId,
+        user.selectedTeam?.id,
         category,
         activeOnly
       )
     } else {
       pauseReasons = await PauseReasonsService.getPauseReasonsByTeam(
-        user.selectedTeamId,
+        user.selectedTeam?.id,
         activeOnly
       )
     }
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    if (!user.selectedTeamId) {
+    if (!user.selectedTeam?.id) {
       return NextResponse.json({ error: 'No team selected' }, { status: 400 })
     }
 
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
       name,
       description,
       category,
-      teamId: user.selectedTeamId
+      teamId: user.selectedTeam?.id
     })
 
     return NextResponse.json(pauseReason, { status: 201 })

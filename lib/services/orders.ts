@@ -63,7 +63,8 @@ export class OrdersService {
         orderId: order.id,
         routingOperationId: routingOp.id,
         teamId: input.teamId,
-        status: 'pending' as const
+        // Only set operation 1 to 'pending', others should wait until previous operations are completed
+        status: routingOp.operationNumber === 1 ? 'pending' : 'waiting'
       }))
 
       await prisma.mESWorkOrderOperation.createMany({
@@ -149,7 +150,7 @@ export class OrdersService {
     const order = await prisma.mESOrder.findFirst({
       where: { id, teamId }
     })
-    
+
     if (!order) {
       return null
     }
@@ -191,7 +192,7 @@ export class OrdersService {
     const order = await prisma.mESOrder.findFirst({
       where: { id, teamId }
     })
-    
+
     if (!order) {
       return false
     }
@@ -203,7 +204,7 @@ export class OrdersService {
         updatedAt: new Date()
       }
     })
-    
+
     return true
   }
 
@@ -212,7 +213,7 @@ export class OrdersService {
     const order = await prisma.mESOrder.findFirst({
       where: { id, teamId, status: 'pending' }
     })
-    
+
     if (!order) {
       return null
     }
@@ -255,7 +256,7 @@ export class OrdersService {
     const order = await prisma.mESOrder.findFirst({
       where: { id, teamId, status: 'in_progress' }
     })
-    
+
     if (!order) {
       return null
     }

@@ -69,7 +69,7 @@ export const mesWorkOrderOperations = pgTable('mes_work_order_operations', {
   orderId: text('order_id').notNull().references(() => mesOrders.id, { onDelete: 'cascade' }),
   routingOperationId: text('routing_operation_id').notNull().references(() => mesRoutingOperations.id),
   operatorId: text('operator_id'), // StackAuth user ID
-  status: text('status').notNull().default('pending').$type<'pending' | 'in_progress' | 'completed' | 'paused' | 'cancelled'>(),
+  status: text('status').notNull().default('pending').$type<'pending' | 'in_progress' | 'completed' | 'paused' | 'cancelled' | 'waiting'>(),
   scheduledStartTime: timestamp('scheduled_start_time', { withTimezone: true }),
   scheduledEndTime: timestamp('scheduled_end_time', { withTimezone: true }),
   actualStartTime: timestamp('actual_start_time', { withTimezone: true }),
@@ -82,6 +82,14 @@ export const mesWorkOrderOperations = pgTable('mes_work_order_operations', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
   teamId: text('team_id').notNull(), // StackAuth team/org ID
 });
+
+// Status definitions:
+// - 'pending': Ready to be started by an operator
+// - 'in_progress': Currently being worked on by an operator
+// - 'completed': Finished successfully
+// - 'paused': Temporarily stopped (with reason)
+// - 'cancelled': Permanently stopped
+// - 'waiting': Future operation waiting for previous operations to complete (sequential workflow)
 
 // Pause Reasons: Standardized reasons for pausing operations
 export const mesPauseReasons = pgTable('mes_pause_reasons', {

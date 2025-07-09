@@ -18,8 +18,25 @@ export async function POST(
     }
 
     const params = await context.params
-    const body = await request.json()
-    const { capturedData, quantityCompleted, quantityRejected, notes } = body
+
+    // Handle potential empty or missing request body
+    let body = {}
+    try {
+      const requestText = await request.text()
+      if (requestText.trim()) {
+        body = JSON.parse(requestText)
+      }
+    } catch (parseError) {
+      console.warn('Failed to parse request body, using defaults:', parseError)
+    }
+
+    // Provide default values for missing fields
+    const {
+      capturedData = null,
+      quantityCompleted = 0,
+      quantityRejected = 0,
+      notes = null
+    } = body
 
     const woo = await WorkOrderOperationsService.completeWOO(
       params.id,

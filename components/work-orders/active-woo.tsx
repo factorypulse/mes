@@ -152,6 +152,8 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
           },
           body: JSON.stringify({
             capturedData: formData,
+            quantityCompleted: 0, // Default to 0, could be made configurable later
+            quantityRejected: 0, // Default to 0, could be made configurable later
             notes: notes.trim() || undefined,
           }),
         }

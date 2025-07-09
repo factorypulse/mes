@@ -2,13 +2,15 @@ import { ReactNode, Suspense } from "react";
 import { ModernSidebar } from "@/components/ui/modern-sidebar";
 import { ColorModeSwitcher } from "@/components/color-mode-switcher";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
   params,
 }: {
   children: ReactNode;
-  params: { teamId: string };
+  params: Promise<{ teamId: string }>;
 }) {
+  const { teamId } = await params;
+  
   return (
     <div className="min-h-screen bg-background">
       {/* Background gradient overlay */}
@@ -22,7 +24,7 @@ export default function DashboardLayout({
       <div className="flex h-screen">
         {/* Enhanced Sidebar */}
         <aside className="glass-card border-r border-border/50 backdrop-blur-xl">
-          <ModernSidebar teamId={params.teamId} />
+          <ModernSidebar teamId={teamId} />
         </aside>
 
         {/* Main content area */}

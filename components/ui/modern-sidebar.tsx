@@ -189,11 +189,11 @@ export function ModernSidebar({ teamId, className }: ModernSidebarProps) {
 
       {/* Footer */}
       <div className="p-4 border-t border-border/50">
-        <div className="glass-subtle rounded-xl p-4 transition-all duration-200 hover:bg-primary/5 cursor-pointer">
-          <div className="flex items-center gap-3">
-            <Link href="/handler/account-settings#profile" className="flex items-center gap-3">
-              <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
-                <User className="h-3 w-3 text-primary" />
+        <Link href="/handler/account-settings#profile">
+          <div className="glass-subtle rounded-xl p-4 transition-all duration-200 hover:bg-primary/5 cursor-pointer">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                <User className="h-4 w-4 text-primary" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium truncate">
@@ -203,12 +203,11 @@ export function ModernSidebar({ teamId, className }: ModernSidebarProps) {
                   {user.primaryEmail}
                 </p>
               </div>
-            </Link>
-
-            <ColorModeSwitcher />
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
+      <ColorModeSwitcher />
     </div>
   );
 }

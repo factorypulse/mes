@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    if (!user.selectedTeamId) {
+    if (!user.selectedTeam?.id) {
       return NextResponse.json({ error: 'No team selected' }, { status: 400 })
     }
 
@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
     }
 
     const usageStats = await PauseReasonsService.getPauseReasonUsage(
-      user.selectedTeamId,
+      user.selectedTeam?.id,
       startDate,
       endDate
     )

@@ -234,7 +234,12 @@ test.describe('API Endpoints', () => {
       };
 
       const completeResponse = await page.request.post(`/api/work-order-operations/${firstWOO.id}/complete`, {
-        data: { capturedData }
+        data: {
+          capturedData,
+          quantityCompleted: 0,
+          quantityRejected: 0,
+          notes: null
+        }
       });
 
       expect(completeResponse.ok()).toBeTruthy();

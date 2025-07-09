@@ -9,12 +9,12 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    if (!user.selectedTeamId) {
+    if (!user.selectedTeam?.id) {
       return NextResponse.json({ error: 'No team selected' }, { status: 400 })
     }
 
     const categoryCounts = await PauseReasonsService.getPauseReasonCategoryCounts(
-      user.selectedTeamId
+      user.selectedTeam.id
     )
 
     return NextResponse.json(categoryCounts)

@@ -2,13 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { PauseReasonsService } from '@/lib/services/pause-reasons'
 import { stackServerApp } from '@/stack'
 
-interface Params {
-  id: string
-}
-
 export async function GET(
   request: NextRequest,
-  { params }: { params: Params }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await stackServerApp.getUser()
@@ -16,13 +12,14 @@ export async function GET(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    if (!user.selectedTeamId) {
+    if (!user.selectedTeam?.id) {
       return NextResponse.json({ error: 'No team selected' }, { status: 400 })
     }
 
+    const params = await context.params
     const pauseReason = await PauseReasonsService.getPauseReasonById(
       params.id,
-      user.selectedTeamId
+      user.selectedTeam.id
     )
 
     if (!pauseReason) {
@@ -38,7 +35,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Params }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await stackServerApp.getUser()
@@ -46,10 +43,11 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    if (!user.selectedTeamId) {
+    if (!user.selectedTeam?.id) {
       return NextResponse.json({ error: 'No team selected' }, { status: 400 })
     }
 
+    const params = await context.params
     const body = await request.json()
     const { name, description, category, isActive } = body
 
@@ -65,7 +63,7 @@ export async function PUT(
 
     const updatedPauseReason = await PauseReasonsService.updatePauseReason(
       params.id,
-      user.selectedTeamId,
+      user.selectedTeam.id,
       { name, description, category, isActive }
     )
 
@@ -82,7 +80,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Params }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await stackServerApp.getUser()
@@ -90,13 +88,14 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    if (!user.selectedTeamId) {
+    if (!user.selectedTeam?.id) {
       return NextResponse.json({ error: 'No team selected' }, { status: 400 })
     }
 
+    const params = await context.params
     const success = await PauseReasonsService.deletePauseReason(
       params.id,
-      user.selectedTeamId
+      user.selectedTeam.id
     )
 
     if (!success) {

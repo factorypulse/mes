@@ -1,39 +1,399 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
-import { RecentSales } from "@/app/dashboard/[teamId]/(overview)/recent-sales";
+import { RecentActivity } from "@/app/dashboard/[teamId]/(overview)/recent-activity";
 import { Graph } from "./graph";
 import { MetricsCard } from "@/components/ui/metrics-card";
-import { ProgressRing } from "@/components/ui/progress-ring";
+
 import { StatusIndicator } from "@/components/ui/status-indicator";
 import { ColorModeSwitcher } from "@/components/color-mode-switcher";
-import { ShoppingCart, Users, BarChart3, Zap, Clock } from "lucide-react";
+import { BarChart3, Zap, Clock } from "lucide-react";
+import { getUser } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: "Manufacturing Dashboard",
   description: "Real-time manufacturing execution system overview",
 };
 
-// Mock data - in real app this would come from API
-const dashboardData = {
-  production: {
-    efficiency: 87.5,
-    throughput: 245,
-    quality: 96.2,
-    downtime: 23,
-  },
-  orders: {
-    active: 12,
-    pending: 34,
-    completed: 187,
-    urgent: 3,
-  },
-  operators: {
-    active: 28,
-    total: 35,
-    shifts: 3,
-  },
-};
+async function fetchDashboardData(teamId: string): Promise<DashboardData> {
+  try {
+    const user = await getUser();
+    if (!user || !user.selectedTeam?.id) {
+      throw new Error("No authenticated user or team");
+    }
+
+    // Import the services we need
+    const { UsersService } = await import("@/lib/services/users");
+    const { prisma } = await import("@/lib/prisma");
+
+    // Get user's accessible departments
+    const userAccessibleDepartments =
+      await UsersService.getUserAccessibleDepartments(user.id, teamId);
+
+    // Build department filter
+    let departmentFilter: any = {};
+    if (
+      userAccessibleDepartments !== "all" &&
+      Array.isArray(userAccessibleDepartments)
+    ) {
+      if ((userAccessibleDepartments as string[]).length === 0) {
+        // User has no department access, return empty metrics
+        return {
+          ordersPending: 0,
+          ordersInProgress: 0,
+          ordersPaused: 0,
+          ordersWaiting: 0,
+          ordersCompletedToday: 0,
+          operationsInProgress: 0,
+          operationsPaused: 0,
+          completedOperationsToday: 0,
+          averageCycleTime: 0,
+          onTimeDeliveryRate: 0,
+          operatorUtilization: 0,
+          totalOperators: 0,
+          activeOperators: 0,
+        };
+      }
+
+      departmentFilter = {
+        routingOperation: {
+          departmentId: { in: userAccessibleDepartments },
+        },
+      };
+    }
+
+    // Calculate date range for today
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    // Get orders by status
+    const ordersPending = await prisma.mESOrder.count({
+      where: {
+        teamId,
+        status: "pending",
+        // Filter by user's accessible departments
+        ...(userAccessibleDepartments !== "all" &&
+          Array.isArray(userAccessibleDepartments) && {
+            workOrderOperations: {
+              some: {
+                routingOperation: {
+                  departmentId: { in: userAccessibleDepartments },
+                },
+              },
+            },
+          }),
+      },
+    });
+
+    const ordersInProgress = await prisma.mESOrder.count({
+      where: {
+        teamId,
+        status: "in_progress",
+        // Filter by user's accessible departments
+        ...(userAccessibleDepartments !== "all" &&
+          Array.isArray(userAccessibleDepartments) && {
+            workOrderOperations: {
+              some: {
+                routingOperation: {
+                  departmentId: { in: userAccessibleDepartments },
+                },
+              },
+            },
+          }),
+      },
+    });
+
+    const ordersPaused = await prisma.mESOrder.count({
+      where: {
+        teamId,
+        status: "paused",
+        // Filter by user's accessible departments
+        ...(userAccessibleDepartments !== "all" &&
+          Array.isArray(userAccessibleDepartments) && {
+            workOrderOperations: {
+              some: {
+                routingOperation: {
+                  departmentId: { in: userAccessibleDepartments },
+                },
+              },
+            },
+          }),
+      },
+    });
+
+    const ordersWaiting = await prisma.mESOrder.count({
+      where: {
+        teamId,
+        status: "waiting",
+        // Filter by user's accessible departments
+        ...(userAccessibleDepartments !== "all" &&
+          Array.isArray(userAccessibleDepartments) && {
+            workOrderOperations: {
+              some: {
+                routingOperation: {
+                  departmentId: { in: userAccessibleDepartments },
+                },
+              },
+            },
+          }),
+      },
+    });
+
+    // Get completed orders today
+    const ordersCompletedToday = await prisma.mESOrder.count({
+      where: {
+        teamId,
+        status: "completed",
+        actualEndDate: {
+          gte: today,
+          lt: tomorrow,
+        },
+        // Filter by user's accessible departments
+        ...(userAccessibleDepartments !== "all" &&
+          Array.isArray(userAccessibleDepartments) && {
+            workOrderOperations: {
+              some: {
+                routingOperation: {
+                  departmentId: { in: userAccessibleDepartments },
+                },
+              },
+            },
+          }),
+      },
+    });
+
+    // Get operations in progress
+    const operationsInProgress = await prisma.mESWorkOrderOperation.count({
+      where: {
+        order: { teamId },
+        status: "in_progress",
+        ...departmentFilter,
+      },
+    });
+
+    // Get paused operations
+    const operationsPaused = await prisma.mESWorkOrderOperation.count({
+      where: {
+        order: { teamId },
+        status: "paused",
+        ...departmentFilter,
+      },
+    });
+
+    // Get completed operations today
+    const completedOperationsToday = await prisma.mESWorkOrderOperation.count({
+      where: {
+        order: { teamId },
+        status: "completed",
+        actualEndTime: {
+          gte: today,
+          lt: tomorrow,
+        },
+        ...departmentFilter,
+      },
+    });
+
+    // Calculate average cycle time (placeholder for now)
+    const averageCycleTime = 0;
+    const onTimeDeliveryRate = 0;
+    const operatorUtilization = 0;
+    const totalOperators = 0;
+    const activeOperators = 0;
+
+    return {
+      ordersPending,
+      ordersInProgress,
+      ordersPaused,
+      ordersWaiting,
+      ordersCompletedToday,
+      operationsInProgress,
+      operationsPaused,
+      completedOperationsToday,
+      averageCycleTime,
+      onTimeDeliveryRate,
+      operatorUtilization,
+      totalOperators,
+      activeOperators,
+    };
+  } catch (error) {
+    console.error("Error fetching dashboard data:", error);
+    // Return fallback data on error
+    return {
+      ordersPending: 0,
+      ordersInProgress: 0,
+      ordersPaused: 0,
+      ordersWaiting: 0,
+      ordersCompletedToday: 0,
+      operationsInProgress: 0,
+      operationsPaused: 0,
+      completedOperationsToday: 0,
+      averageCycleTime: 0,
+      onTimeDeliveryRate: 0,
+      operatorUtilization: 0,
+      totalOperators: 0,
+      activeOperators: 0,
+    };
+  }
+}
+
+async function fetchRecentActivity(teamId: string): Promise<ActivityData[]> {
+  try {
+    const user = await getUser();
+    if (!user || !user.selectedTeam?.id) {
+      return [];
+    }
+
+    // Import the services we need
+    const { UsersService } = await import("@/lib/services/users");
+    const { prisma } = await import("@/lib/prisma");
+
+    // Get user's accessible departments
+    const userAccessibleDepartments =
+      await UsersService.getUserAccessibleDepartments(user.id, teamId);
+
+    // Build department filter
+    let departmentFilter: any = {};
+    if (
+      userAccessibleDepartments !== "all" &&
+      Array.isArray(userAccessibleDepartments)
+    ) {
+      if ((userAccessibleDepartments as string[]).length === 0) {
+        return [];
+      }
+
+      departmentFilter = {
+        routingOperation: {
+          departmentId: { in: userAccessibleDepartments },
+        },
+      };
+    }
+
+    // Get recent work order operations activity, prioritizing completions
+    const recentActivity = await prisma.mESWorkOrderOperation.findMany({
+      where: {
+        order: { teamId },
+        ...departmentFilter,
+      },
+      include: {
+        order: {
+          select: {
+            orderNumber: true,
+            routing: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+        routingOperation: {
+          select: {
+            operationName: true,
+            operationNumber: true,
+            department: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: [
+        // Prioritize completed operations first, then by most recent activity
+        { status: "desc" }, // completed comes before in_progress alphabetically
+        { actualEndTime: "desc" },
+        { updatedAt: "desc" },
+      ],
+      take: 10,
+    });
+
+    // Transform the data for the dashboard
+    const activities = recentActivity.map((woo) => {
+      let status = "pending";
+      let statusColor = "secondary";
+      let activity = "Pending";
+      let timestamp = woo.createdAt;
+
+      if (woo.status === "in_progress") {
+        status = "in_progress";
+        statusColor = "default";
+        activity = "Started";
+        timestamp = woo.actualStartTime || woo.updatedAt;
+      } else if (woo.status === "completed") {
+        status = "completed";
+        statusColor = "outline";
+        activity = "Completed";
+        timestamp = woo.actualEndTime || woo.updatedAt;
+      } else if (woo.status === "paused") {
+        status = "paused";
+        statusColor = "destructive";
+        activity = "Paused";
+        timestamp = woo.updatedAt;
+      }
+
+      return {
+        id: woo.id,
+        orderNumber: woo.order.orderNumber,
+        routingName: woo.order.routing.name,
+        operationName: woo.routingOperation.operationName,
+        operationNumber: woo.routingOperation.operationNumber,
+        department: woo.routingOperation.department?.name || "Unassigned",
+        operatorName: woo.operatorId
+          ? `Operator ${woo.operatorId.slice(0, 8)}`
+          : "Unassigned",
+        status,
+        statusColor,
+        activity,
+        timestamp: timestamp.toISOString(),
+        quantityCompleted: woo.quantityCompleted || 0,
+      };
+    });
+
+    return activities;
+  } catch (error) {
+    console.error("Error fetching recent activity:", error);
+    return [];
+  }
+}
+
+interface DashboardPageProps {
+  params: Promise<{
+    teamId: string;
+  }>;
+}
+
+interface DashboardData {
+  ordersPending: number;
+  ordersInProgress: number;
+  ordersPaused: number;
+  ordersWaiting: number;
+  ordersCompletedToday: number;
+  operationsInProgress: number;
+  operationsPaused: number;
+  completedOperationsToday: number;
+  averageCycleTime: number;
+  onTimeDeliveryRate: number;
+  operatorUtilization: number;
+  totalOperators: number;
+  activeOperators: number;
+}
+
+interface ActivityData {
+  id: string;
+  orderNumber: string;
+  routingName: string;
+  operationName: string;
+  operationNumber: number;
+  department: string;
+  operatorName: string;
+  status: string;
+  statusColor: string;
+  activity: string;
+  timestamp: string;
+  quantityCompleted: number;
+}
 
 function DashboardHeader() {
   return (
@@ -53,121 +413,174 @@ function DashboardHeader() {
   );
 }
 
-function ProductionMetrics() {
-  return (
-    <div className="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-      <MetricsCard
-        title="Production Efficiency"
-        value={`${dashboardData.production.efficiency}%`}
-        change={{ value: "+5.2% from yesterday", trend: "up" }}
-        icon="trending-up"
-        variant="success"
-      />
+function ProductionMetrics({ data }: { data: any }) {
+  const totalActiveOrders =
+    data.ordersPending +
+    data.ordersInProgress +
+    data.ordersPaused +
+    data.ordersWaiting;
 
+  return (
+    <div className="bento-grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
       <MetricsCard
-        title="Hourly Throughput"
-        value={dashboardData.production.throughput}
-        change={{ value: "+12 units/hr", trend: "up" }}
-        icon="factory"
+        title="Live Orders"
+        value={totalActiveOrders}
+        change={{ value: "Total active" }}
+        icon="activity"
         variant="default"
       />
 
       <MetricsCard
-        title="Quality Score"
-        value={`${dashboardData.production.quality}%`}
-        change={{ value: "Stable", trend: "neutral" }}
+        title="Ops in progress"
+        value={data.operationsInProgress}
+        change={{ value: "Currently active"}}
+        icon="factory"
+        variant="success"
+      />
+
+      <MetricsCard
+        title="Ops paused"
+        value={data.operationsPaused}
+        change={{ value: "Currently paused" }}
+        icon="alert-triangle"
+        variant="warning"
+      />
+
+      <MetricsCard
+        title="Orders completed (today)"
+        value={data.ordersCompletedToday}
+        change={{ value: "Orders finished" }}
         icon="check-circle"
         variant="success"
       />
 
       <MetricsCard
-        title="Downtime Today"
-        value={`${dashboardData.production.downtime}m`}
-        change={{ value: "-8m from yesterday", trend: "up" }}
-        icon="alert-triangle"
-        variant="warning"
+        title="Avg cycle time"
+        value={data.averageCycleTime > 0 ? `${data.averageCycleTime}m` : "N/A"}
+        change={{ value: "Per order" }}
+        icon="clock"
+        variant="default"
       />
     </div>
   );
 }
 
-function QuickStats() {
+function QuickStats({ dashboardData }: { dashboardData: DashboardData }) {
   return (
     <div className="bento-grid grid-cols-1 lg:grid-cols-3">
-      {/* Active Orders */}
+      {/* Order Status */}
       <div className="bento-card">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold">Active Orders</h3>
-
-          <ShoppingCart className="h-5 w-5 text-primary" />
+          <h3 className="text-lg font-semibold">Order Status</h3>
+          <BarChart3 className="h-5 w-5 text-primary" />
         </div>
 
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">In Progress</span>
-            <div className="flex items-center gap-2">
-              <StatusIndicator status="active" variant="dot" size="sm" />
-              <span className="font-semibold">
-                {dashboardData.orders.active}
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Pending</span>
             <div className="flex items-center gap-2">
-              <StatusIndicator status="pending" variant="dot" size="sm" />
-              <span className="font-semibold">
-                {dashboardData.orders.pending}
+              <StatusIndicator status="waiting" variant="dot" size="sm" />
+              <span className="font-semibold text-gray-500">
+                {dashboardData.ordersPending}
               </span>
             </div>
           </div>
 
           <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">Urgent</span>
+            <span className="text-sm text-muted-foreground">In Progress</span>
+            <div className="flex items-center gap-2">
+              <StatusIndicator
+                status="active"
+                variant="dot"
+                size="sm"
+                animate
+              />
+              <span className="font-semibold text-green-500">
+                {dashboardData.ordersInProgress}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-muted-foreground">Paused</span>
             <div className="flex items-center gap-2">
               <StatusIndicator status="warning" variant="dot" size="sm" />
               <span className="font-semibold text-orange-500">
-                {dashboardData.orders.urgent}
+                {dashboardData.ordersPaused}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-muted-foreground">Waiting</span>
+            <div className="flex items-center gap-2">
+              <StatusIndicator status="waiting" variant="dot" size="sm" />
+              <span className="font-semibold text-blue-500">
+                {dashboardData.ordersWaiting}
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Operator Status */}
+      {/* Operations Status */}
       <div className="bento-card">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold">Workforce</h3>
-
-          {/* icon of team */}
-          <Users className="h-5 w-5 text-primary" />
+          <h3 className="text-lg font-semibold">Operations Status</h3>
+          <BarChart3 className="h-5 w-5 text-primary" />
         </div>
 
-        <div className="flex items-center justify-center">
-          <ProgressRing
-            progress={
-              (dashboardData.operators.active / dashboardData.operators.total) *
-              100
-            }
-            size="lg"
-            variant="success"
-          >
-            <div className="text-center">
-              <div className="text-2xl font-bold gradient-text">
-                {dashboardData.operators.active}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                of {dashboardData.operators.total}
-              </div>
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-muted-foreground">Running</span>
+            <div className="flex items-center gap-2">
+              <StatusIndicator
+                status="active"
+                variant="dot"
+                size="sm"
+                animate
+              />
+              <span className="font-semibold text-green-500">
+                {dashboardData.operationsInProgress}
+              </span>
             </div>
-          </ProgressRing>
-        </div>
+          </div>
 
-        <div className="mt-4 text-center">
-          <p className="text-sm text-muted-foreground">
-            Active Operators • {dashboardData.operators.shifts} Shifts
-          </p>
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-muted-foreground">Paused</span>
+            <div className="flex items-center gap-2">
+              <StatusIndicator status="warning" variant="dot" size="sm" />
+              <span className="font-semibold text-orange-500">
+                {dashboardData.operationsPaused}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-muted-foreground">
+              Completed Today
+            </span>
+            <div className="flex items-center gap-2">
+              <StatusIndicator status="active" variant="dot" size="sm" />
+              <span className="font-semibold text-blue-500">
+                {dashboardData.completedOperationsToday}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-muted-foreground">
+              Avg Cycle Time
+            </span>
+            <div className="flex items-center gap-2">
+              <Clock className="h-3 w-3 text-muted-foreground" />
+              <span className="font-semibold">
+                {dashboardData.averageCycleTime > 0
+                  ? `${dashboardData.averageCycleTime}m`
+                  : "N/A"}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -175,7 +588,7 @@ function QuickStats() {
       <div className="bento-card">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold">System Health</h3>
-          <BarChart3 className="h-5 w-5 text-primary" />
+          <Zap className="h-5 w-5 text-primary" />
         </div>
 
         <div className="space-y-4">
@@ -192,11 +605,6 @@ function QuickStats() {
           <div className="flex items-center justify-between">
             <span className="text-sm">Real-time Sync</span>
             <StatusIndicator status="active" variant="dot" size="sm" animate />
-          </div>
-
-          <div className="flex items-center justify-between">
-            <span className="text-sm">Machine Sensors</span>
-            <StatusIndicator status="warning" variant="dot" size="sm" />
           </div>
         </div>
       </div>
@@ -252,14 +660,23 @@ function ChartsSection() {
             </div>
           }
         >
-          <RecentSales />
+          <RecentActivity />
         </Suspense>
       </div>
     </div>
   );
 }
 
-export default function DashboardPage() {
+export default async function DashboardPage({ params }: DashboardPageProps) {
+  const { teamId } = await params;
+
+  const user = await getUser();
+  if (!user) {
+    notFound();
+  }
+
+  const dashboardData = await fetchDashboardData(teamId);
+
   return (
     <div className="min-h-screen">
       {/* Ambient background effects */}
@@ -277,8 +694,8 @@ export default function DashboardPage() {
 
       <div className="relative z-10 p-8 space-y-8">
         <DashboardHeader />
-        <ProductionMetrics />
-        <QuickStats />
+        <ProductionMetrics data={dashboardData} />
+        <QuickStats dashboardData={dashboardData} />
         <ChartsSection />
       </div>
     </div>

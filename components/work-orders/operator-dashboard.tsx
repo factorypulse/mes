@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -10,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Clock, Play, Pause, RotateCcw } from "lucide-react";
+import { Clock, ExternalLink, Shield } from "lucide-react";
 import { WOOWithRelations } from "@/lib/services/work-order-operations";
 
 interface OperatorDashboardProps {
@@ -24,6 +25,7 @@ export function OperatorDashboard({
   operatorId,
   departmentId,
 }: OperatorDashboardProps) {
+  const router = useRouter();
   const [woos, setWoos] = useState<WOOWithRelations[]>([]);
   const [activeWoo, setActiveWoo] = useState<WOOWithRelations | null>(null);
   const [loading, setLoading] = useState(true);
@@ -75,46 +77,8 @@ export function OperatorDashboard({
     }
   };
 
-  const startWOO = async (wooId: string) => {
-    try {
-      const response = await fetch(
-        `/api/work-order-operations/${wooId}/start`,
-        {
-          method: "POST",
-        }
-      );
-
-      if (!response.ok) throw new Error("Failed to start work order");
-
-      const startedWoo = await response.json();
-      setActiveWoo(startedWoo);
-      await fetchWOOs(); // Refresh list
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Failed to start work order"
-      );
-    }
-  };
-
-  const resumeWOO = async (wooId: string) => {
-    try {
-      const response = await fetch(
-        `/api/work-order-operations/${wooId}/resume`,
-        {
-          method: "POST",
-        }
-      );
-
-      if (!response.ok) throw new Error("Failed to resume work order");
-
-      const resumedWoo = await response.json();
-      setActiveWoo(resumedWoo);
-      await fetchWOOs(); // Refresh list
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Failed to resume work order"
-      );
-    }
+  const openWOODetail = (wooId: string) => {
+    router.push(`/dashboard/${teamId}/operator/work-order-operations/${wooId}`);
   };
 
   const getStatusColor = (status: string) => {
@@ -127,6 +91,8 @@ export function OperatorDashboard({
         return "bg-yellow-100 text-yellow-800";
       case "completed":
         return "bg-gray-100 text-gray-800";
+      case "waiting":
+        return "bg-slate-100 text-slate-800";
       default:
         return "bg-gray-100 text-gray-800";
     }
@@ -202,14 +168,14 @@ export function OperatorDashboard({
               </div>
 
               <div className="flex gap-2">
-                <Button size="sm" variant="outline">
-                  View Details
+                <Button
+                  size="sm"
+                  onClick={() => openWOODetail(activeWoo.id)}
+                  className="bg-primary hover:bg-primary/90"
+                >
+                  <ExternalLink className="h-4 w-4 mr-1" />
+                  Open Details
                 </Button>
-                <Button size="sm" variant="outline">
-                  <Pause className="h-4 w-4 mr-1" />
-                  Pause
-                </Button>
-                <Button size="sm">Complete</Button>
               </div>
             </div>
           </CardContent>
@@ -222,10 +188,20 @@ export function OperatorDashboard({
 
         {woos.length === 0 ? (
           <Card>
-            <CardContent className="text-center py-8">
-              <p className="text-gray-600">No work orders available</p>
-              <p className="text-sm text-gray-500 mt-1">
-                Check back later or contact your supervisor
+            <CardContent className="text-center py-12">
+              <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
+                <Shield className="h-8 w-8 text-gray-400" />
+              </div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                No Work Orders Available
+              </h3>
+              <p className="text-gray-600 mb-1">
+                No work orders are currently available for your departments
+              </p>
+              <p className="text-sm text-gray-500">
+                Work orders are filtered based on your department access.
+                Contact your supervisor if you need access to additional
+                departments.
               </p>
             </CardContent>
           </Card>
@@ -249,7 +225,13 @@ export function OperatorDashboard({
                         Order: {woo.order.orderNumber} • Op #
                         {woo.routingOperation.operationNumber}
                         {woo.routingOperation.department && (
-                          <> • {woo.routingOperation.department.name}</>
+                          <>
+                            {" "}
+                            •{" "}
+                            <span className="font-medium text-primary">
+                              {woo.routingOperation.department.name}
+                            </span>
+                          </>
                         )}
                       </p>
 
@@ -273,26 +255,14 @@ export function OperatorDashboard({
                     </div>
 
                     <div className="flex gap-2 ml-4">
-                      {woo.status === "pending" && (
-                        <Button
-                          size="sm"
-                          onClick={() => startWOO(woo.id)}
-                          disabled={!!activeWoo}
-                        >
-                          <Play className="h-4 w-4 mr-1" />
-                          Start
-                        </Button>
-                      )}
-                      {woo.status === "paused" && (
-                        <Button
-                          size="sm"
-                          onClick={() => resumeWOO(woo.id)}
-                          disabled={!!activeWoo}
-                        >
-                          <RotateCcw className="h-4 w-4 mr-1" />
-                          Resume
-                        </Button>
-                      )}
+                      <Button
+                        size="sm"
+                        onClick={() => openWOODetail(woo.id)}
+                        variant="outline"
+                      >
+                        <ExternalLink className="h-4 w-4 mr-1" />
+                        Open
+                      </Button>
                     </div>
                   </div>
                 </CardContent>

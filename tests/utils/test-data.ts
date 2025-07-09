@@ -30,48 +30,7 @@ export interface TestPauseReason {
   isActive: boolean;
 }
 
-export class APIHelper {
-  constructor(private page: Page) {}
 
-  async createRouting(routing: TestRouting): Promise<string> {
-    const response = await this.page.request.post('/api/routings', {
-      data: routing
-    });
-    const result = await response.json();
-    return result.id;
-  }
-
-  async createOrder(order: TestOrder): Promise<string> {
-    const response = await this.page.request.post('/api/orders', {
-      data: order
-    });
-    const result = await response.json();
-    return result.id;
-  }
-
-  async createPauseReason(pauseReason: TestPauseReason): Promise<string> {
-    const response = await this.page.request.post('/api/pause-reasons', {
-      data: pauseReason
-    });
-    const result = await response.json();
-    return result.id;
-  }
-
-  async getOrders(): Promise<any[]> {
-    const response = await this.page.request.get('/api/orders');
-    return await response.json();
-  }
-
-  async startWOO(wooId: string): Promise<void> {
-    await this.page.request.post(`/api/work-order-operations/${wooId}/start`);
-  }
-
-  async completeWOO(wooId: string, capturedData?: any): Promise<void> {
-    await this.page.request.post(`/api/work-order-operations/${wooId}/complete`, {
-      data: { capturedData }
-    });
-  }
-}
 
 export class TestDataGenerator {
   private static counter = 0;
@@ -259,7 +218,12 @@ export class APIHelper {
 
   async completeWOO(wooId: string, capturedData: any): Promise<void> {
     const response = await this.page.request.post(`/api/work-order-operations/${wooId}/complete`, {
-      data: { capturedData }
+      data: {
+        capturedData,
+        quantityCompleted: 0,
+        quantityRejected: 0,
+        notes: null
+      }
     });
 
     if (!response.ok()) {

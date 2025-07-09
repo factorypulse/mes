@@ -6,7 +6,8 @@
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
+    /* popover should be white */
+    --popover: 0 0% 10%;
     --popover-foreground: 240 10% 3.9%;
     --primary: 231 98% 65%;
     --primary-foreground: 0 0% 98%;
@@ -75,16 +76,21 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--background)) 100%);
   }
 
   /* Enhanced typography */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    font-weight: 600;
+    letter-spacing: -0.025em;
   }
 }
 
@@ -99,7 +105,12 @@
   }
 
   .glass-card {
-    @apply glass rounded-xl;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 0.75rem;
   }
 
   .glass-subtle {
@@ -111,11 +122,27 @@
 
   /* Bento grid utilities */
   .bento-grid {
-    @apply grid gap-4 auto-rows-min;
+    display: grid;
+    gap: 1rem;
+    grid-auto-rows: min-content;
   }
 
   .bento-card {
-    @apply glass-card p-6 relative overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-lg;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .bento-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
 
   .bento-card::before {
@@ -149,19 +176,27 @@
 
   /* Manufacturing status indicators */
   .status-active {
-    @apply bg-green-500/20 text-green-400 border-green-500/30;
+    background-color: rgba(34, 197, 94, 0.2);
+    color: rgb(74, 222, 128);
+    border-color: rgba(34, 197, 94, 0.3);
   }
 
   .status-pending {
-    @apply bg-blue-500/20 text-blue-400 border-blue-500/30;
+    background-color: rgba(59, 130, 246, 0.2);
+    color: rgb(96, 165, 250);
+    border-color: rgba(59, 130, 246, 0.3);
   }
 
   .status-paused {
-    @apply bg-yellow-500/20 text-yellow-400 border-yellow-500/30;
+    background-color: rgba(234, 179, 8, 0.2);
+    color: rgb(250, 204, 21);
+    border-color: rgba(234, 179, 8, 0.3);
   }
 
   .status-completed {
-    @apply bg-gray-500/20 text-gray-400 border-gray-500/30;
+    background-color: rgba(107, 114, 128, 0.2);
+    color: rgb(156, 163, 175);
+    border-color: rgba(107, 114, 128, 0.3);
   }
 
   /* Gradient text */

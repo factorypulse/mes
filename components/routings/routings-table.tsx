@@ -12,8 +12,9 @@ import {
 } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Edit, Trash2, Eye } from 'lucide-react'
+import { Edit, Trash2, Eye, Settings } from 'lucide-react'
 import { format } from 'date-fns'
+import Link from 'next/link'
 
 interface Routing {
   id: string
@@ -116,9 +117,11 @@ export function RoutingsTable() {
                 </TableCell>
                 <TableCell className="text-right">
                   <div className="flex justify-end space-x-2">
-                    <Button variant="ghost" size="sm">
-                      <Eye className="h-4 w-4" />
-                    </Button>
+                    <Link href={`/dashboard/${teamId}/routings/${routing.id}`}>
+                      <Button variant="ghost" size="sm">
+                        <Settings className="h-4 w-4" />
+                      </Button>
+                    </Link>
                     <Button variant="ghost" size="sm">
                       <Edit className="h-4 w-4" />
                     </Button>

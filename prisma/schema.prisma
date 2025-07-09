@@ -106,7 +106,7 @@ model MESWorkOrderOperation {
   orderId              String    @map("order_id")
   routingOperationId   String    @map("routing_operation_id")
   operatorId           String?   @map("operator_id") // StackAuth user ID
-  status               String    @default("pending") // pending | in_progress | completed | paused | cancelled
+  status               String    @default("pending") // pending | in_progress | completed | paused | cancelled | waiting
   scheduledStartTime   DateTime? @map("scheduled_start_time")
   scheduledEndTime     DateTime? @map("scheduled_end_time")
   actualStartTime      DateTime? @map("actual_start_time")

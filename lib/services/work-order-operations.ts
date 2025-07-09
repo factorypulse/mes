@@ -3,7 +3,7 @@ import type { MESWorkOrderOperation, MESPauseEvent } from '@/generated/prisma'
 
 export interface UpdateWOOInput {
   operatorId?: string
-  status?: 'pending' | 'in_progress' | 'completed' | 'paused' | 'cancelled'
+  status?: 'pending' | 'in_progress' | 'completed' | 'paused' | 'cancelled' | 'waiting'
   scheduledStartTime?: Date
   scheduledEndTime?: Date
   actualStartTime?: Date
@@ -133,13 +133,74 @@ export class WorkOrderOperationsService {
   static async getOperatorWOOs(teamId: string, departmentId?: string): Promise<WOOWithRelations[]> {
     const whereClause: any = {
       teamId,
-      status: { in: ['pending', 'paused'] }
+      status: { in: ['pending', 'paused'] } // Exclude 'waiting' - only show operations that are ready to work
     }
 
     if (departmentId) {
       whereClause.routingOperation = {
         departmentId
       }
+    }
+
+    return await prisma.mESWorkOrderOperation.findMany({
+      where: whereClause,
+      include: {
+        order: {
+          select: {
+            id: true,
+            orderNumber: true,
+            quantity: true,
+            priority: true,
+            scheduledStartDate: true
+          }
+        },
+        routingOperation: {
+          include: {
+            department: {
+              select: {
+                id: true,
+                name: true
+              }
+            }
+          }
+        },
+        pauseEvents: {
+          include: {
+            pauseReason: true
+          },
+          orderBy: {
+            startTime: 'desc'
+          }
+        }
+      },
+      orderBy: [
+        { order: { priority: 'desc' } },
+        { order: { scheduledStartDate: 'asc' } },
+        { routingOperation: { operationNumber: 'asc' } }
+      ]
+    })
+  }
+
+  // Get WOOs filtered by specific departments
+  static async getWOOsByDepartments(
+    teamId: string,
+    departmentIds: string[],
+    status?: string[],
+    operatorId?: string
+  ): Promise<WOOWithRelations[]> {
+    const whereClause: any = {
+      teamId,
+      routingOperation: {
+        departmentId: { in: departmentIds }
+      }
+    }
+
+    if (status && status.length > 0) {
+      whereClause.status = { in: status }
+    }
+
+    if (operatorId) {
+      whereClause.operatorId = operatorId
     }
 
     return await prisma.mESWorkOrderOperation.findMany({
@@ -191,7 +252,7 @@ export class WorkOrderOperationsService {
       return null
     }
 
-    return await prisma.mESWorkOrderOperation.update({
+    const updatedWOO = await prisma.mESWorkOrderOperation.update({
       where: { id },
       data: {
         status: 'in_progress',
@@ -229,6 +290,11 @@ export class WorkOrderOperationsService {
         }
       }
     })
+
+    // Update order status
+    await this.updateOrderStatus(woo.orderId, teamId)
+
+    return updatedWOO
   }
 
   // Pause WOO
@@ -252,7 +318,7 @@ export class WorkOrderOperationsService {
       }
     })
 
-    return await prisma.mESWorkOrderOperation.update({
+    const updatedWOO = await prisma.mESWorkOrderOperation.update({
       where: { id },
       data: {
         status: 'paused',
@@ -288,6 +354,11 @@ export class WorkOrderOperationsService {
         }
       }
     })
+
+    // Update order status
+    await this.updateOrderStatus(woo.orderId, teamId)
+
+    return updatedWOO
   }
 
   // Resume WOO
@@ -316,7 +387,7 @@ export class WorkOrderOperationsService {
       }
     })
 
-    return await prisma.mESWorkOrderOperation.update({
+    const updatedWOO = await prisma.mESWorkOrderOperation.update({
       where: { id },
       data: {
         status: 'in_progress',
@@ -352,6 +423,11 @@ export class WorkOrderOperationsService {
         }
       }
     })
+
+    // Update order status
+    await this.updateOrderStatus(woo.orderId, teamId)
+
+    return updatedWOO
   }
 
   // Complete WOO
@@ -362,6 +438,13 @@ export class WorkOrderOperationsService {
         order: {
           include: {
             workOrderOperations: {
+              include: {
+                routingOperation: {
+                  select: {
+                    operationNumber: true
+                  }
+                }
+              },
               orderBy: {
                 routingOperation: {
                   operationNumber: 'asc'
@@ -444,30 +527,49 @@ export class WorkOrderOperationsService {
       }
     })
 
-    // Check if this is the last WOO for the order
-    const currentWOOIndex = woo.order.workOrderOperations.findIndex(op => op.id === id)
-    const nextWOO = woo.order.workOrderOperations[currentWOOIndex + 1]
+    // Check if this completes all WOOs for the current operation number
+    const currentOperationNumber = woo.routingOperation.operationNumber
+    const allWOOsForCurrentOperation = woo.order.workOrderOperations.filter(
+      op => op.routingOperation?.operationNumber === currentOperationNumber
+    )
+    const completedWOOsForCurrentOperation = allWOOsForCurrentOperation.filter(
+      op => op.status === 'completed' || op.id === id // Include the current WOO being completed
+    )
 
-    if (nextWOO) {
-      // Set next WOO to pending (ready to start)
-      await prisma.mESWorkOrderOperation.update({
-        where: { id: nextWOO.id },
-        data: {
-          status: 'pending',
-          updatedAt: now
-        }
-      })
-    } else {
-      // This was the last WOO, complete the order
-      await prisma.mESOrder.update({
-        where: { id: woo.orderId },
-        data: {
-          status: 'completed',
-          actualEndDate: now,
-          updatedAt: now
-        }
-      })
+    // If all WOOs for current operation are now completed, enable the next operation
+    if (completedWOOsForCurrentOperation.length === allWOOsForCurrentOperation.length) {
+      const nextOperationNumber = currentOperationNumber + 1
+      const nextOperationWOOs = woo.order.workOrderOperations.filter(
+        op => op.routingOperation?.operationNumber === nextOperationNumber
+      )
+
+      if (nextOperationWOOs.length > 0) {
+        // Set all WOOs of the next operation to pending (ready to start)
+        await prisma.mESWorkOrderOperation.updateMany({
+          where: {
+            id: { in: nextOperationWOOs.map(op => op.id) },
+            status: 'waiting'
+          },
+          data: {
+            status: 'pending',
+            updatedAt: now
+          }
+        })
+      } else {
+        // This was the last operation, complete the order
+        await prisma.mESOrder.update({
+          where: { id: woo.orderId },
+          data: {
+            status: 'completed',
+            actualEndDate: now,
+            updatedAt: now
+          }
+        })
+      }
     }
+
+    // Update order status
+    await this.updateOrderStatus(woo.orderId, teamId)
 
     return completedWOO
   }
@@ -589,5 +691,147 @@ export class WorkOrderOperationsService {
     }
 
     return Math.max(0, totalTime)
+  }
+
+  // Update order status based on work order operations
+  static async updateOrderStatus(orderId: string, teamId: string): Promise<void> {
+    const order = await prisma.mESOrder.findFirst({
+      where: { id: orderId, teamId },
+      include: {
+        workOrderOperations: {
+          select: {
+            status: true
+          }
+        }
+      }
+    })
+
+    if (!order || !order.workOrderOperations.length) {
+      return
+    }
+
+    const wooStatuses = order.workOrderOperations.map(woo => woo.status)
+    let newOrderStatus: string
+
+    // Determine order status based on operation statuses
+    if (wooStatuses.every(status => status === 'completed')) {
+      // All operations completed
+      newOrderStatus = 'completed'
+    } else if (wooStatuses.some(status => status === 'paused')) {
+      // Any operation paused
+      newOrderStatus = 'paused'
+    } else if (wooStatuses.some(status => status === 'in_progress')) {
+      // Any operation in progress (and none paused)
+      newOrderStatus = 'in_progress'
+    } else if (wooStatuses.every(status => status === 'waiting')) {
+      // All operations waiting (shouldn't happen but handle it)
+      newOrderStatus = 'waiting'
+    } else if (wooStatuses.some(status => status === 'pending')) {
+      // Has pending operations
+      if (wooStatuses.every(status => ['pending', 'waiting'].includes(status))) {
+        // No operations started yet
+        newOrderStatus = 'pending'
+      } else {
+        // Some operations completed, others pending/waiting
+        newOrderStatus = 'waiting'
+      }
+    } else {
+      // Default fallback
+      newOrderStatus = 'pending'
+    }
+
+    // Update order status if it changed
+    if (newOrderStatus !== order.status) {
+      await prisma.mESOrder.update({
+        where: { id: orderId },
+        data: {
+          status: newOrderStatus,
+          ...(newOrderStatus === 'completed' && !order.actualEndDate && {
+            actualEndDate: new Date()
+          }),
+          updatedAt: new Date()
+        }
+      })
+    }
+  }
+
+  // Migration method to fix existing WOOs to follow sequential operation logic
+  static async migrateToSequentialOperations(teamId: string): Promise<void> {
+    // Get all orders for the team
+    const orders = await prisma.mESOrder.findMany({
+      where: { teamId },
+      include: {
+        workOrderOperations: {
+          include: {
+            routingOperation: {
+              select: {
+                operationNumber: true
+              }
+            }
+          },
+          orderBy: {
+            routingOperation: {
+              operationNumber: 'asc'
+            }
+          }
+        }
+      }
+    })
+
+    for (const order of orders) {
+      // Group WOOs by operation number
+      const woosByOperation = new Map<number, any[]>()
+      for (const woo of order.workOrderOperations) {
+        const opNum = woo.routingOperation.operationNumber
+        if (!woosByOperation.has(opNum)) {
+          woosByOperation.set(opNum, [])
+        }
+        woosByOperation.get(opNum)!.push(woo)
+      }
+
+      // Find the current operation (lowest operation number with incomplete WOOs)
+      let currentOperationNumber = 1
+      const operationNumbers = Array.from(woosByOperation.keys()).sort((a, b) => a - b)
+
+      for (const opNum of operationNumbers) {
+        const woos = woosByOperation.get(opNum)!
+        const allCompleted = woos.every(w => w.status === 'completed')
+
+        if (!allCompleted) {
+          currentOperationNumber = opNum
+          break
+        }
+
+        // If all are completed, check next operation
+        if (allCompleted && opNum < Math.max(...operationNumbers)) {
+          continue
+        }
+      }
+
+      // Update WOO statuses based on sequential logic
+      for (const [opNum, woos] of woosByOperation.entries()) {
+        for (const woo of woos) {
+          let newStatus = woo.status
+
+          if (woo.status === 'completed' || woo.status === 'in_progress') {
+            // Keep completed and in-progress as is
+            continue
+          } else if (opNum === currentOperationNumber) {
+            // Current operation should be pending
+            newStatus = 'pending'
+          } else if (opNum > currentOperationNumber) {
+            // Future operations should be waiting
+            newStatus = 'waiting'
+          }
+
+          if (newStatus !== woo.status) {
+            await prisma.mESWorkOrderOperation.update({
+              where: { id: woo.id },
+              data: { status: newStatus }
+            })
+          }
+        }
+      }
+    }
   }
 }
