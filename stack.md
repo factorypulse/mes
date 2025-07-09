@@ -5,9 +5,9 @@ Tech Stack
     Tailwind 4 for styling
     shadcn/ui for the design system
     lucide for the icons
-    PostgreSql for the database
+    Prisma Postgres for the database
     Redis for the cache
-    BetterAuth for the authentication and
+    StackAuth for the authentication and
 
 UI Vibe:
     Clean, minimal, and modern

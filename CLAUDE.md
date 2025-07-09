@@ -2,85 +2,80 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
+## Commands
 
-This is a Manufacturing Execution System (MES) focused on product tracking, Work-In-Progress (WIP) monitoring, and operational status management. The project is currently in the planning phase with comprehensive specifications but no implementation yet.
+- `npm run dev` - Start development server on http://localhost:3000
+- `npm run build` - Build the application for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint to check code quality
 
-## Technology Stack
+## Tech Stack
 
-- **Frontend**: Next.js 15 with App Router, React 19
-- **Backend**: Next.js 15 API routes (Node.js)
-- **Database**: PostgreSQL
-- **Cache**: Redis
-- **Authentication**: BetterAuth (complete docs in `better_auth_docs.txt`)
-- **UI Framework**: shadcn/ui design system
-- **Icons**: Lucide
-- **Styling**: Tailwind CSS 4
-- **Background Jobs**: BullMQ with Redis
+This is a Next.js application with App Router built for a Manufacturing Execution System (MES):
 
-## Key Documentation Files
+- **Framework**: Next.js with App Router
+- **Language**: TypeScript with strict mode enabled
+- **Frontend**: React
+- **Styling**: Tailwind CSS with shadcn/ui design system
+- **Icons**: Lucide React
+- **Authentication**: StackAuth with multi-tenancy support
+- **Database**: Prisma Postgres
+- **Theme**: Light/dark mode support via next-themes
 
-- **`spec.md`**: Comprehensive product specification (19,768 bytes) - contains detailed user stories, data models, API endpoints, and technical implementation guidelines
-- **`UI.md`**: UI design guidelines including glassmorphism styling, bento concept, and accessibility requirements
-- **`stack.md`**: Technology stack overview and UI vibe specifications
-- **`better_auth_docs.txt`**: Complete BetterAuth documentation for authentication implementation
+## Architecture
 
-## High-Level Architecture
+### Authentication & Multi-tenancy
+- Uses StackAuth for authentication with team-based multi-tenancy
+- Server-side configuration in `stack.tsx` with cookie-based token storage
+- After sign-in redirects to `/dashboard`
+- Teams/organizations are central to the MES workflow
 
-The system is designed with these core modules:
+### Application Structure
+- **Landing Page**: `/` - Marketing/intro page with hero, features, pricing
+- **Dashboard**: `/dashboard` - Main application entry point
+- **Team Dashboard**: `/dashboard/[teamId]` - Team-specific overview with graphs and recent activity
+- **Handler**: `/handler/[...stack]` - StackAuth integration endpoints
 
-1. **Routings Management**: Production paths and operations definition
-2. **Order Management**: Production order creation and tracking
-3. **Work Order Operations (WOO)**: Individual operational steps
-4. **Operator Workflow**: Shop floor operator interface
-5. **Pause Reason Management**: Standardized interruption tracking
-6. **Reporting & Analytics**: Performance insights and dashboards
+### Component Architecture
+- **UI Components**: Located in `components/ui/` using shadcn/ui patterns
+- **Feature Components**: Top-level components for specific features
+- **Layout Components**: `sidebar-layout.tsx` for consistent navigation
+- **Shared Utilities**: `lib/utils.ts` contains `cn()` function for class merging
 
-## Data Models
+### MES Domain Model (Planned)
+Based on the specification, this system will implement:
+- **Routings**: Define production workflows with sequential operations
+- **Orders**: Production orders that follow routings
+- **Work Order Operations (WOOs)**: Individual tasks generated from routings
+- **Pause Reasons**: Standardized interruption tracking
+- **Data Capture**: Flexible input schemas for operator data collection
 
-Core database tables to implement:
-- `mes_routings`: Production routing definitions
-- `mes_routing_operations`: Individual operation steps
-- `mes_orders`: Production orders
-- `mes_work_order_operations`: Work order operations (WOOs)
-- `mes_pause_reasons`: Standardized pause reasons
+### Key Features (V1 Scope)
+- Multi-tenant MES system for product tracking
+- Operator dashboards for work order management
+- Timer-based task tracking with pause/resume functionality
+- Dynamic data input forms based on JSON schemas
+- File attachments for work instructions and operator uploads
+- Real-time WIP monitoring and cycle time analysis
+- Tablet-friendly interface for shop floor use
 
-Integration with existing `Account`, `User`, and `Org` models for multi-tenant support.
+## Development Notes
 
-## Development Setup (To Be Implemented)
+### Path Aliases
+- `@/*` maps to the root directory for cleaner imports
 
-When implementing this project:
+### Styling Approach
+- Uses Tailwind with CSS variables for theming
+- Clean, minimal, modern design with glassmorphism elements
+- Bento-style layouts for dashboard components
+- Responsive design with tablet optimization
 
-1. Initialize Next.js 15 project with App Router
-2. Configure PostgreSQL database
-3. Set up Redis for caching and background jobs
-4. Implement BetterAuth for authentication
-5. Install and configure shadcn/ui components
-6. Set up Tailwind CSS 4
+### File Organization
+- App Router structure with route groups: `(landing-page)`, `(overview)`
+- Server components by default with client components marked explicitly
+- Shared components in `/components` with UI primitives in `/components/ui`
 
-## Implementation Guidelines
-
-- Follow role-based access control patterns defined in `spec.md`
-- Implement multi-tenant architecture with account-based data isolation
-- Use glassmorphism UI design as specified in `UI.md`
-- Start implementation with Routings Management module
-- Ensure all components support light/dark mode
-- Follow accessibility guidelines outlined in UI documentation
-
-## Code Organization
-
-Expected structure when implemented:
-- `/app`: Next.js App Router pages and API routes
-- `/components`: Reusable React components using shadcn/ui
-- `/lib`: Utility functions and database connections
-- `/types`: TypeScript type definitions
-- `/hooks`: Custom React hooks
-- `/middleware`: Authentication and authorization middleware
-
-## Important Notes
-
-- This is a documentation-only project currently - no source code exists yet
-- All user stories and requirements are thoroughly documented in `spec.md`
-- BetterAuth complete documentation is available locally in `better_auth_docs.txt`
-- UI guidelines emphasize clean, minimal, modern design with glassmorphism effects
-- System designed for manufacturing environments with real-time operational tracking
+### Authentication Flow
+- Server-side authentication checks using StackAuth
+- Multi-tenant routing with team ID in URLs
+- Protected routes require valid team membership

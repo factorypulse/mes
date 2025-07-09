@@ -166,7 +166,7 @@ To create a user-friendly Manufacturing Execution System (MES) focused on produc
     State Management: React state/hooks, server actions, and API routes as needed.
     UI Components: shadcn/ui for the design system, lucide for icons.
     Styling: Tailwind CSS 4.
-    Authentication/Authorization: BetterAuth for authentication, with role-based access control (MES_Operator, MES_Planner, MES_Admin) implemented in the app logic.
+    Authentication/Authorization: StackAuth for authentication, with role-based access control (MES_Operator, MES_Planner, MES_Admin) implemented in the app logic.
     File Storage: Use a cloud storage provider (e.g., S3) or local storage, integrated via Next.js API routes and React file upload components.
     Background Jobs: Use a Node.js-compatible job queue (e.g., BullMQ with Redis) for background processing (API ingestion, report generation, etc.).
     Usability: Clean, intuitive, and modern interface using shadcn/ui and Tailwind. Tablet-friendly for shop floor use. Light and dark mode supported.

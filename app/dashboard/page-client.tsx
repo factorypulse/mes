@@ -23,7 +23,9 @@ export function PageClient() {
     return (
       <div className="flex items-center justify-center h-screen w-screen">
         <div className="max-w-xs w-full">
-          <h1 className="text-center text-2xl font-semibold">Welcome!</h1>
+          <h1 className="text-center text-2xl font-semibold">
+            Welcome {user.displayName}!
+          </h1>
           <p className="text-center text-gray-500">
             Create a team to get started
           </p>
