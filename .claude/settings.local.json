@@ -30,7 +30,8 @@
       "Bash(PGPASSWORD=mes_password psql -h localhost -U mes_user -d mes_db -f scripts/create-tables.sql)",
       "Bash(npx:*)",
       "Bash(DATABASE_URL=postgresql://mes_user:mes_password@localhost:5432/mes_db tsx scripts/test-auth-flow.ts)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(node:*)"
     ],
     "deny": []
   }

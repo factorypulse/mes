@@ -14,9 +14,151 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Test {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-    }
+// MES Core Tables (StackAuth provides user/team management)
+
+// Departments (optionally scoped to a team)
+model Department {
+  id          String   @id @default(uuid())
+  teamId      String   @map("team_id")
+  name        String
+  description String?
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  routingOperations MESRoutingOperation[]
+
+  @@map("departments")
+}
+
+// Routings: Define the production paths
+model MESRouting {
+  id          String   @id @default(uuid())
+  teamId      String   @map("team_id")
+  name        String
+  description String?
+  version     String   @default("1.0")
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  operations MESRoutingOperation[]
+  orders     MESOrder[]
+
+  @@map("mes_routings")
+}
+
+// Routing Operations: Individual operations within a routing
+model MESRoutingOperation {
+  id              String   @id @default(uuid())
+  routingId       String   @map("routing_id")
+  departmentId    String?  @map("department_id")
+  operationNumber Int      @map("operation_number")
+  operationName   String   @map("operation_name")
+  description     String?
+  setupTime       Int?     @map("setup_time") // in minutes
+  runTime         Int?     @map("run_time") // in minutes
+  instructions    String?
+  requiredSkills  Json?    @map("required_skills")
+  isActive        Boolean  @default(true) @map("is_active")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+  teamId          String   @map("team_id")
+
+  // Relations
+  routing              MESRouting               @relation(fields: [routingId], references: [id], onDelete: Cascade)
+  department           Department?              @relation(fields: [departmentId], references: [id])
+  workOrderOperations  MESWorkOrderOperation[]
+
+  @@map("mes_routing_operations")
+}
+
+// Orders: Production orders
+model MESOrder {
+  id                  String    @id @default(uuid())
+  teamId              String    @map("team_id")
+  orderNumber         String    @map("order_number")
+  routingId           String    @map("routing_id")
+  quantity            Int
+  priority            Int       @default(1)
+  status              String    @default("pending") // pending | in_progress | completed | cancelled
+  scheduledStartDate  DateTime? @map("scheduled_start_date")
+  scheduledEndDate    DateTime? @map("scheduled_end_date")
+  actualStartDate     DateTime? @map("actual_start_date")
+  actualEndDate       DateTime? @map("actual_end_date")
+  notes               String?
+  customFields        Json?     @map("custom_fields")
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  routing              MESRouting               @relation(fields: [routingId], references: [id])
+  workOrderOperations  MESWorkOrderOperation[]
+
+  @@map("mes_orders")
+}
+
+// Work Order Operations (WOO): Individual work orders for each operation
+model MESWorkOrderOperation {
+  id                   String    @id @default(uuid())
+  orderId              String    @map("order_id")
+  routingOperationId   String    @map("routing_operation_id")
+  operatorId           String?   @map("operator_id") // StackAuth user ID
+  status               String    @default("pending") // pending | in_progress | completed | paused | cancelled
+  scheduledStartTime   DateTime? @map("scheduled_start_time")
+  scheduledEndTime     DateTime? @map("scheduled_end_time")
+  actualStartTime      DateTime? @map("actual_start_time")
+  actualEndTime        DateTime? @map("actual_end_time")
+  quantityCompleted    Int       @default(0) @map("quantity_completed")
+  quantityRejected     Int       @default(0) @map("quantity_rejected")
+  capturedData         Json?     @map("captured_data")
+  notes                String?
+  createdAt            DateTime  @default(now()) @map("created_at")
+  updatedAt            DateTime  @updatedAt @map("updated_at")
+  teamId               String    @map("team_id")
+
+  // Relations
+  order            MESOrder             @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  routingOperation MESRoutingOperation  @relation(fields: [routingOperationId], references: [id])
+  pauseEvents      MESPauseEvent[]
+
+  @@map("mes_work_order_operations")
+}
+
+// Pause Reasons: Standardized reasons for pausing operations
+model MESPauseReason {
+  id          String   @id @default(uuid())
+  teamId      String   @map("team_id")
+  name        String
+  description String?
+  category    String   // planned | unplanned | maintenance | quality | material | other
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  pauseEvents MESPauseEvent[]
+
+  @@map("mes_pause_reasons")
+}
+
+// Pause Events: Track when operations are paused
+model MESPauseEvent {
+  id                     String    @id @default(uuid())
+  workOrderOperationId   String    @map("work_order_operation_id")
+  pauseReasonId          String    @map("pause_reason_id")
+  startTime              DateTime  @map("start_time")
+  endTime                DateTime? @map("end_time")
+  notes                  String?
+  createdAt              DateTime  @default(now()) @map("created_at")
+  updatedAt              DateTime  @updatedAt @map("updated_at")
+  teamId                 String    @map("team_id")
+
+  // Relations
+  workOrderOperation MESWorkOrderOperation @relation(fields: [workOrderOperationId], references: [id], onDelete: Cascade)
+  pauseReason        MESPauseReason        @relation(fields: [pauseReasonId], references: [id])
+
+  @@map("mes_pause_events")
+}

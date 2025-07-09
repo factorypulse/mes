@@ -2,7 +2,7 @@
 
 import SidebarLayout, { SidebarItem } from "@/components/sidebar-layout";
 import { SelectedTeamSwitcher, useUser } from "@stackframe/stack";
-import { BadgePercent, BarChart4, Columns3, Globe, Locate, Settings2, ShoppingBag, ShoppingCart, Users } from "lucide-react";
+import { BarChart4, Factory, Globe, Route, Settings2, ShoppingCart, Timer, Users } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 const navigationItems: SidebarItem[] = [
@@ -14,40 +14,12 @@ const navigationItems: SidebarItem[] = [
   },
   {
     type: 'label',
-    name: 'Management',
+    name: 'Production',
   },
   {
-    name: "Products",
-    href: "/products",
-    icon: ShoppingBag,
-    type: "item",
-  },
-  {
-    name: "People",
-    href: "/people",
-    icon: Users,
-    type: "item",
-  },
-  {
-    name: "Segments",
-    href: "/segments",
-    icon: Columns3,
-    type: "item",
-  },
-  {
-    name: "Regions",
-    href: "/regions",
-    icon: Locate,
-    type: "item",
-  },
-  {
-    type: 'label',
-    name: 'Monetization',
-  },
-  {
-    name: "Revenue",
-    href: "/revenue",
-    icon: BarChart4,
+    name: "Routings",
+    href: "/routings",
+    icon: Route,
     type: "item",
   },
   {
@@ -57,9 +29,31 @@ const navigationItems: SidebarItem[] = [
     type: "item",
   },
   {
-    name: "Discounts",
-    href: "/discounts",
-    icon: BadgePercent,
+    name: "Work Orders",
+    href: "/work-orders",
+    icon: Timer,
+    type: "item",
+  },
+  {
+    name: "Departments",
+    href: "/departments",
+    icon: Factory,
+    type: "item",
+  },
+  {
+    type: 'label',
+    name: 'Management',
+  },
+  {
+    name: "People",
+    href: "/people",
+    icon: Users,
+    type: "item",
+  },
+  {
+    name: "Analytics",
+    href: "/analytics",
+    icon: BarChart4,
     type: "item",
   },
   {
