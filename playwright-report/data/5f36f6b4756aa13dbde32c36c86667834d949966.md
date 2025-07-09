@@ -1,0 +1,75 @@
+# Page snapshot
+
+```yaml
+- button "Open Next.js Dev Tools":
+  - img
+- button "Open issues overlay": 1 Issue
+- button "Collapse issues badge":
+  - img
+- navigation:
+  - button "previous" [disabled]:
+    - img "previous"
+  - text: 1/1
+  - button "next" [disabled]:
+    - img "next"
+- img
+- img
+- text: Next.js 15.3.5 Webpack
+- img
+- dialog "Runtime Error":
+  - text: Runtime Error
+  - button "Copy Stack Trace":
+    - img
+  - button "No related documentation found" [disabled]:
+    - img
+  - link "Learn more about enabling Node.js inspector for server code with Chrome DevTools":
+    - /url: https://nextjs.org/docs/app/building-your-application/configuring/debugging#server-side-code
+    - img
+  - paragraph: "ChunkLoadError: Loading chunk app/handler/layout failed. (error: http://localhost:3000/_next/static/chunks/app/handler/layout.js)"
+  - paragraph: Call Stack 12
+  - text: __webpack_require__.f.j
+  - button "Sourcemapping failed. Click to log cause of error.":
+    - img
+  - text: file:///Users/tomdarcy/code/TomDarcy/mes/.next/static/chunks/webpack.js (858:29) <unknown>
+  - button "Sourcemapping failed. Click to log cause of error.":
+    - img
+  - text: file:///Users/tomdarcy/code/TomDarcy/mes/.next/static/chunks/webpack.js (153:40) Array.reduce
+  - button "Sourcemapping failed. Click to log cause of error.":
+    - img
+  - text: <anonymous> __webpack_require__.e
+  - button "Sourcemapping failed. Click to log cause of error.":
+    - img
+  - text: file:///Users/tomdarcy/code/TomDarcy/mes/.next/static/chunks/webpack.js (152:67) fn.e
+  - button "Sourcemapping failed. Click to log cause of error.":
+    - img
+  - text: file:///Users/tomdarcy/code/TomDarcy/mes/.next/static/chunks/webpack.js (389:50) loadChunk
+  - button "Sourcemapping failed. Click to log cause of error.":
+    - img
+  - text: ./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js preloadModule
+  - button "Sourcemapping failed. Click to log cause of error.":
+    - img
+  - text: ./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js resolveModule
+  - button "Sourcemapping failed. Click to log cause of error.":
+    - img
+  - text: ./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js processFullStringRow
+  - button "Sourcemapping failed. Click to log cause of error.":
+    - img
+  - text: ./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js processFullBinaryRow
+  - button "Sourcemapping failed. Click to log cause of error.":
+    - img
+  - text: ./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js progress
+  - button "Sourcemapping failed. Click to log cause of error.":
+    - img
+  - text: ./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js Layout
+  - button "Sourcemapping failed. Click to log cause of error.":
+    - img
+  - text: rsc:/Server/webpack-internal:///(rsc)/app/handler/layout.tsx (14:88)
+- contentinfo:
+  - region "Error feedback":
+    - paragraph:
+      - link "Was this helpful?":
+        - /url: https://nextjs.org/telemetry#error-feedback
+    - button "Mark as helpful"
+    - button "Mark as not helpful"
+- 'heading "Application error: a client-side exception has occurred while loading localhost (see the browser console for more information)." [level=2]'
+```

@@ -1,0 +1,1340 @@
+<testsuites id="" name="" tests="36" failures="30" skipped="0" errors="0" time="1049.644084">
+<testsuite name="auth.spec.ts" timestamp="2025-07-09T11:25:26.853Z" hostname="chromium" tests="6" failures="5" skipped="0" time="224.818" errors="0">
+<testcase name="Authentication › should login successfully with valid credentials" classname="auth.spec.ts" time="55.431">
+<failure message="auth.spec.ts:5:7 should login successfully with valid credentials" type="FAILURE">
+<![CDATA[  [chromium] › auth.spec.ts:5:7 › Authentication › should login successfully with valid credentials 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-chromium/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should navigate to StackAuth when clicking Sign In" classname="auth.spec.ts" time="5.972">
+<failure message="auth.spec.ts:21:7 should navigate to StackAuth when clicking Sign In" type="FAILURE">
+<![CDATA[  [chromium] › auth.spec.ts:21:7 › Authentication › should navigate to StackAuth when clicking Sign In 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      34 |     const finalUrl = page.url();
+      35 |     const isRedirected = !finalUrl.endsWith('/') || finalUrl.includes('dashboard') || finalUrl.includes('auth');
+    > 36 |     expect(isRedirected).toBe(true);
+         |                          ^
+      37 |   });
+      38 |
+      39 |   test('should handle team creation for new users', async ({ page }) => {
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-chromium/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should handle team creation for new users" classname="auth.spec.ts" time="55.361">
+<failure message="auth.spec.ts:39:7 should handle team creation for new users" type="FAILURE">
+<![CDATA[  [chromium] › auth.spec.ts:39:7 › Authentication › should handle team creation for new users ──────
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-e6347-team-creation-for-new-users-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-e6347-team-creation-for-new-users-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-e6347-team-creation-for-new-users-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-chromium/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should access protected routes after authentication" classname="auth.spec.ts" time="55.301">
+<failure message="auth.spec.ts:61:7 should access protected routes after authentication" type="FAILURE">
+<![CDATA[  [chromium] › auth.spec.ts:61:7 › Authentication › should access protected routes after authentication 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-98c3e-routes-after-authentication-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-98c3e-routes-after-authentication-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-98c3e-routes-after-authentication-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-chromium/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should show sign in option when not authenticated" classname="auth.spec.ts" time="17.061">
+</testcase>
+<testcase name="Authentication › should show dashboard link when authenticated" classname="auth.spec.ts" time="35.692">
+<failure message="auth.spec.ts:87:7 should show dashboard link when authenticated" type="FAILURE">
+<![CDATA[  [chromium] › auth.spec.ts:87:7 › Authentication › should show dashboard link when authenticated ──
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-chromium/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="auth.spec.ts" timestamp="2025-07-09T11:25:26.853Z" hostname="firefox" tests="6" failures="5" skipped="0" time="552.879" errors="0">
+<testcase name="Authentication › should login successfully with valid credentials" classname="auth.spec.ts" time="60.187">
+<failure message="auth.spec.ts:5:7 should login successfully with valid credentials" type="FAILURE">
+<![CDATA[  [firefox] › auth.spec.ts:5:7 › Authentication › should login successfully with valid credentials ─
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-firefox/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should navigate to StackAuth when clicking Sign In" classname="auth.spec.ts" time="47.6">
+<failure message="auth.spec.ts:21:7 should navigate to StackAuth when clicking Sign In" type="FAILURE">
+<![CDATA[  [firefox] › auth.spec.ts:21:7 › Authentication › should navigate to StackAuth when clicking Sign In 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      34 |     const finalUrl = page.url();
+      35 |     const isRedirected = !finalUrl.endsWith('/') || finalUrl.includes('dashboard') || finalUrl.includes('auth');
+    > 36 |     expect(isRedirected).toBe(true);
+         |                          ^
+      37 |   });
+      38 |
+      39 |   test('should handle team creation for new users', async ({ page }) => {
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-firefox/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should handle team creation for new users" classname="auth.spec.ts" time="60.132">
+<failure message="auth.spec.ts:39:7 should handle team creation for new users" type="FAILURE">
+<![CDATA[  [firefox] › auth.spec.ts:39:7 › Authentication › should handle team creation for new users ───────
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-e6347-team-creation-for-new-users-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-e6347-team-creation-for-new-users-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-e6347-team-creation-for-new-users-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-firefox/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should access protected routes after authentication" classname="auth.spec.ts" time="60.545">
+<failure message="auth.spec.ts:61:7 should access protected routes after authentication" type="FAILURE">
+<![CDATA[  [firefox] › auth.spec.ts:61:7 › Authentication › should access protected routes after authentication 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-98c3e-routes-after-authentication-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-98c3e-routes-after-authentication-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-98c3e-routes-after-authentication-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-firefox/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should show sign in option when not authenticated" classname="auth.spec.ts" time="3.905">
+</testcase>
+<testcase name="Authentication › should show dashboard link when authenticated" classname="auth.spec.ts" time="320.51">
+<failure message="auth.spec.ts:87:7 should show dashboard link when authenticated" type="FAILURE">
+<![CDATA[  [firefox] › auth.spec.ts:87:7 › Authentication › should show dashboard link when authenticated ───
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-firefox/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="auth.spec.ts" timestamp="2025-07-09T11:25:26.853Z" hostname="webkit" tests="6" failures="5" skipped="0" time="991.192" errors="0">
+<testcase name="Authentication › should login successfully with valid credentials" classname="auth.spec.ts" time="320.204">
+<failure message="auth.spec.ts:5:7 should login successfully with valid credentials" type="FAILURE">
+<![CDATA[  [webkit] › auth.spec.ts:5:7 › Authentication › should login successfully with valid credentials ──
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-webkit/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should navigate to StackAuth when clicking Sign In" classname="auth.spec.ts" time="6.455">
+<failure message="auth.spec.ts:21:7 should navigate to StackAuth when clicking Sign In" type="FAILURE">
+<![CDATA[  [webkit] › auth.spec.ts:21:7 › Authentication › should navigate to StackAuth when clicking Sign In 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      34 |     const finalUrl = page.url();
+      35 |     const isRedirected = !finalUrl.endsWith('/') || finalUrl.includes('dashboard') || finalUrl.includes('auth');
+    > 36 |     expect(isRedirected).toBe(true);
+         |                          ^
+      37 |   });
+      38 |
+      39 |   test('should handle team creation for new users', async ({ page }) => {
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-webkit/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should handle team creation for new users" classname="auth.spec.ts" time="312.477">
+<failure message="auth.spec.ts:39:7 should handle team creation for new users" type="FAILURE">
+<![CDATA[  [webkit] › auth.spec.ts:39:7 › Authentication › should handle team creation for new users ────────
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-e6347-team-creation-for-new-users-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-e6347-team-creation-for-new-users-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-e6347-team-creation-for-new-users-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-webkit/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should access protected routes after authentication" classname="auth.spec.ts" time="312.537">
+<failure message="auth.spec.ts:61:7 should access protected routes after authentication" type="FAILURE">
+<![CDATA[  [webkit] › auth.spec.ts:61:7 › Authentication › should access protected routes after authentication 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-98c3e-routes-after-authentication-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-98c3e-routes-after-authentication-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-98c3e-routes-after-authentication-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-webkit/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should show sign in option when not authenticated" classname="auth.spec.ts" time="4.321">
+</testcase>
+<testcase name="Authentication › should show dashboard link when authenticated" classname="auth.spec.ts" time="35.198">
+<failure message="auth.spec.ts:87:7 should show dashboard link when authenticated" type="FAILURE">
+<![CDATA[  [webkit] › auth.spec.ts:87:7 › Authentication › should show dashboard link when authenticated ────
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-webkit/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="auth.spec.ts" timestamp="2025-07-09T11:25:26.853Z" hostname="Mobile Chrome" tests="6" failures="5" skipped="0" time="378.275" errors="0">
+<testcase name="Authentication › should login successfully with valid credentials" classname="auth.spec.ts" time="35.362">
+<failure message="auth.spec.ts:5:7 should login successfully with valid credentials" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › auth.spec.ts:5:7 › Authentication › should login successfully with valid credentials 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should navigate to StackAuth when clicking Sign In" classname="auth.spec.ts" time="4.519">
+<failure message="auth.spec.ts:21:7 should navigate to StackAuth when clicking Sign In" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › auth.spec.ts:21:7 › Authentication › should navigate to StackAuth when clicking Sign In 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      34 |     const finalUrl = page.url();
+      35 |     const isRedirected = !finalUrl.endsWith('/') || finalUrl.includes('dashboard') || finalUrl.includes('auth');
+    > 36 |     expect(isRedirected).toBe(true);
+         |                          ^
+      37 |   });
+      38 |
+      39 |   test('should handle team creation for new users', async ({ page }) => {
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should handle team creation for new users" classname="auth.spec.ts" time="33.077">
+<failure message="auth.spec.ts:39:7 should handle team creation for new users" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › auth.spec.ts:39:7 › Authentication › should handle team creation for new users ─
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should access protected routes after authentication" classname="auth.spec.ts" time="33.109">
+<failure message="auth.spec.ts:61:7 should access protected routes after authentication" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › auth.spec.ts:61:7 › Authentication › should access protected routes after authentication 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should show sign in option when not authenticated" classname="auth.spec.ts" time="1.951">
+</testcase>
+<testcase name="Authentication › should show dashboard link when authenticated" classname="auth.spec.ts" time="270.257">
+<failure message="auth.spec.ts:87:7 should show dashboard link when authenticated" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › auth.spec.ts:87:7 › Authentication › should show dashboard link when authenticated 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="auth.spec.ts" timestamp="2025-07-09T11:25:26.853Z" hostname="Mobile Safari" tests="6" failures="5" skipped="0" time="812.957" errors="0">
+<testcase name="Authentication › should login successfully with valid credentials" classname="auth.spec.ts" time="260.004">
+<failure message="auth.spec.ts:5:7 should login successfully with valid credentials" type="FAILURE">
+<![CDATA[  [Mobile Safari] › auth.spec.ts:5:7 › Authentication › should login successfully with valid credentials 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should navigate to StackAuth when clicking Sign In" classname="auth.spec.ts" time="2.375">
+<failure message="auth.spec.ts:21:7 should navigate to StackAuth when clicking Sign In" type="FAILURE">
+<![CDATA[  [Mobile Safari] › auth.spec.ts:21:7 › Authentication › should navigate to StackAuth when clicking Sign In 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      34 |     const finalUrl = page.url();
+      35 |     const isRedirected = !finalUrl.endsWith('/') || finalUrl.includes('dashboard') || finalUrl.includes('auth');
+    > 36 |     expect(isRedirected).toBe(true);
+         |                          ^
+      37 |   });
+      38 |
+      39 |   test('should handle team creation for new users', async ({ page }) => {
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should handle team creation for new users" classname="auth.spec.ts" time="259.073">
+<failure message="auth.spec.ts:39:7 should handle team creation for new users" type="FAILURE">
+<![CDATA[  [Mobile Safari] › auth.spec.ts:39:7 › Authentication › should handle team creation for new users ─
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should access protected routes after authentication" classname="auth.spec.ts" time="256.359">
+<failure message="auth.spec.ts:61:7 should access protected routes after authentication" type="FAILURE">
+<![CDATA[  [Mobile Safari] › auth.spec.ts:61:7 › Authentication › should access protected routes after authentication 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should show sign in option when not authenticated" classname="auth.spec.ts" time="2.171">
+</testcase>
+<testcase name="Authentication › should show dashboard link when authenticated" classname="auth.spec.ts" time="32.975">
+<failure message="auth.spec.ts:87:7 should show dashboard link when authenticated" type="FAILURE">
+<![CDATA[  [Mobile Safari] › auth.spec.ts:87:7 › Authentication › should show dashboard link when authenticated 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="auth.spec.ts" timestamp="2025-07-09T11:25:26.853Z" hostname="iPad" tests="6" failures="5" skipped="0" time="369.822" errors="0">
+<testcase name="Authentication › should login successfully with valid credentials" classname="auth.spec.ts" time="32.972">
+<failure message="auth.spec.ts:5:7 should login successfully with valid credentials" type="FAILURE">
+<![CDATA[  [iPad] › auth.spec.ts:5:7 › Authentication › should login successfully with valid credentials ────
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-iPad/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-iPad/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-iPad/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-iPad/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-iPad/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-3852b-ully-with-valid-credentials-iPad/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should navigate to StackAuth when clicking Sign In" classname="auth.spec.ts" time="1.738">
+<failure message="auth.spec.ts:21:7 should navigate to StackAuth when clicking Sign In" type="FAILURE">
+<![CDATA[  [iPad] › auth.spec.ts:21:7 › Authentication › should navigate to StackAuth when clicking Sign In ─
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      34 |     const finalUrl = page.url();
+      35 |     const isRedirected = !finalUrl.endsWith('/') || finalUrl.includes('dashboard') || finalUrl.includes('auth');
+    > 36 |     expect(isRedirected).toBe(true);
+         |                          ^
+      37 |   });
+      38 |
+      39 |   test('should handle team creation for new users', async ({ page }) => {
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-iPad/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-iPad/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-iPad/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-iPad/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-iPad/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-iPad/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should handle team creation for new users" classname="auth.spec.ts" time="31.943">
+<failure message="auth.spec.ts:39:7 should handle team creation for new users" type="FAILURE">
+<![CDATA[  [iPad] › auth.spec.ts:39:7 › Authentication › should handle team creation for new users ──────────
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-e6347-team-creation-for-new-users-iPad/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-e6347-team-creation-for-new-users-iPad/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-e6347-team-creation-for-new-users-iPad/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-iPad/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-iPad/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-e6347-team-creation-for-new-users-iPad/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should access protected routes after authentication" classname="auth.spec.ts" time="31.918">
+<failure message="auth.spec.ts:61:7 should access protected routes after authentication" type="FAILURE">
+<![CDATA[  [iPad] › auth.spec.ts:61:7 › Authentication › should access protected routes after authentication 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-98c3e-routes-after-authentication-iPad/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-98c3e-routes-after-authentication-iPad/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-98c3e-routes-after-authentication-iPad/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-iPad/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-iPad/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-98c3e-routes-after-authentication-iPad/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should show sign in option when not authenticated" classname="auth.spec.ts" time="1.576">
+</testcase>
+<testcase name="Authentication › should show dashboard link when authenticated" classname="auth.spec.ts" time="269.675">
+<failure message="auth.spec.ts:87:7 should show dashboard link when authenticated" type="FAILURE">
+<![CDATA[  [iPad] › auth.spec.ts:87:7 › Authentication › should show dashboard link when authenticated ──────
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /\/dashboard/
+    Received string:  "http://localhost:3000/handler/sign-in"
+
+       at utils/auth.ts:103
+
+      101 |     if (!found) {
+      102 |       // If no user menu found, check if we're on a dashboard page (indicates auth success)
+    > 103 |       expect(this.page.url()).toMatch(/\/dashboard/);
+          |                               ^
+      104 |     }
+      105 |   }
+      106 |
+        at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)
+        at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)
+        at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-iPad/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-iPad/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-iPad/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[No login form found - user might already be authenticated
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-iPad/test-failed-1.png]]
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-iPad/video.webm]]
+
+[[ATTACHMENT|auth-Authentication-should-cdff9-ard-link-when-authenticated-iPad/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>

@@ -1,71 +1,116 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { StatusIndicator } from "@/components/ui/status-indicator";
+import { Clock, Package, CheckCircle } from "lucide-react";
+
+// Mock data for recent manufacturing activity
+const recentActivity = [
+  {
+    id: "WO-2024-001",
+    type: "Work Order Completed",
+    operator: "Sarah Chen",
+    operatorInitials: "SC",
+    department: "Assembly",
+    time: "2 minutes ago",
+    status: "completed" as const,
+  },
+  {
+    id: "WO-2024-002",
+    type: "Order Started",
+    operator: "Mike Johnson",
+    operatorInitials: "MJ",
+    department: "Machining",
+    time: "8 minutes ago",
+    status: "active" as const,
+  },
+  {
+    id: "WO-2024-003",
+    type: "Quality Check Passed",
+    operator: "Lisa Wang",
+    operatorInitials: "LW",
+    department: "Quality Control",
+    time: "15 minutes ago",
+    status: "completed" as const,
+  },
+  {
+    id: "WO-2024-004",
+    type: "Setup in Progress",
+    operator: "David Brown",
+    operatorInitials: "DB",
+    department: "Assembly",
+    time: "23 minutes ago",
+    status: "pending" as const,
+  },
+  {
+    id: "WO-2024-005",
+    type: "Order Paused",
+    operator: "Emma Wilson",
+    operatorInitials: "EW",
+    department: "Packaging",
+    time: "35 minutes ago",
+    status: "paused" as const,
+  },
+];
+
+function ActivityIcon({ type }: { type: string }) {
+  if (type.includes("Completed") || type.includes("Passed")) {
+    return <CheckCircle className="h-4 w-4 text-green-500" />;
+  }
+  if (type.includes("Started") || type.includes("Progress")) {
+    return <Package className="h-4 w-4 text-blue-500" />;
+  }
+  return <Clock className="h-4 w-4 text-muted-foreground" />;
+}
 
 export function RecentSales() {
   return (
-    <div className="space-y-8">
-      <div className="flex items-center">
-        <Avatar className="h-9 w-9">
-          <AvatarImage src="/avatars/01.png" alt="Avatar" />
-          <AvatarFallback>OM</AvatarFallback>
-        </Avatar>
-        <div className="ml-4 space-y-1">
-          <p className="text-sm font-medium leading-none">Olivia Martin</p>
-          <p className="text-sm text-muted-foreground">
-            olivia.martin@email.com
-          </p>
+    <div className="space-y-4">
+      {recentActivity.map((activity) => (
+        <div
+          key={activity.id}
+          className="glass-subtle rounded-lg p-4 transition-all duration-200 hover:bg-primary/5 group"
+        >
+          <div className="flex items-start gap-4">
+            {/* Avatar */}
+            <Avatar className="h-10 w-10 border border-border/50">
+              <AvatarFallback className="bg-primary/10 text-primary font-semibold">
+                {activity.operatorInitials}
+              </AvatarFallback>
+            </Avatar>
+
+            {/* Content */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center gap-2">
+                  <ActivityIcon type={activity.type} />
+                  <p className="text-sm font-medium leading-none">
+                    {activity.type}
+                  </p>
+                </div>
+                <StatusIndicator
+                  status={activity.status}
+                  variant="dot"
+                  size="sm"
+                  animate={activity.status === 'active'}
+                />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-muted-foreground">
+                    {activity.operator} • {activity.department}
+                  </p>
+                  <p className="text-xs text-muted-foreground font-mono">
+                    {activity.id}
+                  </p>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  {activity.time}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="ml-auto font-medium">+$1,999.00</div>
-      </div>
-      <div className="flex items-center">
-        <Avatar className="flex h-9 w-9 items-center justify-center space-y-0 border">
-          <AvatarImage src="/avatars/02.png" alt="Avatar" />
-          <AvatarFallback>JL</AvatarFallback>
-        </Avatar>
-        <div className="ml-4 space-y-1">
-          <p className="text-sm font-medium leading-none">Jackson Lee</p>
-          <p className="text-sm text-muted-foreground">jackson.lee@email.com</p>
-        </div>
-        <div className="ml-auto font-medium">+$39.00</div>
-      </div>
-      <div className="flex items-center">
-        <Avatar className="h-9 w-9">
-          <AvatarImage src="/avatars/03.png" alt="Avatar" />
-          <AvatarFallback>IN</AvatarFallback>
-        </Avatar>
-        <div className="ml-4 space-y-1">
-          <p className="text-sm font-medium leading-none">Isabella Nguyen</p>
-          <p className="text-sm text-muted-foreground">
-            isabella.nguyen@email.com
-          </p>
-        </div>
-        <div className="ml-auto font-medium">+$299.00</div>
-      </div>
-      <div className="flex items-center">
-        <Avatar className="h-9 w-9">
-          <AvatarImage src="/avatars/04.png" alt="Avatar" />
-          <AvatarFallback>WK</AvatarFallback>
-        </Avatar>
-        <div className="ml-4 space-y-1">
-          <p className="text-sm font-medium leading-none">William Kim</p>
-          <p className="text-sm text-muted-foreground">will@email.com</p>
-        </div>
-        <div className="ml-auto font-medium">+$99.00</div>
-      </div>
-      <div className="flex items-center">
-        <Avatar className="h-9 w-9">
-          <AvatarImage src="/avatars/05.png" alt="Avatar" />
-          <AvatarFallback>SD</AvatarFallback>
-        </Avatar>
-        <div className="ml-4 space-y-1">
-          <p className="text-sm font-medium leading-none">Sofia Davis</p>
-          <p className="text-sm text-muted-foreground">sofia.davis@email.com</p>
-        </div>
-        <div className="ml-auto font-medium">+$39.00</div>
-      </div>
+      ))}
     </div>
-  )
+  );
 }

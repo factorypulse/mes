@@ -1,0 +1,2597 @@
+{
+  "config": {
+    "configFile": "/Users/tomdarcy/code/TomDarcy/mes/playwright.config.ts",
+    "rootDir": "/Users/tomdarcy/code/TomDarcy/mes/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": "/Users/tomdarcy/code/TomDarcy/mes/tests/global-setup.ts",
+    "globalTeardown": "/Users/tomdarcy/code/TomDarcy/mes/tests/global-teardown.ts",
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "test-results/results.xml"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/tomdarcy/code/TomDarcy/mes/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/tomdarcy/code/TomDarcy/mes/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/tomdarcy/code/TomDarcy/mes/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/tomdarcy/code/TomDarcy/mes/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/tomdarcy/code/TomDarcy/mes/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/tomdarcy/code/TomDarcy/mes/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/tomdarcy/code/TomDarcy/mes/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "Mobile Chrome",
+        "name": "Mobile Chrome",
+        "testDir": "/Users/tomdarcy/code/TomDarcy/mes/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/tomdarcy/code/TomDarcy/mes/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "Mobile Safari",
+        "name": "Mobile Safari",
+        "testDir": "/Users/tomdarcy/code/TomDarcy/mes/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/tomdarcy/code/TomDarcy/mes/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "iPad",
+        "name": "iPad",
+        "testDir": "/Users/tomdarcy/code/TomDarcy/mes/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.53.2",
+    "workers": 4,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "auth.spec.ts",
+      "file": "auth.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Authentication",
+          "file": "auth.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should login successfully with valid credentials",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 55431,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\n    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                          "column": 31,
+                          "line": 103
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:25:27.235Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                        "column": 31,
+                        "line": 103
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-c6a87ca646f462f7faf1",
+              "file": "auth.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "should navigate to StackAuth when clicking Sign In",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 5972,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                          "column": 26,
+                          "line": 36
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 34 |\u001b[39m     \u001b[36mconst\u001b[39m finalUrl \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m     \u001b[36mconst\u001b[39m isRedirected \u001b[33m=\u001b[39m \u001b[33m!\u001b[39mfinalUrl\u001b[33m.\u001b[39mendsWith(\u001b[32m'/'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'dashboard'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'auth'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m     expect(isRedirected)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m   test(\u001b[32m'should handle team creation for new users'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                            "column": 26,
+                            "line": 36
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 34 |\u001b[39m     \u001b[36mconst\u001b[39m finalUrl \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m     \u001b[36mconst\u001b[39m isRedirected \u001b[33m=\u001b[39m \u001b[33m!\u001b[39mfinalUrl\u001b[33m.\u001b[39mendsWith(\u001b[32m'/'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'dashboard'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'auth'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m     expect(isRedirected)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m   test(\u001b[32m'should handle team creation for new users'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:25:27.241Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                        "column": 26,
+                        "line": 36
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-997f39bc07b45c271045",
+              "file": "auth.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "should handle team creation for new users",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 55361,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\n    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                          "column": 31,
+                          "line": 103
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:25:27.232Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                        "column": 31,
+                        "line": 103
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-433a1a98de7932debf2c",
+              "file": "auth.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should access protected routes after authentication",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 55301,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\n    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                          "column": 31,
+                          "line": 103
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:25:27.230Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                        "column": 31,
+                        "line": 103
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-b2afed17d2515a55f188",
+              "file": "auth.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should show sign in option when not authenticated",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 17061,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:25:34.454Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-5b813d1a6530c0f7e9df",
+              "file": "auth.spec.ts",
+              "line": 77,
+              "column": 7
+            },
+            {
+              "title": "should show dashboard link when authenticated",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 35692,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\n    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                          "column": 31,
+                          "line": 103
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:25:51.823Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                        "column": 31,
+                        "line": 103
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-5a3c4d764d0e34fdafbc",
+              "file": "auth.spec.ts",
+              "line": 87,
+              "column": 7
+            },
+            {
+              "title": "should login successfully with valid credentials",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 3,
+                      "status": "timedOut",
+                      "duration": 60187,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:26:23.508Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-firefox/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-firefox/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-9aaaa8baf3b2d5a31a31",
+              "file": "auth.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "should navigate to StackAuth when clicking Sign In",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 47600,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                          "column": 26,
+                          "line": 36
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 34 |\u001b[39m     \u001b[36mconst\u001b[39m finalUrl \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m     \u001b[36mconst\u001b[39m isRedirected \u001b[33m=\u001b[39m \u001b[33m!\u001b[39mfinalUrl\u001b[33m.\u001b[39mendsWith(\u001b[32m'/'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'dashboard'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'auth'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m     expect(isRedirected)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m   test(\u001b[32m'should handle team creation for new users'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                            "column": 26,
+                            "line": 36
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 34 |\u001b[39m     \u001b[36mconst\u001b[39m finalUrl \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m     \u001b[36mconst\u001b[39m isRedirected \u001b[33m=\u001b[39m \u001b[33m!\u001b[39mfinalUrl\u001b[33m.\u001b[39mendsWith(\u001b[32m'/'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'dashboard'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'auth'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m     expect(isRedirected)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m   test(\u001b[32m'should handle team creation for new users'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:26:23.509Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-firefox/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-firefox/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                        "column": 26,
+                        "line": 36
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-bb0f13c43402f377b796",
+              "file": "auth.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "should handle team creation for new users",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 60132,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:26:23.508Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-firefox/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-firefox/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-995efc8134d259f159d4",
+              "file": "auth.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should access protected routes after authentication",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 60545,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:26:29.361Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-firefox/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-firefox/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-c9534a07eb289d464902",
+              "file": "auth.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should show sign in option when not authenticated",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 3905,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:27:18.450Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-359d3dc209021315088e",
+              "file": "auth.spec.ts",
+              "line": 77,
+              "column": 7
+            },
+            {
+              "title": "should show dashboard link when authenticated",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 3,
+                      "status": "timedOut",
+                      "duration": 320510,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:27:27.382Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-firefox/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-firefox/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-6cc7a93a58b4c91394e2",
+              "file": "auth.spec.ts",
+              "line": 87,
+              "column": 7
+            },
+            {
+              "title": "should login successfully with valid credentials",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 2,
+                      "status": "timedOut",
+                      "duration": 320204,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:27:27.769Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-webkit/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-webkit/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-4ca3eba2041efcb09988",
+              "file": "auth.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "should navigate to StackAuth when clicking Sign In",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 6455,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                          "column": 26,
+                          "line": 36
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 34 |\u001b[39m     \u001b[36mconst\u001b[39m finalUrl \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m     \u001b[36mconst\u001b[39m isRedirected \u001b[33m=\u001b[39m \u001b[33m!\u001b[39mfinalUrl\u001b[33m.\u001b[39mendsWith(\u001b[32m'/'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'dashboard'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'auth'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m     expect(isRedirected)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m   test(\u001b[32m'should handle team creation for new users'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                            "column": 26,
+                            "line": 36
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 34 |\u001b[39m     \u001b[36mconst\u001b[39m finalUrl \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m     \u001b[36mconst\u001b[39m isRedirected \u001b[33m=\u001b[39m \u001b[33m!\u001b[39mfinalUrl\u001b[33m.\u001b[39mendsWith(\u001b[32m'/'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'dashboard'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'auth'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m     expect(isRedirected)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m   test(\u001b[32m'should handle team creation for new users'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:27:28.060Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-webkit/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                        "column": 26,
+                        "line": 36
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-e247283b979720fc24db",
+              "file": "auth.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "should handle team creation for new users",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 312477,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:27:35.175Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-webkit/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-webkit/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-eb83ea7239ee0e0f2a07",
+              "file": "auth.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should access protected routes after authentication",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 312537,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:27:35.816Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-webkit/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-webkit/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-ce5d49aa757f5971b103",
+              "file": "auth.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should show sign in option when not authenticated",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 15,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 4321,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:32:49.530Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-57a7c1684cc84f103ed6",
+              "file": "auth.spec.ts",
+              "line": 77,
+              "column": 7
+            },
+            {
+              "title": "should show dashboard link when authenticated",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 35198,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\n    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                          "column": 31,
+                          "line": 103
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:32:49.531Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-webkit/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                        "column": 31,
+                        "line": 103
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-5c9882f03377174e4d0d",
+              "file": "auth.spec.ts",
+              "line": 87,
+              "column": 7
+            },
+            {
+              "title": "should login successfully with valid credentials",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 17,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 35362,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\n    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                          "column": 31,
+                          "line": 103
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:32:49.529Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Chrome/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Chrome/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Chrome/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                        "column": 31,
+                        "line": 103
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-462a430cbad5488b2876",
+              "file": "auth.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "should navigate to StackAuth when clicking Sign In",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 4519,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                          "column": 26,
+                          "line": 36
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 34 |\u001b[39m     \u001b[36mconst\u001b[39m finalUrl \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m     \u001b[36mconst\u001b[39m isRedirected \u001b[33m=\u001b[39m \u001b[33m!\u001b[39mfinalUrl\u001b[33m.\u001b[39mendsWith(\u001b[32m'/'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'dashboard'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'auth'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m     expect(isRedirected)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m   test(\u001b[32m'should handle team creation for new users'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                            "column": 26,
+                            "line": 36
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 34 |\u001b[39m     \u001b[36mconst\u001b[39m finalUrl \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m     \u001b[36mconst\u001b[39m isRedirected \u001b[33m=\u001b[39m \u001b[33m!\u001b[39mfinalUrl\u001b[33m.\u001b[39mendsWith(\u001b[32m'/'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'dashboard'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'auth'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m     expect(isRedirected)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m   test(\u001b[32m'should handle team creation for new users'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:32:50.227Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Chrome/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Chrome/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Chrome/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                        "column": 26,
+                        "line": 36
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-4f8bed21ebf9dd67936b",
+              "file": "auth.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "should handle team creation for new users",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 33077,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\n    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                          "column": 31,
+                          "line": 103
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:32:55.475Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Chrome/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Chrome/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Chrome/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                        "column": 31,
+                        "line": 103
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-3ebf7bc30ced8b3b64a0",
+              "file": "auth.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should access protected routes after authentication",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 20,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 33109,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\n    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                          "column": 31,
+                          "line": 103
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:32:55.896Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Chrome/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Chrome/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Chrome/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                        "column": 31,
+                        "line": 103
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-00841501ba787114131f",
+              "file": "auth.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should show sign in option when not authenticated",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 21,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1951,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:33:25.734Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-25999b2216a4d19ea333",
+              "file": "auth.spec.ts",
+              "line": 77,
+              "column": 7
+            },
+            {
+              "title": "should show dashboard link when authenticated",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 22,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 270257,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:33:25.768Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Chrome/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Chrome/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Chrome/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-0e7b69791944ca7a584e",
+              "file": "auth.spec.ts",
+              "line": 87,
+              "column": 7
+            },
+            {
+              "title": "should login successfully with valid credentials",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 23,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 260004,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:33:28.134Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Safari/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Safari/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-Mobile-Safari/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-82495805710734cad1da",
+              "file": "auth.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "should navigate to StackAuth when clicking Sign In",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 24,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 2375,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                          "column": 26,
+                          "line": 36
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 34 |\u001b[39m     \u001b[36mconst\u001b[39m finalUrl \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m     \u001b[36mconst\u001b[39m isRedirected \u001b[33m=\u001b[39m \u001b[33m!\u001b[39mfinalUrl\u001b[33m.\u001b[39mendsWith(\u001b[32m'/'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'dashboard'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'auth'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m     expect(isRedirected)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m   test(\u001b[32m'should handle team creation for new users'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                            "column": 26,
+                            "line": 36
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 34 |\u001b[39m     \u001b[36mconst\u001b[39m finalUrl \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m     \u001b[36mconst\u001b[39m isRedirected \u001b[33m=\u001b[39m \u001b[33m!\u001b[39mfinalUrl\u001b[33m.\u001b[39mendsWith(\u001b[32m'/'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'dashboard'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'auth'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m     expect(isRedirected)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m   test(\u001b[32m'should handle team creation for new users'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:33:29.263Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Safari/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Safari/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-Mobile-Safari/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                        "column": 26,
+                        "line": 36
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-0785a5f12a289997dd2f",
+              "file": "auth.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "should handle team creation for new users",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 25,
+                      "parallelIndex": 3,
+                      "status": "timedOut",
+                      "duration": 259073,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:33:29.581Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Safari/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Safari/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-Mobile-Safari/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-cc50c0febf86ab82b0c9",
+              "file": "auth.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should access protected routes after authentication",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 26,
+                      "parallelIndex": 2,
+                      "status": "timedOut",
+                      "duration": 256359,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:33:32.267Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Safari/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Safari/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-Mobile-Safari/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-728f220cfaf12ad7f5d0",
+              "file": "auth.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should show sign in option when not authenticated",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 27,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 2171,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:37:49.490Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-feba1346c5d7f4f6bf52",
+              "file": "auth.spec.ts",
+              "line": 77,
+              "column": 7
+            },
+            {
+              "title": "should show dashboard link when authenticated",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 28,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 32975,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\n    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                          "column": 31,
+                          "line": 103
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:37:49.505Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Safari/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Safari/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-Mobile-Safari/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                        "column": 31,
+                        "line": 103
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-048834660ee077194730",
+              "file": "auth.spec.ts",
+              "line": 87,
+              "column": 7
+            },
+            {
+              "title": "should login successfully with valid credentials",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad",
+                  "projectName": "iPad",
+                  "results": [
+                    {
+                      "workerIndex": 29,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 32972,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\n    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                          "column": 31,
+                          "line": 103
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:8:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:37:49.486Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-iPad/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-iPad/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-3852b-ully-with-valid-credentials-iPad/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                        "column": 31,
+                        "line": 103
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-f434587487cd2856d21a",
+              "file": "auth.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "should navigate to StackAuth when clicking Sign In",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad",
+                  "projectName": "iPad",
+                  "results": [
+                    {
+                      "workerIndex": 30,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 1738,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                          "column": 26,
+                          "line": 36
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 34 |\u001b[39m     \u001b[36mconst\u001b[39m finalUrl \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m     \u001b[36mconst\u001b[39m isRedirected \u001b[33m=\u001b[39m \u001b[33m!\u001b[39mfinalUrl\u001b[33m.\u001b[39mendsWith(\u001b[32m'/'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'dashboard'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'auth'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m     expect(isRedirected)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m   test(\u001b[32m'should handle team creation for new users'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                            "column": 26,
+                            "line": 36
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 34 |\u001b[39m     \u001b[36mconst\u001b[39m finalUrl \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m     \u001b[36mconst\u001b[39m isRedirected \u001b[33m=\u001b[39m \u001b[33m!\u001b[39mfinalUrl\u001b[33m.\u001b[39mendsWith(\u001b[32m'/'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'dashboard'\u001b[39m) \u001b[33m||\u001b[39m finalUrl\u001b[33m.\u001b[39mincludes(\u001b[32m'auth'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m     expect(isRedirected)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m   test(\u001b[32m'should handle team creation for new users'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:36:26\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:37:52.382Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-iPad/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-iPad/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-f0f9b-kAuth-when-clicking-Sign-In-iPad/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts",
+                        "column": 26,
+                        "line": 36
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-29d3d4c71cc4c8e90f7e",
+              "file": "auth.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "should handle team creation for new users",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad",
+                  "projectName": "iPad",
+                  "results": [
+                    {
+                      "workerIndex": 31,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 31943,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\n    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                          "column": 31,
+                          "line": 103
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:42:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:37:54.587Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-iPad/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-iPad/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-e6347-team-creation-for-new-users-iPad/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                        "column": 31,
+                        "line": 103
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-f06bf3f89bb8ee15939b",
+              "file": "auth.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "should access protected routes after authentication",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad",
+                  "projectName": "iPad",
+                  "results": [
+                    {
+                      "workerIndex": 32,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 31918,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\n    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\n    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5",
+                        "location": {
+                          "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                          "column": 31,
+                          "line": 103
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:64:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:37:56.539Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-iPad/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-iPad/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-98c3e-routes-after-authentication-iPad/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                        "column": 31,
+                        "line": 103
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-160b93365425362c7fbf",
+              "file": "auth.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should show sign in option when not authenticated",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad",
+                  "projectName": "iPad",
+                  "results": [
+                    {
+                      "workerIndex": 34,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1576,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:38:23.050Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-9316dea14c5e44519c57",
+              "file": "auth.spec.ts",
+              "line": 77,
+              "column": 7
+            },
+            {
+              "title": "should show dashboard link when authenticated",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad",
+                  "projectName": "iPad",
+                  "results": [
+                    {
+                      "workerIndex": 33,
+                      "parallelIndex": 3,
+                      "status": "timedOut",
+                      "duration": 269675,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts",
+                            "column": 31,
+                            "line": 103
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/\\/dashboard/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:3000/handler/sign-in\"\u001b[39m\n\n\u001b[90m   at \u001b[39mutils/auth.ts:103\n\n\u001b[0m \u001b[90m 101 |\u001b[39m     \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39mfound) {\n \u001b[90m 102 |\u001b[39m       \u001b[90m// If no user menu found, check if we're on a dashboard page (indicates auth success)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m       expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mtoMatch(\u001b[35m/\\/dashboard/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m     }\n \u001b[90m 105 |\u001b[39m   }\n \u001b[90m 106 |\u001b[39m\u001b[0m\n\u001b[2m    at AuthHelper.verifyAuthenticated (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:103:31)\u001b[22m\n\u001b[2m    at AuthHelper.login (/Users/tomdarcy/code/TomDarcy/mes/tests/utils/auth.ts:49:5)\u001b[22m\n\u001b[2m    at /Users/tomdarcy/code/TomDarcy/mes/tests/auth.spec.ts:90:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "No login form found - user might already be authenticated\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T11:38:23.049Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-iPad/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-iPad/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/tomdarcy/code/TomDarcy/mes/test-results/auth-Authentication-should-cdff9-ard-link-when-authenticated-iPad/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-036b5968f866fa245250",
+              "file": "auth.spec.ts",
+              "line": 87,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-07-09T11:25:23.250Z",
+    "duration": 1049644.084,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 30,
+    "flaky": 0
+  }
+}

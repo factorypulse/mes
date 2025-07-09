@@ -1,118 +1,51 @@
-"use client";
+import { ReactNode, Suspense } from "react";
+import { ModernSidebar } from "@/components/ui/modern-sidebar";
+import { ColorModeSwitcher } from "@/components/color-mode-switcher";
 
-import SidebarLayout, { SidebarItem } from "@/components/sidebar-layout";
-import { SelectedTeamSwitcher, useUser } from "@stackframe/stack";
-import {
-  BarChart4,
-  Factory,
-  Globe,
-  Route,
-  Settings2,
-  ShoppingCart,
-  Timer,
-  User,
-  Users,
-} from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
-
-const navigationItems: SidebarItem[] = [
-  {
-    name: "Overview",
-    href: "/",
-    icon: Globe,
-    type: "item",
-  },
-  {
-    type: "label",
-    name: "Production",
-  },
-  {
-    name: "Routings",
-    href: "/routings",
-    icon: Route,
-    type: "item",
-  },
-  {
-    name: "Orders",
-    href: "/orders",
-    icon: ShoppingCart,
-    type: "item",
-  },
-  {
-    name: "Work Orders",
-    href: "/work-orders",
-    icon: Timer,
-    type: "item",
-  },
-  {
-    name: "Operator",
-    href: "/operator",
-    icon: User,
-    type: "item",
-  },
-  {
-    name: "Departments",
-    href: "/departments",
-    icon: Factory,
-    type: "item",
-  },
-  {
-    type: "label",
-    name: "Management",
-  },
-  {
-    name: "People",
-    href: "/people",
-    icon: Users,
-    type: "item",
-  },
-  {
-    name: "Analytics",
-    href: "/analytics",
-    icon: BarChart4,
-    type: "item",
-  },
-  {
-    type: "label",
-    name: "Settings",
-  },
-  {
-    name: "Configuration",
-    href: "/configuration",
-    icon: Settings2,
-    type: "item",
-  },
-];
-
-export default function Layout(props: { children: React.ReactNode }) {
-  const params = useParams<{ teamId: string }>();
-  const user = useUser({ or: "redirect" });
-  const team = user.useTeam(params.teamId);
-  const router = useRouter();
-
-  if (!team) {
-    router.push("/dashboard");
-    return null;
-  }
-
+export default function DashboardLayout({
+  children,
+  params,
+}: {
+  children: ReactNode;
+  params: { teamId: string };
+}) {
   return (
-    <SidebarLayout
-      items={navigationItems}
-      basePath={`/dashboard/${team.id}`}
-      sidebarTop={
-        <SelectedTeamSwitcher
-          selectedTeam={team}
-          urlMap={(team) => `/dashboard/${team.id}`}
-        />
-      }
-      baseBreadcrumb={[
-        {
-          title: team.displayName,
-          href: `/dashboard/${team.id}`,
-        },
-      ]}
-    >
-      {props.children}
-    </SidebarLayout>
+    <div className="min-h-screen bg-background">
+      {/* Background gradient overlay */}
+      <div className="fixed inset-0 -z-20">
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+      </div>
+
+   
+
+      <div className="flex h-screen">
+        {/* Enhanced Sidebar */}
+        <aside className="glass-card border-r border-border/50 backdrop-blur-xl">
+          <ModernSidebar teamId={params.teamId} />
+        </aside>
+
+        {/* Main content area */}
+        <main className="flex-1 overflow-auto">
+          {/* Page content */}
+          <div className="flex-1 p-4">
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center h-96">
+                  <div className="glass-card p-8 text-center">
+                    <div className="w-8 h-8 border-2 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4" />
+                    <p className="text-muted-foreground">
+                      Loading dashboard...
+                    </p>
+                  </div>
+                </div>
+              }
+            >
+              {children}
+            </Suspense>
+          </div>
+        </main>
+      </div>
+    </div>
   );
 }

@@ -1,0 +1,114 @@
+{
+  "users": [
+    {
+      "email": "tdarcytom@googlemail.com",
+      "password": "y3m7Lw!f+:2jEDA",
+      "role": "admin"
+    }
+  ],
+  "organizations": [
+    {
+      "id": "org-1",
+      "name": "Assembly Department"
+    },
+    {
+      "id": "org-2",
+      "name": "Quality Control"
+    }
+  ],
+  "sampleRoutings": [
+    {
+      "name": "Standard Widget Assembly",
+      "productIdentifier": "WIDGET-STD",
+      "operations": [
+        {
+          "title": "Component Assembly",
+          "orgId": "org-1",
+          "targetTimeMinutes": 30,
+          "instructions": "Assemble components according to specification",
+          "dataInputs": [
+            {
+              "name": "torque_spec",
+              "label": "Torque Specification (Nm)",
+              "type": "number",
+              "required": true
+            },
+            {
+              "name": "visual_check",
+              "label": "Visual Inspection Passed",
+              "type": "boolean",
+              "required": true
+            }
+          ]
+        },
+        {
+          "title": "Quality Inspection",
+          "orgId": "org-2",
+          "targetTimeMinutes": 15,
+          "instructions": "Perform dimensional and functional checks",
+          "dataInputs": [
+            {
+              "name": "dimension_a",
+              "label": "Dimension A (mm)",
+              "type": "number",
+              "required": true
+            },
+            {
+              "name": "dimension_b",
+              "label": "Dimension B (mm)",
+              "type": "number",
+              "required": true
+            },
+            {
+              "name": "functional_test",
+              "label": "Functional Test Result",
+              "type": "boolean",
+              "required": true
+            },
+            {
+              "name": "inspector_notes",
+              "label": "Inspector Notes",
+              "type": "text",
+              "required": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sampleOrders": [
+    {
+      "productIdentifier": "WIDGET-STD",
+      "quantity": 100,
+      "routingName": "Standard Widget Assembly",
+      "erpReference": "PO-2025-001"
+    }
+  ],
+  "pauseReasons": [
+    {
+      "reasonCode": "MACH_DOWN",
+      "description": "Machine Breakdown",
+      "isActive": true
+    },
+    {
+      "reasonCode": "MATERIAL_WAIT",
+      "description": "Waiting for Materials",
+      "isActive": true
+    },
+    {
+      "reasonCode": "BREAK_TIME",
+      "description": "Scheduled Break",
+      "isActive": true
+    },
+    {
+      "reasonCode": "MAINTENANCE",
+      "description": "Scheduled Maintenance",
+      "isActive": true
+    },
+    {
+      "reasonCode": "SETUP_CHANGE",
+      "description": "Machine Setup Change",
+      "isActive": true
+    }
+  ]
+}

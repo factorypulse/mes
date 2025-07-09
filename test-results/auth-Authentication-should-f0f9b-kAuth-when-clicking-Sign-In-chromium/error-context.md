@@ -1,0 +1,148 @@
+# Page snapshot
+
+```yaml
+- banner:
+  - link "Stack Template":
+    - /url: /
+  - navigation:
+    - link "Home":
+      - /url: /
+    - link "Features":
+      - /url: /#features
+    - link "Pricing":
+      - /url: /#pricing
+    - link "Github":
+      - /url: https://github.com/stack-auth/stack-template
+  - button:
+    - img
+  - link "Stack Template":
+    - /url: /
+  - button:
+    - img
+  - button:
+    - img
+  - navigation:
+    - link "Sign In":
+      - /url: /handler/sign-in
+    - link "Sign Up":
+      - /url: /handler/sign-up
+- main:
+  - link "100% Open-source & Free":
+    - /url: https://stacktemplate.com
+  - heading "A Multi-tenant Next.js Starter Template" [level=1]
+  - paragraph: Built for developers, by developers. Next.js + Shadcn UI + Stack Auth.
+  - link "Get Started":
+    - /url: /handler/sign-up
+  - link "GitHub":
+    - /url: https://github.com/stack-auth/stack-template
+  - paragraph:
+    - text: Crafted with ❤️ by
+    - link "Stack Auth":
+      - /url: https://stack-auth.com
+  - heading "Features" [level=2]
+  - paragraph: Unlock powerful capabilities for your project.
+  - img
+  - heading "Next.js 14" [level=3]
+  - paragraph: "Utilize the latest features: App Router, Layouts, Suspense."
+  - img
+  - heading "Shadcn UI" [level=3]
+  - paragraph: Modern and fully customizable UI components based on Tailwind CSS.
+  - img
+  - heading "Stack Auth" [level=3]
+  - paragraph: "Comprehensive Authentication: OAuth, User Management, and more."
+  - img
+  - heading "Multi-tenancy & RBAC" [level=3]
+  - paragraph: Built-in Teams and Permissions.
+  - img
+  - heading "100% Open-source" [level=3]
+  - paragraph: Open-source and self-hostable codebase.
+  - img
+  - heading "Modular Design" [level=3]
+  - paragraph: Easily extend and customize. No spaghetti code.
+  - heading "Pricing" [level=2]
+  - paragraph: Flexible plans for every team.
+  - heading "Basic" [level=3]
+  - paragraph: For individuals and small projects.
+  - text: Free/month
+  - list:
+    - listitem:
+      - img
+      - text: Full source code
+    - listitem:
+      - img
+      - text: 100% Open-source
+    - listitem:
+      - img
+      - text: Community support
+    - listitem:
+      - img
+      - text: Free forever
+    - listitem:
+      - img
+      - text: No credit card required
+  - link "Get Started":
+    - /url: /handler/sign-up
+  - heading "Pro" [level=3]
+  - paragraph: Ideal for growing teams and businesses.
+  - text: $0.00/month
+  - list:
+    - listitem:
+      - img
+      - text: Full source code
+    - listitem:
+      - img
+      - text: 100% Open-source
+    - listitem:
+      - img
+      - text: Community support
+    - listitem:
+      - img
+      - text: Free forever
+    - listitem:
+      - img
+      - text: No credit card required
+  - link "Upgrade to Pro":
+    - /url: /handler/sign-up
+  - heading "Enterprise" [level=3]
+  - paragraph: For large organizations.
+  - text: Still Free/month
+  - list:
+    - listitem:
+      - img
+      - text: Full source code
+    - listitem:
+      - img
+      - text: 100% Open-source
+    - listitem:
+      - img
+      - text: Community support
+    - listitem:
+      - img
+      - text: Free forever
+    - listitem:
+      - img
+      - text: No credit card required
+  - link "Contact Us":
+    - /url: /handler/sign-up
+- contentinfo:
+  - paragraph:
+    - text: Built by
+    - link "Stack Auth":
+      - /url: https://stack-auth.com/
+    - text: . The source code is available on
+    - link "GitHub":
+      - /url: https://github.com/stack-auth/stack-template
+    - text: .
+  - link:
+    - /url: https://twitter.com/stack_auth
+    - img
+  - link:
+    - /url: linkedin.com/company/stack-auth
+    - img
+  - link:
+    - /url: https://github.com/stack-auth/stack-template
+    - img
+- alert
+- button "Open Next.js Dev Tools":
+  - img
+```

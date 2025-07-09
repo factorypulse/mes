@@ -49,7 +49,7 @@ A minimalistic multi-tenant Next.js starter template with minimal setup and a mo
 4. Start the development server and go to [http://localhost:3000](http://localhost:3000)
 
     ```bash
-    npm run dev 
+    npm run dev
     ```
 
 ## Features & Tech Stack
@@ -65,3 +65,6 @@ A minimalistic multi-tenant Next.js starter template with minimal setup and a mo
 
 - [Shadcn UI](https://github.com/shadcn-ui/ui)
 - [Shadcn Taxonomy](https://github.com/shadcn-ui/taxonomy)
+
+DEV_USERNAME="tdarcytom@googlemail.com"
+DEV_PASSWORD="y3m7Lw!f+:2jEDA"

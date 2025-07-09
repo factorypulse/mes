@@ -17,7 +17,7 @@ export function ColorModeSwitcher() {
       >
         <Moon />
       </Button>
-      
+
       <Button
         variant="ghost"
         size="icon"
