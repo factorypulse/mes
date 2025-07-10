@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { useUser } from "@stackframe/stack";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   BarChart4,
   Factory,
@@ -125,18 +126,23 @@ function NavigationLink({
   }
 
   return (
-    <Link
-      href={`${basePath}${item.href}`}
-      className={cn(
-        "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
-        "hover:bg-primary/10 hover:text-primary",
-        isActive
-          ? "bg-primary/15 text-primary shadow-sm border border-primary/20"
-          : "text-muted-foreground hover:text-foreground",
-        isCollapsed && "px-2 justify-center"
-      )}
-      title={isCollapsed ? item.name : undefined}
+    <motion.div
+      whileHover={{ x: 2 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.2 }}
     >
+      <Link
+        href={`${basePath}${item.href}`}
+        className={cn(
+          "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
+          "hover:bg-primary/10 hover:text-primary hover:shadow-sm",
+          isActive
+            ? "bg-primary/15 text-primary shadow-sm border border-primary/20"
+            : "text-muted-foreground hover:text-foreground",
+          isCollapsed && "px-2 justify-center"
+        )}
+        title={isCollapsed ? item.name : undefined}
+      >
       <item.icon
         className={cn(
           "h-5 w-5 transition-colors",
@@ -156,7 +162,8 @@ function NavigationLink({
       {isCollapsed && isActive && (
         <div className="absolute right-1 top-1/2 transform -translate-y-1/2 h-2 w-2 rounded-full bg-primary animate-pulse" />
       )}
-    </Link>
+      </Link>
+    </motion.div>
   );
 }
 
@@ -170,12 +177,13 @@ export function ModernSidebar({ teamId, className }: ModernSidebarProps) {
   if (!team) return null;
 
   return (
-    <div
+    <motion.div
       className={cn(
-        "h-full flex flex-col transition-all duration-300 ease-in-out",
-        isCollapsed ? "w-16" : "w-72",
+        "h-full flex flex-col",
         className
       )}
+      animate={{ width: isCollapsed ? 64 : 288 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       {/* Header */}
       <div
@@ -311,6 +319,6 @@ export function ModernSidebar({ teamId, className }: ModernSidebarProps) {
           </div>
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }
