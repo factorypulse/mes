@@ -755,6 +755,103 @@ export class WorkOrderOperationsService {
     }
   }
 
+  // Get work order operations with filters (for external API)
+  static async getWorkOrderOperationsWithFilters(filters: {
+    teamId: string
+    status?: string[]
+    operatorId?: string
+    orderId?: string
+    departmentId?: string
+    fromDate?: Date
+    toDate?: Date
+    limit: number
+    offset: number
+    sortBy: string
+    sortOrder: 'asc' | 'desc'
+  }): Promise<{ woos: WOOWithRelations[]; total: number }> {
+    const whereClause: any = {
+      teamId: filters.teamId
+    }
+
+    if (filters.status && filters.status.length > 0) {
+      whereClause.status = { in: filters.status }
+    }
+
+    if (filters.operatorId) {
+      whereClause.operatorId = filters.operatorId
+    }
+
+    if (filters.orderId) {
+      whereClause.orderId = filters.orderId
+    }
+
+    if (filters.departmentId) {
+      whereClause.routingOperation = {
+        departmentId: filters.departmentId
+      }
+    }
+
+    if (filters.fromDate) {
+      whereClause.createdAt = {
+        ...whereClause.createdAt,
+        gte: filters.fromDate
+      }
+    }
+
+    if (filters.toDate) {
+      whereClause.createdAt = {
+        ...whereClause.createdAt,
+        lte: filters.toDate
+      }
+    }
+
+    const orderBy: any = {}
+    orderBy[filters.sortBy] = filters.sortOrder
+
+    const [woos, total] = await Promise.all([
+      prisma.mESWorkOrderOperation.findMany({
+        where: whereClause,
+        include: {
+          order: {
+            select: {
+              id: true,
+              orderNumber: true,
+              quantity: true,
+              priority: true,
+              scheduledStartDate: true
+            }
+          },
+          routingOperation: {
+            include: {
+              department: {
+                select: {
+                  id: true,
+                  name: true
+                }
+              }
+            }
+          },
+          pauseEvents: {
+            include: {
+              pauseReason: true
+            },
+            orderBy: {
+              startTime: 'desc'
+            }
+          }
+        },
+        orderBy,
+        skip: filters.offset,
+        take: filters.limit
+      }),
+      prisma.mESWorkOrderOperation.count({
+        where: whereClause
+      })
+    ])
+
+    return { woos, total }
+  }
+
   // Migration method to fix existing WOOs to follow sequential operation logic
   static async migrateToSequentialOperations(teamId: string): Promise<void> {
     // Get all orders for the team

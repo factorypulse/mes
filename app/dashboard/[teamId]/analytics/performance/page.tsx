@@ -6,10 +6,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { AnalyticsFilters, FilterState } from "../components/analytics-filters";
-import { 
-  TrendingUp, 
-  Clock, 
-  Target, 
+import { ExportButton } from "@/components/analytics/export-button";
+import {
+  CycleTimeTrendChart,
+  DepartmentPerformanceChart,
+  PerformanceTrendChart
+} from "@/components/analytics/charts";
+import {
+  TrendingUp,
+  Clock,
+  Target,
   BarChart3,
   Zap,
   AlertCircle,
@@ -69,12 +75,12 @@ interface PerformanceData {
 export default function PerformancePage() {
   const params = useParams();
   const teamId = params.teamId as string;
-  
+
   const [data, setData] = useState<PerformanceData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [departments, setDepartments] = useState<Array<{ id: string; name: string }>>([]);
-  
+
   const [filters, setFilters] = useState<FilterState>({
     dateRange: "last7days",
     departments: [],
@@ -145,11 +151,19 @@ export default function PerformancePage() {
 
   return (
     <div className="space-y-6">
-      <AnalyticsFilters
-        filters={filters}
-        onFiltersChange={setFilters}
-        availableDepartments={departments}
-      />
+      <div className="flex flex-col sm:flex-row justify-between gap-4">
+        <AnalyticsFilters
+          filters={filters}
+          onFiltersChange={setFilters}
+          availableDepartments={departments}
+        />
+        <ExportButton
+          teamId={teamId}
+          exportType="performance"
+          departments={departments}
+          className="self-start"
+        />
+      </div>
 
       {/* Key Performance Indicators */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -206,113 +220,35 @@ export default function PerformancePage() {
         </Card>
       </div>
 
-      {/* Cycle Time Analysis */}
+      {/* Enhanced Performance Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Clock className="h-5 w-5" />
-              Cycle Time by Department
-            </CardTitle>
-            <CardDescription>
-              Average cycle times across departments
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {data.cycleTimeAnalysis.cycleTimeByDepartment.map((dept, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <div className="font-medium">{dept.departmentName}</div>
-                      <div className="text-sm text-muted-foreground">{dept.operationsCount} operations</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-bold">{dept.averageCycleTime}m</div>
-                      <div className="text-xs text-muted-foreground">avg time</div>
-                    </div>
-                  </div>
-                  <Progress 
-                    value={(dept.averageCycleTime / Math.max(...data.cycleTimeAnalysis.cycleTimeByDepartment.map(d => d.averageCycleTime))) * 100} 
-                    className="h-2" 
-                  />
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <DepartmentPerformanceChart
+          data={data.cycleTimeAnalysis.cycleTimeByDepartment || []}
+          title="Cycle Time by Department"
+          metric="cycleTime"
+        />
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5" />
-              Efficiency by Department
-            </CardTitle>
-            <CardDescription>
-              Performance vs standard times
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {data.efficiency.efficiencyByDepartment.map((dept, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <div className="font-medium">{dept.departmentName}</div>
-                      <div className="text-sm text-muted-foreground">{dept.operationsCount} operations</div>
-                    </div>
-                    <div className="text-right">
-                      <div className={`font-bold ${dept.averageEfficiency >= 100 ? 'text-green-600' : dept.averageEfficiency >= 80 ? 'text-yellow-600' : 'text-red-600'}`}>
-                        {dept.averageEfficiency}%
-                      </div>
-                      <div className="text-xs text-muted-foreground">efficiency</div>
-                    </div>
-                  </div>
-                  <Progress 
-                    value={Math.min(dept.averageEfficiency, 100)} 
-                    className="h-2" 
-                  />
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <DepartmentPerformanceChart
+          data={data.efficiency.efficiencyByDepartment || []}
+          title="Efficiency by Department"
+          metric="efficiency"
+        />
       </div>
 
-      {/* Throughput Analysis */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <BarChart3 className="h-5 w-5" />
-            Throughput Analysis
-          </CardTitle>
-          <CardDescription>
-            Operations per hour by department
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {data.throughput.throughputByDepartment.map((dept, index) => (
-              <div key={index} className="p-4 border rounded-lg">
-                <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-medium">{dept.departmentName}</h4>
-                  <Badge variant="outline">
-                    {dept.operationsCount} ops
-                  </Badge>
-                </div>
-                <div className="text-2xl font-bold text-blue-600 mb-1">
-                  {dept.operationsPerHour.toFixed(1)}
-                </div>
-                <div className="text-sm text-muted-foreground">operations/hour</div>
-                <Progress 
-                  value={(dept.operationsPerHour / Math.max(...data.throughput.throughputByDepartment.map(d => d.operationsPerHour))) * 100} 
-                  className="h-2 mt-2" 
-                />
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      {/* Throughput and Trends */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <DepartmentPerformanceChart
+          data={data.throughput.throughputByDepartment || []}
+          title="Throughput Analysis"
+          metric="throughput"
+        />
+
+        <CycleTimeTrendChart
+          data={data.cycleTimeAnalysis.cycleTimeTrend || []}
+          title="Cycle Time Trends"
+          height={300}
+        />
+      </div>
 
       {/* Quality Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

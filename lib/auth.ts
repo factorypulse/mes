@@ -17,3 +17,32 @@ export async function requireAuth() {
   }
   return user;
 }
+
+// Export the main auth function for API routes
+export async function auth() {
+  try {
+    const user = await stackServerApp.getUser();
+    return user ? { user } : null;
+  } catch (error) {
+    console.error("Error in auth:", error);
+    return null;
+  }
+}
+
+// Export auth object with api methods for different usage patterns
+export const authObject = {
+  api: {
+    async getSession({ headers }: { headers: Headers }) {
+      try {
+        const user = await stackServerApp.getUser();
+        return user ? { user } : null;
+      } catch (error) {
+        console.error("Error getting session:", error);
+        return null;
+      }
+    }
+  }
+};
+
+// Default export for the auth object pattern
+export default auth;

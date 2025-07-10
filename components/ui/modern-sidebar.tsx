@@ -15,6 +15,7 @@ import {
   LucideIcon,
   ChevronLeft,
   ChevronRight,
+  BookOpen,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -67,17 +68,12 @@ const navigationItems: NavigationItem[] = [
     type: "item",
   },
   {
-    name: "Management",
+    name: "Reporting",
     href: "",
     icon: Factory, // placeholder
     type: "separator",
   },
-  {
-    name: "People",
-    href: "/people",
-    icon: Users,
-    type: "item",
-  },
+
   {
     name: "Analytics",
     href: "/analytics",
@@ -94,6 +90,12 @@ const navigationItems: NavigationItem[] = [
     name: "Configuration",
     href: "/configuration",
     icon: Settings2,
+    type: "item",
+  },
+  {
+    name: "API Documentation",
+    href: "/api-documentation",
+    icon: BookOpen,
     type: "item",
   },
 ];
@@ -117,9 +119,7 @@ function NavigationLink({
             {item.name}
           </p>
         )}
-        {isCollapsed && (
-          <div className="h-px bg-border mx-auto w-6" />
-        )}
+        {isCollapsed && <div className="h-px bg-border mx-auto w-6" />}
       </div>
     );
   }
@@ -170,25 +170,33 @@ export function ModernSidebar({ teamId, className }: ModernSidebarProps) {
   if (!team) return null;
 
   return (
-    <div className={cn(
-      "h-full flex flex-col transition-all duration-300 ease-in-out",
-      isCollapsed ? "w-16" : "w-72",
-      className
-    )}>
+    <div
+      className={cn(
+        "h-full flex flex-col transition-all duration-300 ease-in-out",
+        isCollapsed ? "w-16" : "w-72",
+        className
+      )}
+    >
       {/* Header */}
-      <div className={cn(
-        "border-b border-border/50 transition-all duration-300",
-        isCollapsed ? "p-3" : "p-6"
-      )}>
+      <div
+        className={cn(
+          "border-b border-border/50 transition-all duration-300",
+          isCollapsed ? "p-3" : "p-6"
+        )}
+      >
         {/* Display the team name and logo */}
-        <div className={cn(
-          "flex items-center transition-all duration-300",
-          isCollapsed ? "justify-center" : "justify-between"
-        )}>
-          <div className={cn(
+        <div
+          className={cn(
             "flex items-center transition-all duration-300",
-            isCollapsed ? "justify-center" : "gap-2"
-          )}>
+            isCollapsed ? "justify-center" : "justify-between"
+          )}
+        >
+          <div
+            className={cn(
+              "flex items-center transition-all duration-300",
+              isCollapsed ? "justify-center" : "gap-2"
+            )}
+          >
             <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden">
               {team.profileImageUrl ? (
                 <Image
@@ -210,9 +218,7 @@ export function ModernSidebar({ teamId, className }: ModernSidebarProps) {
               </p>
             )}
           </div>
-          {!isCollapsed && (
-            <ColorModeSwitcher />
-          )}
+          {!isCollapsed && <ColorModeSwitcher />}
         </div>
         {/* Color mode switcher when collapsed */}
         {isCollapsed && (
@@ -223,10 +229,12 @@ export function ModernSidebar({ teamId, className }: ModernSidebarProps) {
       </div>
 
       {/* Toggle Button */}
-      <div className={cn(
-        "border-b border-border/50 transition-all duration-300",
-        isCollapsed ? "p-2" : "p-4"
-      )}>
+      <div
+        className={cn(
+          "border-b border-border/50 transition-all duration-300",
+          isCollapsed ? "p-2" : "p-4"
+        )}
+      >
         <Button
           variant="ghost"
           size="sm"
@@ -249,10 +257,12 @@ export function ModernSidebar({ teamId, className }: ModernSidebarProps) {
       </div>
 
       {/* Navigation */}
-      <nav className={cn(
-        "flex-1 space-y-1 overflow-y-auto transition-all duration-300",
-        isCollapsed ? "p-2" : "p-4"
-      )}>
+      <nav
+        className={cn(
+          "flex-1 space-y-1 overflow-y-auto transition-all duration-300",
+          isCollapsed ? "p-2" : "p-4"
+        )}
+      >
         {navigationItems.map((item, index) => (
           <NavigationLink
             key={index}
@@ -265,19 +275,25 @@ export function ModernSidebar({ teamId, className }: ModernSidebarProps) {
       </nav>
 
       {/* Footer */}
-      <div className={cn(
-        "border-t border-border/50 transition-all duration-300",
-        isCollapsed ? "p-2" : "p-4"
-      )}>
+      <div
+        className={cn(
+          "border-t border-border/50 transition-all duration-300",
+          isCollapsed ? "p-2" : "p-4"
+        )}
+      >
         <Link href="/handler/account-settings#profile">
-          <div className={cn(
-            "glass-subtle rounded-xl transition-all duration-200 hover:bg-primary/5 cursor-pointer",
-            isCollapsed ? "p-2 flex justify-center" : "p-4"
-          )}>
-            <div className={cn(
-              "flex items-center transition-all duration-300",
-              isCollapsed ? "justify-center" : "gap-3"
-            )}>
+          <div
+            className={cn(
+              "glass-subtle rounded-xl transition-all duration-200 hover:bg-primary/5 cursor-pointer",
+              isCollapsed ? "p-2 flex justify-center" : "p-4"
+            )}
+          >
+            <div
+              className={cn(
+                "flex items-center transition-all duration-300",
+                isCollapsed ? "justify-center" : "gap-3"
+              )}
+            >
               <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                 <User className="h-4 w-4 text-primary" />
               </div>

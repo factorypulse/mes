@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { StatusIndicator } from "@/components/ui/status-indicator";
+import { Badge } from "@/components/ui/badge";
 import { Clock, Package, CheckCircle, Play, Pause } from "lucide-react";
 
 interface ActivityData {
@@ -110,12 +110,12 @@ export async function RecentActivity() {
                     {activity.activity} Operation
                   </p>
                 </div>
-                <StatusIndicator
-                  status={activity.status as any}
-                  variant="dot"
-                  size="sm"
-                  animate={activity.status === 'in_progress'}
-                />
+                <Badge 
+                  variant={activity.status as any}
+                  className="text-xs"
+                >
+                  {activity.status}
+                </Badge>
               </div>
 
               <div className="flex items-center justify-between">

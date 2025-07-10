@@ -15,10 +15,12 @@ import {
   AlertTriangle,
   FileText,
   Users,
+  Key,
 } from "lucide-react";
 import { DepartmentsTab } from "./components/departments/departments-tab";
 import { UsersTab } from "./components/users/users-tab";
 import { DataCollectionTab } from "./components/data-collection/data-collection-tab";
+import { APIKeysList } from "./components/api-keys/api-keys-list";
 
 interface ConfigurationPageProps {
   params: Promise<{
@@ -57,7 +59,7 @@ export default function ConfigurationPage({ params }: ConfigurationPageProps) {
             onValueChange={setActiveTab}
             className="space-y-6"
           >
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-5">
               <TabsTrigger
                 value="departments"
                 className="flex items-center gap-2"
@@ -82,6 +84,10 @@ export default function ConfigurationPage({ params }: ConfigurationPageProps) {
               <TabsTrigger value="users" className="flex items-center gap-2">
                 <Users className="h-4 w-4" />
                 Users & Roles
+              </TabsTrigger>
+              <TabsTrigger value="api-keys" className="flex items-center gap-2">
+                <Key className="h-4 w-4" />
+                API Keys
               </TabsTrigger>
             </TabsList>
 
@@ -112,6 +118,10 @@ export default function ConfigurationPage({ params }: ConfigurationPageProps) {
 
             <TabsContent value="users" className="space-y-4">
               <UsersTab teamId={teamId} />
+            </TabsContent>
+
+            <TabsContent value="api-keys" className="space-y-4">
+              <APIKeysList teamId={teamId} />
             </TabsContent>
           </Tabs>
         </CardContent>

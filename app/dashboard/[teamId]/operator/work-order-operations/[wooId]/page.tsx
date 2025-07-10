@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { StatusIndicator } from "@/components/ui/status-indicator";
 import { ActiveWOO } from "@/components/work-orders/active-woo";
 import {
   Clock,
@@ -344,18 +343,10 @@ export default function WorkOrderOperationDetailPage() {
           </div>
 
           <div className="flex items-center gap-4 w-full sm:w-auto justify-end">
-            <StatusIndicator
-              status={
-                woo.status === "in_progress"
-                  ? "active"
-                  : woo.status === "paused"
-                  ? "warning"
-                  : "pending"
-              }
-              label={woo.status.replace("_", " ")}
-              animate={woo.status === "in_progress"}
-            />
-            <Badge className={`${getStatusColor(woo.status)} text-base px-3 py-1`}>
+            <Badge 
+              variant={woo.status === "in_progress" ? "active" : woo.status === "paused" ? "paused" : "pending"}
+              className="text-base px-3 py-1"
+            >
               {woo.status.replace("_", " ")}
             </Badge>
           </div>

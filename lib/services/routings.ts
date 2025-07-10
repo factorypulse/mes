@@ -215,4 +215,57 @@ export class RoutingsService {
     
     return true
   }
+
+  // Get routings with filters (for external API)
+  static async getRoutingsWithFilters(filters: {
+    teamId: string
+    isActive?: boolean
+    name?: string
+    limit: number
+    offset: number
+    sortBy: string
+    sortOrder: 'asc' | 'desc'
+  }): Promise<{ routings: MESRouting[]; total: number }> {
+    const whereClause: any = {
+      teamId: filters.teamId
+    }
+
+    if (filters.isActive !== undefined) {
+      whereClause.isActive = filters.isActive
+    }
+
+    if (filters.name) {
+      whereClause.name = {
+        contains: filters.name,
+        mode: 'insensitive'
+      }
+    }
+
+    const orderBy: any = {}
+    orderBy[filters.sortBy] = filters.sortOrder
+
+    const [routings, total] = await Promise.all([
+      prisma.mESRouting.findMany({
+        where: whereClause,
+        include: {
+          operations: {
+            include: {
+              department: true
+            },
+            orderBy: {
+              operationNumber: 'asc'
+            }
+          }
+        },
+        orderBy,
+        skip: filters.offset,
+        take: filters.limit
+      }),
+      prisma.mESRouting.count({
+        where: whereClause
+      })
+    ])
+
+    return { routings, total }
+  }
 }

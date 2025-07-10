@@ -2,13 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { AnalyticsFilters, FilterState } from "../components/analytics-filters";
-import { 
-  Factory, 
-  AlertTriangle, 
+import { ExportButton } from "@/components/analytics/export-button";
+import {
+  Factory,
+  AlertTriangle,
   Clock,
   Users,
   BarChart3,
@@ -18,7 +25,7 @@ import {
   Eye,
   Play,
   Pause,
-  Square
+  Square,
 } from "lucide-react";
 
 interface WIPData {
@@ -58,37 +65,43 @@ interface WIPData {
     departmentName: string;
     operationName: string;
     wipCount: number;
-    severity: 'high' | 'medium' | 'low';
+    severity: "high" | "medium" | "low";
   }>;
 }
 
 export default function WIPPage() {
   const params = useParams();
   const teamId = params.teamId as string;
-  
+
   const [data, setData] = useState<WIPData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [departments, setDepartments] = useState<Array<{ id: string; name: string }>>([]);
-  const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<'overview' | 'kanban' | 'list'>('overview');
-  
+  const [departments, setDepartments] = useState<
+    Array<{ id: string; name: string }>
+  >([]);
+  const [selectedDepartment, setSelectedDepartment] = useState<string | null>(
+    null
+  );
+  const [viewMode, setViewMode] = useState<"overview" | "kanban" | "list">(
+    "overview"
+  );
+
   const [filters, setFilters] = useState<FilterState>({
     dateRange: "today",
     departments: [],
-    operators: []
+    operators: [],
   });
 
   const fetchWIPData = async () => {
     try {
       setError(null);
       const [wipRes, departmentsRes] = await Promise.all([
-        fetch('/api/analytics/wip'),
-        fetch('/api/departments')
+        fetch("/api/analytics/wip"),
+        fetch("/api/departments"),
       ]);
 
       if (!wipRes.ok) {
-        throw new Error('Failed to fetch WIP data');
+        throw new Error("Failed to fetch WIP data");
       }
 
       const wipData = await wipRes.json();
@@ -99,7 +112,7 @@ export default function WIPPage() {
         setDepartments(departmentsData);
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load WIP data');
+      setError(err instanceof Error ? err.message : "Failed to load WIP data");
     } finally {
       setLoading(false);
     }
@@ -143,58 +156,76 @@ export default function WIPPage() {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'in_progress': return <Play className="h-4 w-4 text-green-500" />;
-      case 'paused': return <Pause className="h-4 w-4 text-orange-500" />;
-      case 'pending': return <Clock className="h-4 w-4 text-gray-500" />;
-      case 'waiting': return <Square className="h-4 w-4 text-blue-500" />;
-      default: return <Clock className="h-4 w-4 text-gray-500" />;
+      case "in_progress":
+        return <Play className="h-4 w-4 text-green-500" />;
+      case "paused":
+        return <Pause className="h-4 w-4 text-orange-500" />;
+      case "pending":
+        return <Clock className="h-4 w-4 text-gray-500" />;
+      case "waiting":
+        return <Square className="h-4 w-4 text-blue-500" />;
+      default:
+        return <Clock className="h-4 w-4 text-gray-500" />;
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'in_progress': return 'text-green-600 bg-green-50 border-green-200';
-      case 'paused': return 'text-orange-600 bg-orange-50 border-orange-200';
-      case 'pending': return 'text-gray-600 bg-gray-50 border-gray-200';
-      case 'waiting': return 'text-blue-600 bg-blue-50 border-blue-200';
-      default: return 'text-gray-600 bg-gray-50 border-gray-200';
+      case "in_progress":
+        return "text-green-600 bg-green-50 border-green-200";
+      case "paused":
+        return "text-orange-600 bg-orange-50 border-orange-200";
+      case "pending":
+        return "text-gray-600 bg-gray-50 border-gray-200";
+      case "waiting":
+        return "text-blue-600 bg-blue-50 border-blue-200";
+      default:
+        return "text-gray-600 bg-gray-50 border-gray-200";
     }
   };
 
-  const filteredOperations = selectedDepartment 
-    ? data.operationsBoard.filter(op => op.departmentId === selectedDepartment)
+  const filteredOperations = selectedDepartment
+    ? data.operationsBoard.filter(
+        (op) => op.departmentId === selectedDepartment
+      )
     : data.operationsBoard;
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         <AnalyticsFilters
           filters={filters}
           onFiltersChange={setFilters}
           availableDepartments={departments}
         />
-        
+
         <div className="flex items-center gap-2">
+          <ExportButton
+            teamId={teamId}
+            exportType="wip"
+            departments={departments}
+          />
+          <div className="h-6 w-px bg-border mx-2" />
           <Button
-            variant={viewMode === 'overview' ? 'default' : 'outline'}
+            variant={viewMode === "overview" ? "default" : "outline"}
             size="sm"
-            onClick={() => setViewMode('overview')}
+            onClick={() => setViewMode("overview")}
           >
             <BarChart3 className="h-4 w-4 mr-1" />
             Overview
           </Button>
           <Button
-            variant={viewMode === 'kanban' ? 'default' : 'outline'}
+            variant={viewMode === "kanban" ? "default" : "outline"}
             size="sm"
-            onClick={() => setViewMode('kanban')}
+            onClick={() => setViewMode("kanban")}
           >
             <Factory className="h-4 w-4 mr-1" />
             Kanban
           </Button>
           <Button
-            variant={viewMode === 'list' ? 'default' : 'outline'}
+            variant={viewMode === "list" ? "default" : "outline"}
             size="sm"
-            onClick={() => setViewMode('list')}
+            onClick={() => setViewMode("list")}
           >
             <Eye className="h-4 w-4 mr-1" />
             List
@@ -213,7 +244,9 @@ export default function WIPPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{data.totalWipOperations}</div>
-            <p className="text-xs text-muted-foreground">Operations in progress</p>
+            <p className="text-xs text-muted-foreground">
+              Operations in progress
+            </p>
           </CardContent>
         </Card>
 
@@ -225,7 +258,9 @@ export default function WIPPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-600">{data.wipByStatus.in_progress}</div>
+            <div className="text-2xl font-bold text-green-600">
+              {data.wipByStatus.in_progress}
+            </div>
             <p className="text-xs text-muted-foreground">Currently running</p>
           </CardContent>
         </Card>
@@ -238,7 +273,9 @@ export default function WIPPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-orange-600">{data.wipByStatus.paused}</div>
+            <div className="text-2xl font-bold text-orange-600">
+              {data.wipByStatus.paused}
+            </div>
             <p className="text-xs text-muted-foreground">Temporarily stopped</p>
           </CardContent>
         </Card>
@@ -251,13 +288,15 @@ export default function WIPPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-blue-600">{data.wipByStatus.waiting + data.wipByStatus.pending}</div>
+            <div className="text-2xl font-bold text-blue-600">
+              {data.wipByStatus.waiting + data.wipByStatus.pending}
+            </div>
             <p className="text-xs text-muted-foreground">Pending start</p>
           </CardContent>
         </Card>
       </div>
 
-      {viewMode === 'overview' && (
+      {viewMode === "overview" && (
         <>
           {/* WIP by Department */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -274,35 +313,55 @@ export default function WIPPage() {
               <CardContent>
                 <div className="space-y-4">
                   {data.wipByDepartment.map((dept, index) => (
-                    <div 
-                      key={index} 
+                    <div
+                      key={index}
                       className={`p-3 border rounded-lg cursor-pointer transition-colors ${
-                        selectedDepartment === dept.id ? 'bg-primary/5 border-primary/30' : 'hover:bg-muted/50'
+                        selectedDepartment === dept.id
+                          ? "bg-primary/5 border-primary/30"
+                          : "hover:bg-muted/50"
                       }`}
-                      onClick={() => setSelectedDepartment(selectedDepartment === dept.id ? null : dept.id)}
+                      onClick={() =>
+                        setSelectedDepartment(
+                          selectedDepartment === dept.id ? null : dept.id
+                        )
+                      }
                     >
                       <div className="flex items-center justify-between mb-2">
                         <h4 className="font-medium">{dept.name}</h4>
-                        <Badge variant="outline">
-                          {dept.wipCount} total
-                        </Badge>
+                        <Badge variant="outline">{dept.wipCount} total</Badge>
                       </div>
                       <div className="grid grid-cols-4 gap-2 text-sm">
                         <div className="text-center">
-                          <div className="font-semibold text-green-600">{dept.inProgress}</div>
-                          <div className="text-xs text-muted-foreground">Active</div>
+                          <div className="font-semibold text-green-600">
+                            {dept.inProgress}
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            Active
+                          </div>
                         </div>
                         <div className="text-center">
-                          <div className="font-semibold text-orange-600">{dept.paused}</div>
-                          <div className="text-xs text-muted-foreground">Paused</div>
+                          <div className="font-semibold text-orange-600">
+                            {dept.paused}
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            Paused
+                          </div>
                         </div>
                         <div className="text-center">
-                          <div className="font-semibold text-gray-600">{dept.pending}</div>
-                          <div className="text-xs text-muted-foreground">Pending</div>
+                          <div className="font-semibold text-gray-600">
+                            {dept.pending}
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            Pending
+                          </div>
                         </div>
                         <div className="text-center">
-                          <div className="font-semibold text-blue-600">{dept.waiting}</div>
-                          <div className="text-xs text-muted-foreground">Waiting</div>
+                          <div className="font-semibold text-blue-600">
+                            {dept.waiting}
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            Waiting
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -325,20 +384,36 @@ export default function WIPPage() {
               <CardContent>
                 <div className="space-y-3">
                   {data.bottlenecks.map((bottleneck, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-3 border rounded-lg"
+                    >
                       <div className="flex-1">
-                        <div className="font-medium">{bottleneck.operationName}</div>
-                        <div className="text-sm text-muted-foreground">{bottleneck.departmentName}</div>
+                        <div className="font-medium">
+                          {bottleneck.operationName}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {bottleneck.departmentName}
+                        </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Badge 
-                          variant={bottleneck.severity === 'high' ? 'destructive' : 
-                                   bottleneck.severity === 'medium' ? 'secondary' : 'outline'}
+                        <Badge
+                          variant={
+                            bottleneck.severity === "high"
+                              ? "destructive"
+                              : bottleneck.severity === "medium"
+                              ? "secondary"
+                              : "outline"
+                          }
                         >
                           {bottleneck.wipCount} WIP
                         </Badge>
-                        {bottleneck.severity === 'high' && <TrendingUp className="h-4 w-4 text-red-500" />}
-                        {bottleneck.severity === 'medium' && <TrendingDown className="h-4 w-4 text-orange-500" />}
+                        {bottleneck.severity === "high" && (
+                          <TrendingUp className="h-4 w-4 text-red-500" />
+                        )}
+                        {bottleneck.severity === "medium" && (
+                          <TrendingDown className="h-4 w-4 text-orange-500" />
+                        )}
                       </div>
                     </div>
                   ))}
@@ -354,7 +429,7 @@ export default function WIPPage() {
         </>
       )}
 
-      {viewMode === 'kanban' && (
+      {viewMode === "kanban" && (
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -362,7 +437,7 @@ export default function WIPPage() {
               Operations Board
               {selectedDepartment && (
                 <Badge variant="outline">
-                  {departments.find(d => d.id === selectedDepartment)?.name}
+                  {departments.find((d) => d.id === selectedDepartment)?.name}
                 </Badge>
               )}
             </CardTitle>
@@ -376,69 +451,143 @@ export default function WIPPage() {
               <div className="space-y-3">
                 <div className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg">
                   <Clock className="h-4 w-4 text-gray-500" />
-                  <span className="font-medium">Pending ({filteredOperations.filter(op => op.status === 'pending').length})</span>
+                  <span className="font-medium">
+                    Pending (
+                    {
+                      filteredOperations.filter((op) => op.status === "pending")
+                        .length
+                    }
+                    )
+                  </span>
                 </div>
-                {filteredOperations.filter(op => op.status === 'pending').map((op) => (
-                  <div key={op.id} className="p-3 border rounded-lg bg-white">
-                    <div className="font-medium text-sm mb-1">{op.orderNumber}</div>
-                    <div className="text-xs text-muted-foreground mb-2">{op.operationName}</div>
-                    <div className="text-xs text-muted-foreground">{op.department}</div>
-                  </div>
-                ))}
+                {filteredOperations
+                  .filter((op) => op.status === "pending")
+                  .map((op) => (
+                    <div key={op.id} className="p-3 border rounded-lg bg-white">
+                      <div className="font-medium text-sm mb-1">
+                        {op.orderNumber}
+                      </div>
+                      <div className="text-xs text-muted-foreground mb-2">
+                        {op.operationName}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {op.department}
+                      </div>
+                    </div>
+                  ))}
               </div>
 
               {/* In Progress Column */}
               <div className="space-y-3">
                 <div className="flex items-center gap-2 p-2 bg-green-50 rounded-lg">
                   <Play className="h-4 w-4 text-green-500" />
-                  <span className="font-medium">In Progress ({filteredOperations.filter(op => op.status === 'in_progress').length})</span>
+                  <span className="font-medium">
+                    In Progress (
+                    {
+                      filteredOperations.filter(
+                        (op) => op.status === "in_progress"
+                      ).length
+                    }
+                    )
+                  </span>
                 </div>
-                {filteredOperations.filter(op => op.status === 'in_progress').map((op) => (
-                  <div key={op.id} className="p-3 border border-green-200 bg-green-50 rounded-lg">
-                    <div className="font-medium text-sm mb-1">{op.orderNumber}</div>
-                    <div className="text-xs text-muted-foreground mb-2">{op.operationName}</div>
-                    <div className="text-xs text-muted-foreground mb-1">{op.department}</div>
-                    <div className="text-xs text-green-600">{op.operatorName}</div>
-                  </div>
-                ))}
+                {filteredOperations
+                  .filter((op) => op.status === "in_progress")
+                  .map((op) => (
+                    <div
+                      key={op.id}
+                      className="p-3 border border-green-200 bg-green-50 rounded-lg"
+                    >
+                      <div className="font-medium text-sm mb-1">
+                        {op.orderNumber}
+                      </div>
+                      <div className="text-xs text-muted-foreground mb-2">
+                        {op.operationName}
+                      </div>
+                      <div className="text-xs text-muted-foreground mb-1">
+                        {op.department}
+                      </div>
+                      <div className="text-xs text-green-600">
+                        {op.operatorName}
+                      </div>
+                    </div>
+                  ))}
               </div>
 
               {/* Paused Column */}
               <div className="space-y-3">
                 <div className="flex items-center gap-2 p-2 bg-orange-50 rounded-lg">
                   <Pause className="h-4 w-4 text-orange-500" />
-                  <span className="font-medium">Paused ({filteredOperations.filter(op => op.status === 'paused').length})</span>
+                  <span className="font-medium">
+                    Paused (
+                    {
+                      filteredOperations.filter((op) => op.status === "paused")
+                        .length
+                    }
+                    )
+                  </span>
                 </div>
-                {filteredOperations.filter(op => op.status === 'paused').map((op) => (
-                  <div key={op.id} className="p-3 border border-orange-200 bg-orange-50 rounded-lg">
-                    <div className="font-medium text-sm mb-1">{op.orderNumber}</div>
-                    <div className="text-xs text-muted-foreground mb-2">{op.operationName}</div>
-                    <div className="text-xs text-muted-foreground mb-1">{op.department}</div>
-                    <div className="text-xs text-orange-600">{op.operatorName}</div>
-                  </div>
-                ))}
+                {filteredOperations
+                  .filter((op) => op.status === "paused")
+                  .map((op) => (
+                    <div
+                      key={op.id}
+                      className="p-3 border border-orange-200 bg-orange-50 rounded-lg"
+                    >
+                      <div className="font-medium text-sm mb-1">
+                        {op.orderNumber}
+                      </div>
+                      <div className="text-xs text-muted-foreground mb-2">
+                        {op.operationName}
+                      </div>
+                      <div className="text-xs text-muted-foreground mb-1">
+                        {op.department}
+                      </div>
+                      <div className="text-xs text-orange-600">
+                        {op.operatorName}
+                      </div>
+                    </div>
+                  ))}
               </div>
 
               {/* Waiting Column */}
               <div className="space-y-3">
                 <div className="flex items-center gap-2 p-2 bg-blue-50 rounded-lg">
                   <Square className="h-4 w-4 text-blue-500" />
-                  <span className="font-medium">Waiting ({filteredOperations.filter(op => op.status === 'waiting').length})</span>
+                  <span className="font-medium">
+                    Waiting (
+                    {
+                      filteredOperations.filter((op) => op.status === "waiting")
+                        .length
+                    }
+                    )
+                  </span>
                 </div>
-                {filteredOperations.filter(op => op.status === 'waiting').map((op) => (
-                  <div key={op.id} className="p-3 border border-blue-200 bg-blue-50 rounded-lg">
-                    <div className="font-medium text-sm mb-1">{op.orderNumber}</div>
-                    <div className="text-xs text-muted-foreground mb-2">{op.operationName}</div>
-                    <div className="text-xs text-muted-foreground">{op.department}</div>
-                  </div>
-                ))}
+                {filteredOperations
+                  .filter((op) => op.status === "waiting")
+                  .map((op) => (
+                    <div
+                      key={op.id}
+                      className="p-3 border border-blue-200 bg-blue-50 rounded-lg"
+                    >
+                      <div className="font-medium text-sm mb-1">
+                        {op.orderNumber}
+                      </div>
+                      <div className="text-xs text-muted-foreground mb-2">
+                        {op.operationName}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {op.department}
+                      </div>
+                    </div>
+                  ))}
               </div>
             </div>
           </CardContent>
         </Card>
       )}
 
-      {viewMode === 'list' && (
+      {viewMode === "list" && (
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -446,7 +595,7 @@ export default function WIPPage() {
               Operations List
               {selectedDepartment && (
                 <Badge variant="outline">
-                  {departments.find(d => d.id === selectedDepartment)?.name}
+                  {departments.find((d) => d.id === selectedDepartment)?.name}
                 </Badge>
               )}
             </CardTitle>
@@ -457,17 +606,26 @@ export default function WIPPage() {
           <CardContent>
             <div className="space-y-3">
               {filteredOperations.map((op) => (
-                <div key={op.id} className={`p-4 border rounded-lg ${getStatusColor(op.status)}`}>
+                <div
+                  key={op.id}
+                  className={`p-4 border rounded-lg ${getStatusColor(
+                    op.status
+                  )}`}
+                >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-3">
                       {getStatusIcon(op.status)}
                       <div>
-                        <div className="font-medium">{op.orderNumber} - {op.operationName}</div>
-                        <div className="text-sm text-muted-foreground">{op.routingName}</div>
+                        <div className="font-medium">
+                          {op.orderNumber} - {op.operationName}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {op.routingName}
+                        </div>
                       </div>
                     </div>
                     <Badge variant="outline" className="capitalize">
-                      {op.status.replace('_', ' ')}
+                      {op.status.replace("_", " ")}
                     </Badge>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
@@ -481,11 +639,15 @@ export default function WIPPage() {
                     </div>
                     <div>
                       <div className="text-muted-foreground">Progress</div>
-                      <div className="font-medium">{op.quantityCompleted}/{op.quantityToProduce}</div>
+                      <div className="font-medium">
+                        {op.quantityCompleted}/{op.quantityToProduce}
+                      </div>
                     </div>
                     <div>
                       <div className="text-muted-foreground">Updated</div>
-                      <div className="font-medium">{new Date(op.updatedAt).toLocaleTimeString()}</div>
+                      <div className="font-medium">
+                        {new Date(op.updatedAt).toLocaleTimeString()}
+                      </div>
                     </div>
                   </div>
                 </div>

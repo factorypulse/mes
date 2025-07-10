@@ -310,4 +310,83 @@ export class OrdersService {
     const completedOps = order.workOrderOperations.filter(op => op.status === 'completed').length
     return Math.round((completedOps / order.workOrderOperations.length) * 100)
   }
+
+  // Get orders with filters (for external API)
+  static async getOrdersWithFilters(filters: {
+    teamId: string
+    status?: string
+    fromDate?: Date
+    toDate?: Date
+    erpReference?: string
+    productIdentifier?: string
+    limit: number
+    offset: number
+    sortBy: string
+    sortOrder: 'asc' | 'desc'
+  }): Promise<{ orders: MESOrder[]; total: number }> {
+    const whereClause: any = {
+      teamId: filters.teamId
+    }
+
+    if (filters.status) {
+      whereClause.status = filters.status
+    }
+
+    if (filters.fromDate) {
+      whereClause.createdAt = {
+        ...whereClause.createdAt,
+        gte: filters.fromDate
+      }
+    }
+
+    if (filters.toDate) {
+      whereClause.createdAt = {
+        ...whereClause.createdAt,
+        lte: filters.toDate
+      }
+    }
+
+    const orderBy: any = {}
+    orderBy[filters.sortBy] = filters.sortOrder
+
+    const [orders, total] = await Promise.all([
+      prisma.mESOrder.findMany({
+        where: whereClause,
+        include: {
+          routing: {
+            include: {
+              operations: {
+                include: {
+                  department: true
+                },
+                orderBy: {
+                  operationNumber: 'asc'
+                }
+              }
+            }
+          },
+          workOrderOperations: {
+            include: {
+              routingOperation: {
+                include: {
+                  department: true
+                }
+              }
+            },
+            orderBy: {
+              id: 'asc'
+            }
+          }
+        },
+        orderBy,
+        skip: filters.offset,
+        take: filters.limit
+      }),
+      prisma.mESOrder.count({
+        where: whereClause
+      })
+    ])
+
+    return { orders, total }
+  }
 }

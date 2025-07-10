@@ -2,22 +2,35 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { MetricsCard } from "@/components/ui/metrics-card";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Clock, 
-  Target, 
-  Users, 
-  Activity, 
+import { ExportButton } from "@/components/analytics/export-button";
+import {
+  WIPDistributionChart,
+  CycleTimeTrendChart,
+  DepartmentPerformanceChart,
+} from "@/components/analytics/charts";
+import {
+  BarChart3,
+  TrendingUp,
+  Clock,
+  Target,
+  Users,
+  Activity,
   AlertTriangle,
   CheckCircle,
   RefreshCw,
-  Loader2
+  Loader2,
+  Factory,
+  LucideIcon,
 } from "lucide-react";
 
 interface AnalyticsData {
@@ -30,7 +43,7 @@ interface AnalyticsData {
 export default function AnalyticsPage() {
   const params = useParams();
   const teamId = params.teamId as string;
-  
+
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -39,32 +52,41 @@ export default function AnalyticsPage() {
   const fetchAnalyticsData = async () => {
     try {
       setError(null);
-      const [dashboardRes, wipRes, performanceRes, activityRes] = await Promise.all([
-        fetch('/api/analytics/dashboard'),
-        fetch('/api/analytics/wip'),
-        fetch('/api/analytics/performance'),
-        fetch('/api/analytics/recent-activity')
-      ]);
+      const [dashboardRes, wipRes, performanceRes, activityRes] =
+        await Promise.all([
+          fetch("/api/analytics/dashboard"),
+          fetch("/api/analytics/wip"),
+          fetch("/api/analytics/performance"),
+          fetch("/api/analytics/recent-activity"),
+        ]);
 
-      if (!dashboardRes.ok || !wipRes.ok || !performanceRes.ok || !activityRes.ok) {
-        throw new Error('Failed to fetch analytics data');
+      if (
+        !dashboardRes.ok ||
+        !wipRes.ok ||
+        !performanceRes.ok ||
+        !activityRes.ok
+      ) {
+        throw new Error("Failed to fetch analytics data");
       }
 
-      const [dashboardMetrics, wipData, performanceData, recentActivity] = await Promise.all([
-        dashboardRes.json(),
-        wipRes.json(),
-        performanceRes.json(),
-        activityRes.json()
-      ]);
+      const [dashboardMetrics, wipData, performanceData, recentActivity] =
+        await Promise.all([
+          dashboardRes.json(),
+          wipRes.json(),
+          performanceRes.json(),
+          activityRes.json(),
+        ]);
 
       setData({
         dashboardMetrics,
         wipData,
         performanceData,
-        recentActivity
+        recentActivity,
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load analytics data');
+      setError(
+        err instanceof Error ? err.message : "Failed to load analytics data"
+      );
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -78,10 +100,10 @@ export default function AnalyticsPage() {
 
   useEffect(() => {
     fetchAnalyticsData();
-    
+
     // Set up auto-refresh every 30 seconds
     const interval = setInterval(fetchAnalyticsData, 30000);
-    
+
     return () => clearInterval(interval);
   }, [teamId]);
 
@@ -137,7 +159,10 @@ export default function AnalyticsPage() {
       <div className="space-y-8">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+            <Badge
+              variant="outline"
+              className="bg-green-50 text-green-700 border-green-200"
+            >
               <Activity className="h-3 w-3 mr-1" />
               Live Data
             </Badge>
@@ -145,17 +170,26 @@ export default function AnalyticsPage() {
               Updates every 30 seconds
             </span>
           </div>
-          <Button 
-            onClick={handleRefresh} 
-            variant="outline" 
-            size="sm"
-            disabled={refreshing}
-          >
-            <RefreshCw className={`h-4 w-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
-            Refresh
-          </Button>
+          <div className="flex items-center gap-2">
+            <ExportButton
+              teamId={teamId}
+              exportType="dashboard"
+              className="h-9"
+            />
+            <Button
+              onClick={handleRefresh}
+              variant="outline"
+              size="sm"
+              disabled={refreshing}
+            >
+              <RefreshCw
+                className={`h-4 w-4 mr-2 ${refreshing ? "animate-spin" : ""}`}
+              />
+              Refresh
+            </Button>
+          </div>
         </div>
-        
+
         <OverviewMetrics data={data.dashboardMetrics} />
         <WIPAnalysis data={data.wipData} />
         <PerformanceAnalysis data={data.performanceData} />
@@ -164,7 +198,6 @@ export default function AnalyticsPage() {
     </div>
   );
 }
-
 
 function OverviewMetrics({ data }: { data: any }) {
   if (!data) {
@@ -183,35 +216,85 @@ function OverviewMetrics({ data }: { data: any }) {
     );
   }
 
-  const totalActiveOrders = data.ordersPending + data.ordersInProgress + data.ordersPaused + data.ordersWaiting;
+  const totalActiveOrders =
+    data.ordersPending +
+    data.ordersInProgress +
+    data.ordersPaused +
+    data.ordersWaiting;
+
+  const getIcon = (iconName: string): LucideIcon => {
+    const iconMap: Record<string, LucideIcon> = {
+      activity: Activity,
+      factory: Factory,
+      clock: Clock,
+      users: Users,
+    };
+    return iconMap[iconName] || Activity;
+  };
+
+  interface MetricCardProps {
+    title: string;
+    value: string | number;
+    subtitle: string;
+    icon: string;
+    variant?: "default" | "success" | "warning";
+  }
+
+  const MetricCard = ({ title, value, subtitle, icon, variant = "default" }: MetricCardProps) => {
+    const IconComponent = getIcon(icon);
+    const variantClasses = {
+      default: "border-primary/30 bg-primary/5",
+      success: "border-green-500/30 bg-green-500/5",
+      warning: "border-yellow-500/30 bg-yellow-500/5",
+    };
+
+    return (
+      <Card className={`relative ${variantClasses[variant]}`}>
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+              {title}
+            </p>
+            <div className="p-2 rounded-lg bg-primary/10">
+              <IconComponent className="h-4 w-4 text-primary" />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <p className="text-3xl font-bold">{value}</p>
+            <p className="text-sm text-muted-foreground">{subtitle}</p>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  };
 
   return (
     <div className="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-      <MetricsCard
+      <MetricCard
         title="Active Orders"
         value={totalActiveOrders}
-        change={{ value: `${data.ordersCompletedToday} completed today`, trend: "neutral" }}
+        subtitle={`${data.ordersCompletedToday} completed today`}
         icon="activity"
         variant="default"
       />
-      <MetricsCard
+      <MetricCard
         title="Operations Running"
         value={data.operationsInProgress}
-        change={{ value: `${data.operationsPaused} paused`, trend: "neutral" }}
+        subtitle={`${data.operationsPaused} paused`}
         icon="factory"
         variant="success"
       />
-      <MetricsCard
+      <MetricCard
         title="Avg Cycle Time"
         value={`${data.averageCycleTime}m`}
-        change={{ value: "Per operation", trend: "neutral" }}
+        subtitle="Per operation"
         icon="clock"
         variant="default"
       />
-      <MetricsCard
+      <MetricCard
         title="Operator Utilization"
         value={`${data.operatorUtilization}%`}
-        change={{ value: `${data.activeOperators}/${data.totalOperators} active`, trend: "neutral" }}
+        subtitle={`${data.activeOperators}/${data.totalOperators} active`}
         icon="users"
         variant="default"
       />
@@ -244,49 +327,17 @@ function WIPAnalysis({ data }: { data: any }) {
 
   return (
     <div className="bento-grid grid-cols-1 lg:grid-cols-2">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <BarChart3 className="h-5 w-5" />
-            Work In Progress
-          </CardTitle>
-          <CardDescription>
-            Current operations by status
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">In Progress</span>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="font-bold text-green-600">{data.wipByStatus?.in_progress || 0}</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">Paused</span>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                <span className="font-bold text-orange-600">{data.wipByStatus?.paused || 0}</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">Pending</span>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
-                <span className="font-bold text-gray-600">{data.wipByStatus?.pending || 0}</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">Waiting</span>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="font-bold text-blue-600">{data.wipByStatus?.waiting || 0}</span>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      <WIPDistributionChart
+        data={
+          data.wipByStatus || {
+            pending: 0,
+            in_progress: 0,
+            paused: 0,
+            waiting: 0,
+          }
+        }
+        title="Work In Progress Distribution"
+      />
 
       <Card>
         <CardHeader>
@@ -294,28 +345,37 @@ function WIPAnalysis({ data }: { data: any }) {
             <AlertTriangle className="h-5 w-5" />
             Bottlenecks
           </CardTitle>
-          <CardDescription>
-            Operations with highest WIP
-          </CardDescription>
+          <CardDescription>Operations with highest WIP</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {(data.bottlenecks || []).slice(0, 5).map((bottleneck: any, index: number) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex-1">
-                  <div className="text-sm font-medium">{bottleneck.operationName}</div>
-                  <div className="text-xs text-muted-foreground">{bottleneck.departmentName}</div>
+            {(data.bottlenecks || [])
+              .slice(0, 5)
+              .map((bottleneck: any, index: number) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <div className="text-sm font-medium">
+                      {bottleneck.operationName}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {bottleneck.departmentName}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Badge
+                      variant={
+                        bottleneck.severity === "high"
+                          ? "destructive"
+                          : bottleneck.severity === "medium"
+                          ? "secondary"
+                          : "outline"
+                      }
+                    >
+                      {bottleneck.wipCount}
+                    </Badge>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Badge 
-                    variant={bottleneck.severity === 'high' ? 'destructive' : 
-                             bottleneck.severity === 'medium' ? 'secondary' : 'outline'}
-                  >
-                    {bottleneck.wipCount}
-                  </Badge>
-                </div>
-              </div>
-            ))}
+              ))}
             {(!data.bottlenecks || data.bottlenecks.length === 0) && (
               <p className="text-sm text-muted-foreground text-center py-4">
                 No bottlenecks detected
@@ -353,37 +413,11 @@ function PerformanceAnalysis({ data }: { data: any }) {
 
   return (
     <div className="bento-grid grid-cols-1 lg:grid-cols-3">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Clock className="h-5 w-5" />
-            Cycle Time Analysis
-          </CardTitle>
-          <CardDescription>
-            Average cycle time by department
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {(data.cycleTimeAnalysis?.cycleTimeByDepartment || []).slice(0, 5).map((dept: any, index: number) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex-1">
-                  <div className="text-sm font-medium">{dept.departmentName}</div>
-                  <div className="text-xs text-muted-foreground">{dept.operationsCount} operations</div>
-                </div>
-                <div className="text-right">
-                  <div className="text-sm font-bold">{dept.averageCycleTime}m</div>
-                </div>
-              </div>
-            ))}
-            {(!data.cycleTimeAnalysis?.cycleTimeByDepartment || data.cycleTimeAnalysis.cycleTimeByDepartment.length === 0) && (
-              <p className="text-sm text-muted-foreground text-center py-4">
-                No cycle time data available
-              </p>
-            )}
-          </div>
-        </CardContent>
-      </Card>
+      <DepartmentPerformanceChart
+        data={data.cycleTimeAnalysis?.cycleTimeByDepartment || []}
+        title="Cycle Time by Department"
+        metric="cycleTime"
+      />
 
       <Card>
         <CardHeader>
@@ -391,9 +425,7 @@ function PerformanceAnalysis({ data }: { data: any }) {
             <TrendingUp className="h-5 w-5" />
             Efficiency
           </CardTitle>
-          <CardDescription>
-            Performance vs. standard times
-          </CardDescription>
+          <CardDescription>Performance vs. standard times</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -401,18 +433,27 @@ function PerformanceAnalysis({ data }: { data: any }) {
               <div className="text-2xl font-bold text-green-600">
                 {data.efficiency?.overallEfficiency || 0}%
               </div>
-              <div className="text-sm text-muted-foreground">Overall Efficiency</div>
+              <div className="text-sm text-muted-foreground">
+                Overall Efficiency
+              </div>
             </div>
             <div className="space-y-2">
-              {(data.efficiency?.efficiencyByDepartment || []).slice(0, 3).map((dept: any, index: number) => (
-                <div key={index} className="space-y-1">
-                  <div className="flex justify-between text-sm">
-                    <span>{dept.departmentName}</span>
-                    <span className="font-medium">{dept.averageEfficiency}%</span>
+              {(data.efficiency?.efficiencyByDepartment || [])
+                .slice(0, 3)
+                .map((dept: any, index: number) => (
+                  <div key={index} className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span>{dept.departmentName}</span>
+                      <span className="font-medium">
+                        {dept.averageEfficiency}%
+                      </span>
+                    </div>
+                    <Progress
+                      value={Math.min(dept.averageEfficiency, 100)}
+                      className="h-2"
+                    />
                   </div>
-                  <Progress value={Math.min(dept.averageEfficiency, 100)} className="h-2" />
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </CardContent>
@@ -424,9 +465,7 @@ function PerformanceAnalysis({ data }: { data: any }) {
             <Target className="h-5 w-5" />
             Quality Metrics
           </CardTitle>
-          <CardDescription>
-            Production quality indicators
-          </CardDescription>
+          <CardDescription>Production quality indicators</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -434,21 +473,27 @@ function PerformanceAnalysis({ data }: { data: any }) {
               <span className="text-sm font-medium">Completion Rate</span>
               <div className="flex items-center gap-2">
                 <CheckCircle className="h-4 w-4 text-green-500" />
-                <span className="font-bold text-green-600">{data.qualityMetrics?.completionRate || 0}%</span>
+                <span className="font-bold text-green-600">
+                  {data.qualityMetrics?.completionRate || 0}%
+                </span>
               </div>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium">On-Time Delivery</span>
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4 text-blue-500" />
-                <span className="font-bold text-blue-600">{data.qualityMetrics?.onTimeDelivery || 0}%</span>
+                <span className="font-bold text-blue-600">
+                  {data.qualityMetrics?.onTimeDelivery || 0}%
+                </span>
               </div>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Throughput</span>
               <div className="flex items-center gap-2">
                 <Activity className="h-4 w-4 text-purple-500" />
-                <span className="font-bold text-purple-600">{data.throughput?.operationsPerHour?.toFixed(1) || 0}/hr</span>
+                <span className="font-bold text-purple-600">
+                  {data.throughput?.operationsPerHour?.toFixed(1) || 0}/hr
+                </span>
               </div>
             </div>
           </div>
@@ -494,10 +539,15 @@ function RecentActivityFeed({ data }: { data: any[] }) {
       <CardContent>
         <div className="space-y-3 max-h-96 overflow-y-auto">
           {data.map((activity) => (
-            <div key={activity.id} className="flex items-center justify-between p-3 rounded-lg border">
+            <div
+              key={activity.id}
+              className="flex items-center justify-between p-3 rounded-lg border"
+            >
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="font-medium text-sm">{activity.orderNumber}</span>
+                  <span className="font-medium text-sm">
+                    {activity.orderNumber}
+                  </span>
                   <Badge variant="outline" className="text-xs">
                     {activity.activity}
                   </Badge>
@@ -510,7 +560,9 @@ function RecentActivityFeed({ data }: { data: any[] }) {
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-sm font-medium">{activity.operatorName}</div>
+                <div className="text-sm font-medium">
+                  {activity.operatorName}
+                </div>
                 <div className="text-xs text-muted-foreground">
                   {activity.quantityCompleted} completed
                 </div>

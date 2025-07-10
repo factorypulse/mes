@@ -162,3 +162,77 @@ model MESPauseEvent {
 
   @@map("mes_pause_events")
 }
+
+// API Authentication and Audit Models
+
+// API Keys for external system authentication
+model MESAPIKey {
+  id           String   @id @default(uuid())
+  teamId       String   @map("team_id")
+  name         String   // Human-readable name for the API key
+  description  String?  // Optional description
+  keyHash      String   @unique @map("key_hash") // Hashed version of the API key
+  keyPrefix    String   @map("key_prefix") // First 8 characters for identification
+  permissions  Json     @default("{\"read\": true, \"write\": false, \"admin\": false}") // Permission object
+  isActive     Boolean  @default(true) @map("is_active")
+  expiresAt    DateTime? @map("expires_at") // Optional expiration date
+  lastUsedAt   DateTime? @map("last_used_at")
+  createdBy    String   @map("created_by") // StackAuth user ID who created the key
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  usageRecords MESAPIKeyUsage[]
+  auditLogs    MESAuditLog[]
+
+  @@map("mes_api_keys")
+}
+
+// API Key Usage tracking for rate limiting
+model MESAPIKeyUsage {
+  id         String   @id @default(uuid())
+  apiKeyId   String   @map("api_key_id")
+  teamId     String   @map("team_id")
+  endpoint   String   // API endpoint called
+  method     String   // HTTP method
+  timestamp  DateTime @default(now())
+  ipAddress  String?  @map("ip_address")
+  userAgent  String?  @map("user_agent")
+  statusCode Int      @map("status_code")
+  responseTime Int    @map("response_time") // Response time in milliseconds
+
+  // Relations
+  apiKey MESAPIKey @relation(fields: [apiKeyId], references: [id], onDelete: Cascade)
+
+  @@index([apiKeyId, timestamp])
+  @@index([teamId, timestamp])
+  @@map("mes_api_key_usage")
+}
+
+// Audit logging for all API operations
+model MESAuditLog {
+  id            String   @id @default(uuid())
+  teamId        String   @map("team_id")
+  apiKeyId      String?  @map("api_key_id") // Null for internal operations
+  userId        String?  @map("user_id") // StackAuth user ID for internal operations
+  action        String   // Action performed (CREATE, UPDATE, DELETE, etc.)
+  resource      String   // Resource type (order, routing, etc.)
+  resourceId    String?  @map("resource_id") // ID of the resource affected
+  endpoint      String?  // API endpoint for external calls
+  method        String?  // HTTP method for external calls
+  ipAddress     String?  @map("ip_address")
+  userAgent     String?  @map("user_agent")
+  requestData   Json?    @map("request_data") // Request payload (sanitized)
+  responseData  Json?    @map("response_data") // Response data (sanitized)
+  statusCode    Int?     @map("status_code")
+  errorMessage  String?  @map("error_message")
+  timestamp     DateTime @default(now())
+
+  // Relations
+  apiKey MESAPIKey? @relation(fields: [apiKeyId], references: [id], onDelete: SetNull)
+
+  @@index([teamId, timestamp])
+  @@index([apiKeyId, timestamp])
+  @@index([action, resource])
+  @@map("mes_audit_logs")
+}

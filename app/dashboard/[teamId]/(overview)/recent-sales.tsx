@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { StatusIndicator } from "@/components/ui/status-indicator";
+import { Badge } from "@/components/ui/badge";
 import { Clock, Package, CheckCircle } from "lucide-react";
 
 // Mock data for recent manufacturing activity
@@ -86,12 +86,12 @@ export function RecentSales() {
                     {activity.type}
                   </p>
                 </div>
-                <StatusIndicator
-                  status={activity.status}
-                  variant="dot"
-                  size="sm"
-                  animate={activity.status === 'active'}
-                />
+                <Badge 
+                  variant={activity.status}
+                  className="text-xs"
+                >
+                  {activity.status}
+                </Badge>
               </div>
 
               <div className="flex items-center justify-between">

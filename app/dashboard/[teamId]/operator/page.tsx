@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useUser } from "@stackframe/stack";
 import { OperatorDashboard } from "@/components/work-orders/operator-dashboard";
-import { StatusIndicator } from "@/components/ui/status-indicator";
+import { Badge } from "@/components/ui/badge";
 import { User, Timer } from "lucide-react";
 
 interface DepartmentAccess {
@@ -90,11 +90,9 @@ export default function OperatorPage() {
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <StatusIndicator
-              status="pending"
-              label="Ready for Work"
-              animate={false}
-            />
+            <Badge variant="pending">
+              Ready for Work
+            </Badge>
           </div>
         </div>
 

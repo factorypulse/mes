@@ -4,11 +4,10 @@ import { notFound } from "next/navigation";
 
 import { RecentActivity } from "@/app/dashboard/[teamId]/(overview)/recent-activity";
 import { Graph } from "./graph";
-import { MetricsCard } from "@/components/ui/metrics-card";
-
-import { StatusIndicator } from "@/components/ui/status-indicator";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { ColorModeSwitcher } from "@/components/color-mode-switcher";
-import { BarChart3, Zap, Clock } from "lucide-react";
+import { BarChart3, Zap, Clock, Activity, Factory, AlertTriangle, CheckCircle, LucideIcon } from "lucide-react";
 import { getUser } from "@/lib/auth";
 
 export const metadata: Metadata = {
@@ -120,7 +119,7 @@ function DashboardHeader() {
         </p>
       </div>
       <div className="flex items-center gap-4">
-        <StatusIndicator status="active" label="System Online" />
+        <Badge variant="active">System Online</Badge>
       </div>
     </div>
   );
@@ -133,44 +132,91 @@ function ProductionMetrics({ data }: { data: any }) {
     data.ordersPaused +
     data.ordersWaiting;
 
+  const getIcon = (iconName: string): LucideIcon => {
+    const iconMap: Record<string, LucideIcon> = {
+      activity: Activity,
+      factory: Factory,
+      "alert-triangle": AlertTriangle,
+      "check-circle": CheckCircle,
+      clock: Clock,
+    };
+    return iconMap[iconName] || Activity;
+  };
+
+  interface MetricCardProps {
+    title: string;
+    value: string | number;
+    subtitle: string;
+    icon: string;
+    variant?: "default" | "success" | "warning";
+  }
+
+  const MetricCard = ({ title, value, subtitle, icon, variant = "default" }: MetricCardProps) => {
+    const IconComponent = getIcon(icon);
+    const variantClasses = {
+      default: "border-primary/30 bg-primary/5",
+      success: "border-green-500/30 bg-green-500/5",
+      warning: "border-yellow-500/30 bg-yellow-500/5",
+    };
+
+    return (
+      <Card className={`relative ${variantClasses[variant]}`}>
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+              {title}
+            </p>
+            <div className="p-2 rounded-lg bg-primary/10">
+              <IconComponent className="h-4 w-4 text-primary" />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <p className="text-3xl font-bold">{value}</p>
+            <p className="text-sm text-muted-foreground">{subtitle}</p>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  };
+
   return (
     <div className="bento-grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
-      <MetricsCard
+      <MetricCard
         title="Live Orders"
         value={totalActiveOrders}
-        change={{ value: "Total active", trend: "neutral" }}
+        subtitle="Total active"
         icon="activity"
         variant="default"
       />
 
-      <MetricsCard
+      <MetricCard
         title="Ops in progress"
         value={data.operationsInProgress}
-        change={{ value: "Currently active", trend: "neutral" }}
+        subtitle="Currently active"
         icon="factory"
         variant="success"
       />
 
-      <MetricsCard
+      <MetricCard
         title="Ops paused"
         value={data.operationsPaused}
-        change={{ value: "Currently paused", trend: "neutral" }}
+        subtitle="Currently paused"
         icon="alert-triangle"
         variant="warning"
       />
 
-      <MetricsCard
+      <MetricCard
         title="Orders completed (today)"
         value={data.ordersCompletedToday}
-        change={{ value: "Orders finished", trend: "neutral" }}
+        subtitle="Orders finished"
         icon="check-circle"
         variant="success"
       />
 
-      <MetricsCard
+      <MetricCard
         title="Avg cycle time"
         value={data.averageCycleTime > 0 ? `${data.averageCycleTime}m` : "N/A"}
-        change={{ value: "Per order", trend: "neutral" }}
+        subtitle="Per order"
         icon="clock"
         variant="default"
       />
@@ -192,7 +238,7 @@ function QuickStats({ dashboardData }: { dashboardData: DashboardData }) {
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Pending</span>
             <div className="flex items-center gap-2">
-              <StatusIndicator status="waiting" variant="dot" size="sm" />
+              <div className="w-2 h-2 rounded-full bg-gray-500"></div>
               <span className="font-semibold text-gray-500">
                 {dashboardData.ordersPending}
               </span>
@@ -202,12 +248,7 @@ function QuickStats({ dashboardData }: { dashboardData: DashboardData }) {
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">In Progress</span>
             <div className="flex items-center gap-2">
-              <StatusIndicator
-                status="active"
-                variant="dot"
-                size="sm"
-                animate
-              />
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
               <span className="font-semibold text-green-500">
                 {dashboardData.ordersInProgress}
               </span>
@@ -217,7 +258,7 @@ function QuickStats({ dashboardData }: { dashboardData: DashboardData }) {
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Paused</span>
             <div className="flex items-center gap-2">
-              <StatusIndicator status="warning" variant="dot" size="sm" />
+              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
               <span className="font-semibold text-orange-500">
                 {dashboardData.ordersPaused}
               </span>
@@ -227,7 +268,7 @@ function QuickStats({ dashboardData }: { dashboardData: DashboardData }) {
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Waiting</span>
             <div className="flex items-center gap-2">
-              <StatusIndicator status="waiting" variant="dot" size="sm" />
+              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
               <span className="font-semibold text-blue-500">
                 {dashboardData.ordersWaiting}
               </span>
@@ -247,12 +288,7 @@ function QuickStats({ dashboardData }: { dashboardData: DashboardData }) {
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Running</span>
             <div className="flex items-center gap-2">
-              <StatusIndicator
-                status="active"
-                variant="dot"
-                size="sm"
-                animate
-              />
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
               <span className="font-semibold text-green-500">
                 {dashboardData.operationsInProgress}
               </span>
@@ -262,7 +298,7 @@ function QuickStats({ dashboardData }: { dashboardData: DashboardData }) {
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Paused</span>
             <div className="flex items-center gap-2">
-              <StatusIndicator status="warning" variant="dot" size="sm" />
+              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
               <span className="font-semibold text-orange-500">
                 {dashboardData.operationsPaused}
               </span>
@@ -274,7 +310,7 @@ function QuickStats({ dashboardData }: { dashboardData: DashboardData }) {
               Completed Today
             </span>
             <div className="flex items-center gap-2">
-              <StatusIndicator status="active" variant="dot" size="sm" />
+              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
               <span className="font-semibold text-blue-500">
                 {dashboardData.completedOperationsToday}
               </span>
@@ -307,17 +343,17 @@ function QuickStats({ dashboardData }: { dashboardData: DashboardData }) {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-sm">Database</span>
-            <StatusIndicator status="active" variant="dot" size="sm" animate />
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
           </div>
 
           <div className="flex items-center justify-between">
             <span className="text-sm">API Services</span>
-            <StatusIndicator status="active" variant="dot" size="sm" animate />
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
           </div>
 
           <div className="flex items-center justify-between">
             <span className="text-sm">Real-time Sync</span>
-            <StatusIndicator status="active" variant="dot" size="sm" animate />
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
           </div>
         </div>
       </div>
