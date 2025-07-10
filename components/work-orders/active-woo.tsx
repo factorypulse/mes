@@ -22,9 +22,13 @@ import {
   AlertCircle,
   FileText,
   Upload,
+  Paperclip,
 } from "lucide-react";
 import { WOOWithRelations } from "@/lib/services/work-order-operations";
 import { PauseReasonDialog } from "./pause-reason-dialog";
+import { DataCollectionForm } from "@/components/data-collection/data-collection-form";
+import { FileUpload } from "@/components/ui/file-upload";
+import { FileList } from "@/components/ui/file-list";
 
 interface ActiveWOOProps {
   woo: WOOWithRelations;
@@ -47,6 +51,9 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showPauseDialog, setShowPauseDialog] = useState(false);
+  const [dataCollectionActivities, setDataCollectionActivities] = useState<any[]>([]);
+  const [attachments, setAttachments] = useState<any[]>([]);
+  const [loadingActivities, setLoadingActivities] = useState(true);
 
   // Parse data input schema
   const inputSchema: FormField[] = Array.isArray(
@@ -61,6 +68,38 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
       setFormData(woo.capturedData as Record<string, any>);
     }
   }, [woo.capturedData]);
+
+  useEffect(() => {
+    // Load data collection activities and attachments
+    fetchDataCollectionActivities();
+    fetchAttachments();
+  }, [woo.id]);
+
+  const fetchDataCollectionActivities = async () => {
+    try {
+      const response = await fetch(`/api/work-order-operations/${woo.id}/data-collection`);
+      if (response.ok) {
+        const activities = await response.json();
+        setDataCollectionActivities(activities);
+      }
+    } catch (error) {
+      console.error('Error fetching data collection activities:', error);
+    } finally {
+      setLoadingActivities(false);
+    }
+  };
+
+  const fetchAttachments = async () => {
+    try {
+      const response = await fetch(`/api/work-order-operations/${woo.id}/attachments`);
+      if (response.ok) {
+        const attachmentsData = await response.json();
+        setAttachments(attachmentsData);
+      }
+    } catch (error) {
+      console.error('Error fetching attachments:', error);
+    }
+  };
 
   useEffect(() => {
     // Calculate elapsed time
@@ -143,6 +182,9 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
     setError(null);
 
     try {
+      // Save data collection first
+      await saveDataCollection();
+
       const response = await fetch(
         `/api/work-order-operations/${woo.id}/complete`,
         {
@@ -169,6 +211,28 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const saveDataCollection = async () => {
+    if (Object.keys(formData).length === 0) return;
+
+    const response = await fetch(`/api/work-order-operations/${woo.id}/data-collection`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ collectedData: formData })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to save data collection');
+    }
+  };
+
+  const handleFileUpload = (file: any) => {
+    setAttachments(prev => [...prev, file]);
+  };
+
+  const handleDataCollectionSubmit = (data: Record<string, any>) => {
+    setFormData(data);
   };
 
   const handleInputChange = (fieldName: string, value: any) => {
@@ -345,20 +409,41 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
         </Card>
       )}
 
-      {/* Data Input Forms */}
-      {inputSchema.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Data Collection</CardTitle>
-            <CardDescription>
-              Please fill out the required information for this operation
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4">{inputSchema.map(renderFormField)}</div>
-          </CardContent>
-        </Card>
+      {/* Data Collection Forms */}
+      {!loadingActivities && (
+        <DataCollectionForm
+          activities={dataCollectionActivities}
+          wooId={woo.id}
+          onSubmit={handleDataCollectionSubmit}
+          initialData={formData}
+        />
       )}
+
+      {/* File Attachments */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg flex items-center gap-2">
+            <Paperclip className="h-5 w-5" />
+            Attachments
+          </CardTitle>
+          <CardDescription>
+            Upload files related to this operation
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <FileUpload
+            onUpload={handleFileUpload}
+            wooId={woo.id}
+            attachmentType="operator"
+          />
+          {attachments.length > 0 && (
+            <div>
+              <h4 className="text-sm font-medium mb-2">Uploaded Files</h4>
+              <FileList files={attachments} />
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       {/* Notes */}
       <Card>

@@ -16,6 +16,12 @@ export async function GET(request: NextRequest) {
 
     const teamId = user.selectedTeam.id
 
+    // Calculate date range for today
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+
     // Get user's accessible departments
     const userAccessibleDepartments = await UsersService.getUserAccessibleDepartments(user.id, teamId)
 
@@ -156,12 +162,7 @@ export async function GET(request: NextRequest) {
     })
 
     // Get completed operations today
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-    const tomorrow = new Date(today)
-    tomorrow.setDate(tomorrow.getDate() + 1)
-
-        const completedOperationsToday = await prisma.mESWorkOrderOperation.count({
+    const completedOperationsToday = await prisma.mESWorkOrderOperation.count({
       where: {
         order: { teamId },
         status: 'completed',

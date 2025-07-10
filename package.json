@@ -34,6 +34,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@stackframe/stack": "^2.7.16",
     "@tailwindcss/postcss": "^4.1.11",
+    "@types/uuid": "^10.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -45,7 +46,8 @@
     "recharts": "^2.15.1",
     "sonner": "^2.0.6",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.53.2",

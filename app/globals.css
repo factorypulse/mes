@@ -132,7 +132,7 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     border-radius: 0.75rem;
     padding: 1.5rem;
     position: relative;

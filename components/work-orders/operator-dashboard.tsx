@@ -126,16 +126,28 @@ export function OperatorDashboard({
 
       {/* Active Work Order */}
       {activeWoo && (
-        <Card className="border-l-4 border-l-green-500">
+        <Card
+          className="border-l-4 border-l-green-500"
+          onClick={() => openWOODetail(activeWoo.id)}
+        >
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
                 <CardTitle className="text-lg">Active Work Order</CardTitle>
                 <CardDescription>Currently in progress</CardDescription>
               </div>
+              <div className="flex flex-col items-center gap-4">
               <Badge className={getStatusColor(activeWoo.status)}>
-                {activeWoo.status.replace("_", " ")}
+                {activeWoo.status.replace("_", " ").replace(/\b\w/g, c => c.toUpperCase())}
               </Badge>
+    <Button
+                  size="lg"
+                  onClick={() => openWOODetail(activeWoo.id)}
+                  className="min-h-12 px-6 font-medium"
+                >
+                  Open
+                </Button>
+                </div>
             </div>
           </CardHeader>
           <CardContent>
@@ -168,14 +180,7 @@ export function OperatorDashboard({
               </div>
 
               <div className="flex gap-2">
-                <Button
-                  size="sm"
-                  onClick={() => openWOODetail(activeWoo.id)}
-                  className="bg-primary hover:bg-primary/90"
-                >
-                  <ExternalLink className="h-4 w-4 mr-1" />
-                  Open Details
-                </Button>
+
               </div>
             </div>
           </CardContent>
@@ -208,10 +213,14 @@ export function OperatorDashboard({
         ) : (
           <div className="grid gap-4">
             {woos.map((woo) => (
-              <Card key={woo.id} className="hover:shadow-md transition-shadow">
+              <Card
+                key={woo.id}
+                className="hover:shadow-md transition-all duration-200 cursor-pointer hover:border-primary/30"
+                onClick={() => openWOODetail(woo.id)}
+              >
                 <CardContent className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-2">
                         <h3 className="font-medium">
                           {woo.routingOperation.operationName}
@@ -254,13 +263,15 @@ export function OperatorDashboard({
                       </div>
                     </div>
 
-                    <div className="flex gap-2 ml-4">
+                    <div className="flex-shrink-0">
                       <Button
-                        size="sm"
-                        onClick={() => openWOODetail(woo.id)}
-                        variant="outline"
+                        size="lg"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openWOODetail(woo.id);
+                        }}
+                        className="min-h-12 px-6 font-medium"
                       >
-                        <ExternalLink className="h-4 w-4 mr-1" />
                         Open
                       </Button>
                     </div>

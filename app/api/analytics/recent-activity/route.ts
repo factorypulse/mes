@@ -61,11 +61,6 @@ export async function GET(request: NextRequest) {
               }
             }
           }
-        },
-        operator: {
-          select: {
-            name: true
-          }
         }
       },
       orderBy: [
@@ -108,7 +103,7 @@ export async function GET(request: NextRequest) {
         operationName: woo.routingOperation.operationName,
         operationNumber: woo.routingOperation.operationNumber,
         department: woo.routingOperation.department?.name || 'Unassigned',
-        operatorName: woo.operator?.name || (woo.operatorId ? `Operator ${woo.operatorId.slice(0, 8)}` : 'Unassigned'),
+        operatorName: woo.operatorId ? `Operator ${woo.operatorId.slice(0, 8)}` : 'Unassigned',
         status,
         statusColor,
         activity,

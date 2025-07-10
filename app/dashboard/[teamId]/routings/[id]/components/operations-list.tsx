@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { MoreHorizontal, Edit, Trash2, Clock, User, Info } from 'lucide-react'
+import { MoreHorizontal, Edit, Trash2, Clock, User, Info, Eye, ExternalLink } from 'lucide-react'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { EditOperationDialog } from './edit-operation-dialog'
@@ -44,6 +44,10 @@ export function OperationsList({ routingId, teamId, operations }: OperationsList
 
   const handleDelete = (operation: Operation) => {
     setDeletingOperation(operation)
+  }
+
+  const handleViewDetails = (operation: Operation) => {
+    router.push(`/dashboard/${teamId}/routings/${routingId}/operations/${operation.id}`)
   }
 
   const handleOperationUpdated = () => {
@@ -145,6 +149,10 @@ export function OperationsList({ routingId, teamId, operations }: OperationsList
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={() => handleViewDetails(operation)}>
+                        <Eye className="h-4 w-4 mr-2" />
+                        View Details
+                      </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => handleEdit(operation)}>
                         <Edit className="h-4 w-4 mr-2" />
                         Edit

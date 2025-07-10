@@ -56,20 +56,7 @@ export default function OperatorPage() {
     setRefreshKey((prev) => prev + 1);
   };
 
-  const formatTimeOnShift = () => {
-    const now = new Date();
-    const shiftStart = new Date();
-    shiftStart.setHours(7, 0, 0, 0); // Assuming 7 AM shift start
 
-    const hours = Math.floor(
-      (now.getTime() - shiftStart.getTime()) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor(
-      ((now.getTime() - shiftStart.getTime()) % (1000 * 60 * 60)) / (1000 * 60)
-    );
-
-    return `${hours}h ${minutes}m`;
-  };
 
   const getAccessLevelDisplay = () => {
     if (loadingAccess) return "Loading...";
@@ -90,24 +77,16 @@ export default function OperatorPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Ambient background effects */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-green-500/5 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float" />
-        <div
-          className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"
-          style={{ animationDelay: "3s" }}
-        />
-      </div>
+     
 
-      <div className="relative z-10 p-8 space-y-8">
+      <div className="relative z-10 space-y-8">
         {/* Page Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-bold gradient-text mb-2">
-              Operator Workflow
-            </h1>
+            <h1 className="text-3xl font-bold tracking-tight">Operator Dashboard</h1>
+
             <p className="text-muted-foreground text-lg">
-              Manage your work orders and track real-time progress
+              Manage your work orders and track real-time progress.
             </p>
           </div>
           <div className="flex items-center gap-4">
@@ -137,15 +116,6 @@ export default function OperatorPage() {
             </div>
 
             <div className="flex items-center gap-6">
-              <div className="text-center">
-                <div className="text-2xl font-bold gradient-text">
-                  {formatTimeOnShift()}
-                </div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">
-                  Time on Shift
-                </p>
-              </div>
-
               <div className="text-center">
                 <div className="text-2xl font-bold gradient-text">
                   {getAccessLevelDisplay()}

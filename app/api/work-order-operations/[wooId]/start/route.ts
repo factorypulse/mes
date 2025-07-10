@@ -4,7 +4,7 @@ import { stackServerApp } from '@/stack'
 
 export async function POST(
   request: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  context: { params: Promise<{ wooId: string }> }
 ) {
   try {
     const user = await stackServerApp.getUser()
@@ -18,15 +18,15 @@ export async function POST(
     }
 
     const params = await context.params
-    const woo = await WorkOrderOperationsService.resumeWOO(params.id, teamId)
+    const woo = await WorkOrderOperationsService.startWOO(params.wooId, teamId, user.id)
 
     if (!woo) {
-      return NextResponse.json({ error: 'Work order operation not found or cannot be resumed' }, { status: 404 })
+      return NextResponse.json({ error: 'Work order operation not found or cannot be started' }, { status: 404 })
     }
 
     return NextResponse.json(woo)
   } catch (error) {
-    console.error('Error resuming work order operation:', error)
+    console.error('Error starting work order operation:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

@@ -18,6 +18,7 @@ export interface CreateRoutingOperationInput {
   instructions?: string
   departmentId?: string
   requiredSkills?: any
+  fileAttachments?: any
 }
 
 export interface UpdateRoutingInput {

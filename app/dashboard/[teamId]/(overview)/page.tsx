@@ -23,201 +23,13 @@ async function fetchDashboardData(teamId: string): Promise<DashboardData> {
       throw new Error("No authenticated user or team");
     }
 
-    // Import the services we need
-    const { UsersService } = await import("@/lib/services/users");
-    const { prisma } = await import("@/lib/prisma");
+    // Import the analytics service
+    const { AnalyticsService } = await import("@/lib/services/analytics");
 
-    // Get user's accessible departments
-    const userAccessibleDepartments =
-      await UsersService.getUserAccessibleDepartments(user.id, teamId);
+    // Get dashboard metrics using the service
+    const metrics = await AnalyticsService.getDashboardMetrics(user.id, teamId);
 
-    // Build department filter
-    let departmentFilter: any = {};
-    if (
-      userAccessibleDepartments !== "all" &&
-      Array.isArray(userAccessibleDepartments)
-    ) {
-      if ((userAccessibleDepartments as string[]).length === 0) {
-        // User has no department access, return empty metrics
-        return {
-          ordersPending: 0,
-          ordersInProgress: 0,
-          ordersPaused: 0,
-          ordersWaiting: 0,
-          ordersCompletedToday: 0,
-          operationsInProgress: 0,
-          operationsPaused: 0,
-          completedOperationsToday: 0,
-          averageCycleTime: 0,
-          onTimeDeliveryRate: 0,
-          operatorUtilization: 0,
-          totalOperators: 0,
-          activeOperators: 0,
-        };
-      }
-
-      departmentFilter = {
-        routingOperation: {
-          departmentId: { in: userAccessibleDepartments },
-        },
-      };
-    }
-
-    // Calculate date range for today
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-
-    // Get orders by status
-    const ordersPending = await prisma.mESOrder.count({
-      where: {
-        teamId,
-        status: "pending",
-        // Filter by user's accessible departments
-        ...(userAccessibleDepartments !== "all" &&
-          Array.isArray(userAccessibleDepartments) && {
-            workOrderOperations: {
-              some: {
-                routingOperation: {
-                  departmentId: { in: userAccessibleDepartments },
-                },
-              },
-            },
-          }),
-      },
-    });
-
-    const ordersInProgress = await prisma.mESOrder.count({
-      where: {
-        teamId,
-        status: "in_progress",
-        // Filter by user's accessible departments
-        ...(userAccessibleDepartments !== "all" &&
-          Array.isArray(userAccessibleDepartments) && {
-            workOrderOperations: {
-              some: {
-                routingOperation: {
-                  departmentId: { in: userAccessibleDepartments },
-                },
-              },
-            },
-          }),
-      },
-    });
-
-    const ordersPaused = await prisma.mESOrder.count({
-      where: {
-        teamId,
-        status: "paused",
-        // Filter by user's accessible departments
-        ...(userAccessibleDepartments !== "all" &&
-          Array.isArray(userAccessibleDepartments) && {
-            workOrderOperations: {
-              some: {
-                routingOperation: {
-                  departmentId: { in: userAccessibleDepartments },
-                },
-              },
-            },
-          }),
-      },
-    });
-
-    const ordersWaiting = await prisma.mESOrder.count({
-      where: {
-        teamId,
-        status: "waiting",
-        // Filter by user's accessible departments
-        ...(userAccessibleDepartments !== "all" &&
-          Array.isArray(userAccessibleDepartments) && {
-            workOrderOperations: {
-              some: {
-                routingOperation: {
-                  departmentId: { in: userAccessibleDepartments },
-                },
-              },
-            },
-          }),
-      },
-    });
-
-    // Get completed orders today
-    const ordersCompletedToday = await prisma.mESOrder.count({
-      where: {
-        teamId,
-        status: "completed",
-        actualEndDate: {
-          gte: today,
-          lt: tomorrow,
-        },
-        // Filter by user's accessible departments
-        ...(userAccessibleDepartments !== "all" &&
-          Array.isArray(userAccessibleDepartments) && {
-            workOrderOperations: {
-              some: {
-                routingOperation: {
-                  departmentId: { in: userAccessibleDepartments },
-                },
-              },
-            },
-          }),
-      },
-    });
-
-    // Get operations in progress
-    const operationsInProgress = await prisma.mESWorkOrderOperation.count({
-      where: {
-        order: { teamId },
-        status: "in_progress",
-        ...departmentFilter,
-      },
-    });
-
-    // Get paused operations
-    const operationsPaused = await prisma.mESWorkOrderOperation.count({
-      where: {
-        order: { teamId },
-        status: "paused",
-        ...departmentFilter,
-      },
-    });
-
-    // Get completed operations today
-    const completedOperationsToday = await prisma.mESWorkOrderOperation.count({
-      where: {
-        order: { teamId },
-        status: "completed",
-        actualEndTime: {
-          gte: today,
-          lt: tomorrow,
-        },
-        ...departmentFilter,
-      },
-    });
-
-    // Calculate average cycle time (placeholder for now)
-    const averageCycleTime = 0;
-    const onTimeDeliveryRate = 0;
-    const operatorUtilization = 0;
-    const totalOperators = 0;
-    const activeOperators = 0;
-
-    return {
-      ordersPending,
-      ordersInProgress,
-      ordersPaused,
-      ordersWaiting,
-      ordersCompletedToday,
-      operationsInProgress,
-      operationsPaused,
-      completedOperationsToday,
-      averageCycleTime,
-      onTimeDeliveryRate,
-      operatorUtilization,
-      totalOperators,
-      activeOperators,
-    };
+    return metrics;
   } catch (error) {
     console.error("Error fetching dashboard data:", error);
     // Return fallback data on error
@@ -246,110 +58,11 @@ async function fetchRecentActivity(teamId: string): Promise<ActivityData[]> {
       return [];
     }
 
-    // Import the services we need
-    const { UsersService } = await import("@/lib/services/users");
-    const { prisma } = await import("@/lib/prisma");
+    // Import the analytics service
+    const { AnalyticsService } = await import("@/lib/services/analytics");
 
-    // Get user's accessible departments
-    const userAccessibleDepartments =
-      await UsersService.getUserAccessibleDepartments(user.id, teamId);
-
-    // Build department filter
-    let departmentFilter: any = {};
-    if (
-      userAccessibleDepartments !== "all" &&
-      Array.isArray(userAccessibleDepartments)
-    ) {
-      if ((userAccessibleDepartments as string[]).length === 0) {
-        return [];
-      }
-
-      departmentFilter = {
-        routingOperation: {
-          departmentId: { in: userAccessibleDepartments },
-        },
-      };
-    }
-
-    // Get recent work order operations activity, prioritizing completions
-    const recentActivity = await prisma.mESWorkOrderOperation.findMany({
-      where: {
-        order: { teamId },
-        ...departmentFilter,
-      },
-      include: {
-        order: {
-          select: {
-            orderNumber: true,
-            routing: {
-              select: {
-                name: true,
-              },
-            },
-          },
-        },
-        routingOperation: {
-          select: {
-            operationName: true,
-            operationNumber: true,
-            department: {
-              select: {
-                name: true,
-              },
-            },
-          },
-        },
-      },
-      orderBy: [
-        // Prioritize completed operations first, then by most recent activity
-        { status: "desc" }, // completed comes before in_progress alphabetically
-        { actualEndTime: "desc" },
-        { updatedAt: "desc" },
-      ],
-      take: 10,
-    });
-
-    // Transform the data for the dashboard
-    const activities = recentActivity.map((woo) => {
-      let status = "pending";
-      let statusColor = "secondary";
-      let activity = "Pending";
-      let timestamp = woo.createdAt;
-
-      if (woo.status === "in_progress") {
-        status = "in_progress";
-        statusColor = "default";
-        activity = "Started";
-        timestamp = woo.actualStartTime || woo.updatedAt;
-      } else if (woo.status === "completed") {
-        status = "completed";
-        statusColor = "outline";
-        activity = "Completed";
-        timestamp = woo.actualEndTime || woo.updatedAt;
-      } else if (woo.status === "paused") {
-        status = "paused";
-        statusColor = "destructive";
-        activity = "Paused";
-        timestamp = woo.updatedAt;
-      }
-
-      return {
-        id: woo.id,
-        orderNumber: woo.order.orderNumber,
-        routingName: woo.order.routing.name,
-        operationName: woo.routingOperation.operationName,
-        operationNumber: woo.routingOperation.operationNumber,
-        department: woo.routingOperation.department?.name || "Unassigned",
-        operatorName: woo.operatorId
-          ? `Operator ${woo.operatorId.slice(0, 8)}`
-          : "Unassigned",
-        status,
-        statusColor,
-        activity,
-        timestamp: timestamp.toISOString(),
-        quantityCompleted: woo.quantityCompleted || 0,
-      };
-    });
+    // Get recent activity using the service
+    const activities = await AnalyticsService.getRecentActivity(user.id, teamId, 10);
 
     return activities;
   } catch (error) {
@@ -425,7 +138,7 @@ function ProductionMetrics({ data }: { data: any }) {
       <MetricsCard
         title="Live Orders"
         value={totalActiveOrders}
-        change={{ value: "Total active" }}
+        change={{ value: "Total active", trend: "neutral" }}
         icon="activity"
         variant="default"
       />
@@ -433,7 +146,7 @@ function ProductionMetrics({ data }: { data: any }) {
       <MetricsCard
         title="Ops in progress"
         value={data.operationsInProgress}
-        change={{ value: "Currently active"}}
+        change={{ value: "Currently active", trend: "neutral" }}
         icon="factory"
         variant="success"
       />
@@ -441,7 +154,7 @@ function ProductionMetrics({ data }: { data: any }) {
       <MetricsCard
         title="Ops paused"
         value={data.operationsPaused}
-        change={{ value: "Currently paused" }}
+        change={{ value: "Currently paused", trend: "neutral" }}
         icon="alert-triangle"
         variant="warning"
       />
@@ -449,7 +162,7 @@ function ProductionMetrics({ data }: { data: any }) {
       <MetricsCard
         title="Orders completed (today)"
         value={data.ordersCompletedToday}
-        change={{ value: "Orders finished" }}
+        change={{ value: "Orders finished", trend: "neutral" }}
         icon="check-circle"
         variant="success"
       />
@@ -457,7 +170,7 @@ function ProductionMetrics({ data }: { data: any }) {
       <MetricsCard
         title="Avg cycle time"
         value={data.averageCycleTime > 0 ? `${data.averageCycleTime}m` : "N/A"}
-        change={{ value: "Per order" }}
+        change={{ value: "Per order", trend: "neutral" }}
         icon="clock"
         variant="default"
       />

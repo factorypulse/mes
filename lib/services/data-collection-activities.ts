@@ -87,6 +87,11 @@ export class DataCollectionActivitiesService {
     return []
   }
 
+  static async getActivitiesByRoutingOperation(routingOperationId: string) {
+    // TODO: Implement once Prisma models are available
+    return []
+  }
+
   // Data collection operations
   static async collectData(input: CollectDataInput) {
     // TODO: Implement once Prisma models are available

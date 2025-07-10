@@ -10,7 +10,7 @@ export default async function DashboardLayout({
   params: Promise<{ teamId: string }>;
 }) {
   const { teamId } = await params;
-  
+
   return (
     <div className="min-h-screen bg-background">
       {/* Background gradient overlay */}
@@ -19,7 +19,7 @@ export default async function DashboardLayout({
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       </div>
 
-   
+
 
       <div className="flex h-screen">
         {/* Enhanced Sidebar */}
@@ -30,7 +30,7 @@ export default async function DashboardLayout({
         {/* Main content area */}
         <main className="flex-1 overflow-auto">
           {/* Page content */}
-          <div className="flex-1 p-4">
+          <div className="flex-1 p-8">
             <Suspense
               fallback={
                 <div className="flex items-center justify-center h-96">

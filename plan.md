@@ -90,8 +90,8 @@
 **Target Completion**: Day 8-9
 
 #### Tasks:
-- [ ] Analyse what API endpoints are needed for the user facing app
-- [ ] Build API endpoints for all core modules
+- [ ] Analyse what external API endpoints are needed for users to build integrations with other systems
+- [ ] Build API endpoints for all core modules 
 - [ ] Implement API authentication and authorization
 - [ ] Implement API documentation (OpenAPI/Swagger) user facing
 

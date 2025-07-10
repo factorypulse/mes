@@ -4,7 +4,7 @@ import { stackServerApp } from '@/stack'
 
 export async function GET(
   request: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  context: { params: Promise<{ wooId: string }> }
 ) {
   try {
     const user = await stackServerApp.getUser()
@@ -18,7 +18,7 @@ export async function GET(
     }
 
     const params = await context.params
-    const woo = await WorkOrderOperationsService.getWOOById(params.id, teamId)
+    const woo = await WorkOrderOperationsService.getWOOById(params.wooId, teamId)
 
     if (!woo) {
       return NextResponse.json({ error: 'Work order operation not found' }, { status: 404 })
@@ -33,7 +33,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  context: { params: Promise<{ wooId: string }> }
 ) {
   try {
     const user = await stackServerApp.getUser()
@@ -58,7 +58,7 @@ export async function PUT(
       actualEndTime: body.actualEndTime ? new Date(body.actualEndTime) : undefined,
     }
 
-    const woo = await WorkOrderOperationsService.updateWOO(params.id, teamId, updateData)
+    const woo = await WorkOrderOperationsService.updateWOO(params.wooId, teamId, updateData)
 
     if (!woo) {
       return NextResponse.json({ error: 'Work order operation not found' }, { status: 404 })

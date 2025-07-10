@@ -4,7 +4,7 @@ import { stackServerApp } from '@/stack'
 
 export async function POST(
   request: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  context: { params: Promise<{ wooId: string }> }
 ) {
   try {
     const user = await stackServerApp.getUser()
@@ -20,7 +20,7 @@ export async function POST(
     const params = await context.params
 
     // Handle potential empty or missing request body
-    let body = {}
+    let body: any = {}
     try {
       const requestText = await request.text()
       if (requestText.trim()) {
@@ -39,7 +39,7 @@ export async function POST(
     } = body
 
     const woo = await WorkOrderOperationsService.completeWOO(
-      params.id,
+      params.wooId,
       teamId,
       capturedData,
       quantityCompleted,

@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { DepartmentsTab } from "./components/departments/departments-tab";
 import { UsersTab } from "./components/users/users-tab";
+import { DataCollectionTab } from "./components/data-collection/data-collection-tab";
 
 interface ConfigurationPageProps {
   params: Promise<{
@@ -106,19 +107,7 @@ export default function ConfigurationPage({ params }: ConfigurationPageProps) {
             </TabsContent>
 
             <TabsContent value="data-collection" className="space-y-4">
-              <div className="rounded-lg border border-dashed p-8 text-center">
-                <FileText className="mx-auto h-12 w-12 text-muted-foreground" />
-                <h3 className="mt-4 text-lg font-semibold">
-                  Data Collection Activities
-                </h3>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Manage reusable data collection templates for operations.
-                </p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Coming soon - Will include the new data collection activity
-                  model
-                </p>
-              </div>
+              <DataCollectionTab teamId={teamId} />
             </TabsContent>
 
             <TabsContent value="users" className="space-y-4">
