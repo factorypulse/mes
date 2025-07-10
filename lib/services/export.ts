@@ -93,7 +93,8 @@ export class ExportService {
       },
       orderBy: {
         createdAt: 'desc'
-      }
+      },
+      cacheStrategy: { swr: 180, ttl: 180 } // 3-minute cache for export data
     })
 
     const headers = [
@@ -222,7 +223,8 @@ export class ExportService {
       },
       orderBy: {
         actualEndTime: 'desc'
-      }
+      },
+      cacheStrategy: { swr: 300, ttl: 300 } // 5-minute cache for performance export data
     })
 
     const headers = [
@@ -355,7 +357,8 @@ export class ExportService {
       orderBy: [
         { order: { priority: 'desc' } },
         { routingOperation: { operationNumber: 'asc' } }
-      ]
+      ],
+      cacheStrategy: { swr: 60, ttl: 60 } // 1-minute cache for WIP export data
     })
 
     const headers = [

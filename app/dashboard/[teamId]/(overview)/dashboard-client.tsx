@@ -211,8 +211,8 @@ export function QuickStats({ dashboardData }: { dashboardData: any }) {
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Pending</span>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-gray-500"></div>
-              <span className="font-semibold text-gray-500">
+              <div className="w-2 h-2 rounded-full bg-gray-500 dark:bg-gray-400"></div>
+              <span className="font-semibold text-gray-500 dark:text-gray-400">
                 {dashboardData.ordersPending}
               </span>
             </div>
@@ -221,8 +221,8 @@ export function QuickStats({ dashboardData }: { dashboardData: any }) {
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">In Progress</span>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="font-semibold text-green-500">
+              <div className="w-2 h-2 rounded-full bg-green-500 dark:bg-green-400 animate-pulse"></div>
+              <span className="font-semibold text-green-500 dark:text-green-400">
                 {dashboardData.ordersInProgress}
               </span>
             </div>
@@ -231,8 +231,8 @@ export function QuickStats({ dashboardData }: { dashboardData: any }) {
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Paused</span>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-              <span className="font-semibold text-orange-500">
+              <div className="w-2 h-2 rounded-full bg-orange-500 dark:bg-orange-400"></div>
+              <span className="font-semibold text-orange-500 dark:text-orange-400">
                 {dashboardData.ordersPaused}
               </span>
             </div>
@@ -241,8 +241,8 @@ export function QuickStats({ dashboardData }: { dashboardData: any }) {
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Waiting</span>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-              <span className="font-semibold text-blue-500">
+              <div className="w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400"></div>
+              <span className="font-semibold text-blue-500 dark:text-blue-400">
                 {dashboardData.ordersWaiting}
               </span>
             </div>
@@ -268,8 +268,8 @@ export function QuickStats({ dashboardData }: { dashboardData: any }) {
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Running</span>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="font-semibold text-green-500">
+              <div className="w-2 h-2 rounded-full bg-green-500 dark:bg-green-400 animate-pulse"></div>
+              <span className="font-semibold text-green-500 dark:text-green-400">
                 {dashboardData.operationsInProgress}
               </span>
             </div>
@@ -278,8 +278,8 @@ export function QuickStats({ dashboardData }: { dashboardData: any }) {
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Paused</span>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-              <span className="font-semibold text-orange-500">
+              <div className="w-2 h-2 rounded-full bg-orange-500 dark:bg-orange-400"></div>
+              <span className="font-semibold text-orange-500 dark:text-orange-400">
                 {dashboardData.operationsPaused}
               </span>
             </div>
@@ -290,8 +290,8 @@ export function QuickStats({ dashboardData }: { dashboardData: any }) {
               Completed Today
             </span>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-              <span className="font-semibold text-blue-500">
+              <div className="w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400"></div>
+              <span className="font-semibold text-blue-500 dark:text-blue-400">
                 {dashboardData.completedOperationsToday}
               </span>
             </div>

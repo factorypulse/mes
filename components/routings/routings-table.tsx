@@ -85,7 +85,7 @@ export function RoutingsTable() {
             <TableHead>Version</TableHead>
             <TableHead>Operations</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Created</TableHead>
+            <TableHead>Edit</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -122,16 +122,8 @@ export function RoutingsTable() {
                         <Settings className="h-4 w-4" />
                       </Button>
                     </Link>
-                    <Button variant="ghost" size="sm">
-                      <Edit className="h-4 w-4" />
-                    </Button>
-                    <Button 
-                      variant="ghost" 
-                      size="sm"
-                      onClick={() => handleDelete(routing.id)}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
+
+
                   </div>
                 </TableCell>
               </TableRow>

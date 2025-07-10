@@ -16,19 +16,19 @@ const badgeVariants = cva(
           "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
         outline: "text-foreground",
         active:
-          "border-transparent bg-green-500 text-white shadow hover:bg-green-600",
+          "border-transparent bg-green-500 dark:bg-green-600 text-white shadow hover:bg-green-600 dark:hover:bg-green-700",
         pending:
-          "border-transparent bg-blue-500 text-white shadow hover:bg-blue-600",
+          "border-transparent bg-blue-500 dark:bg-blue-600 text-white shadow hover:bg-blue-600 dark:hover:bg-blue-700",
         paused:
-          "border-transparent bg-yellow-500 text-black shadow hover:bg-yellow-600",
+          "border-transparent bg-yellow-500 dark:bg-yellow-600 text-black dark:text-white shadow hover:bg-yellow-600 dark:hover:bg-yellow-700",
         completed:
-          "border-transparent bg-gray-500 text-white shadow hover:bg-gray-600",
+          "border-transparent bg-gray-500 dark:bg-gray-600 text-white shadow hover:bg-gray-600 dark:hover:bg-gray-700",
         error:
-          "border-transparent bg-red-500 text-white shadow hover:bg-red-600",
+          "border-transparent bg-red-500 dark:bg-red-600 text-white shadow hover:bg-red-600 dark:hover:bg-red-700",
         warning:
-          "border-transparent bg-orange-500 text-white shadow hover:bg-orange-600",
+          "border-transparent bg-orange-500 dark:bg-orange-600 text-white shadow hover:bg-orange-600 dark:hover:bg-orange-700",
         waiting:
-          "border-transparent bg-slate-500 text-white shadow hover:bg-slate-600",
+          "border-transparent bg-slate-500 dark:bg-slate-600 text-white shadow hover:bg-slate-600 dark:hover:bg-slate-700",
       },
     },
     defaultVariants: {

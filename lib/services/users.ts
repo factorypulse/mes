@@ -47,7 +47,8 @@ export class UsersService {
             select: {
               id: true,
               name: true
-            }
+            },
+            cacheStrategy: { swr: 120, ttl: 120 } // 2-minute cache for department details
           })
         }
 
@@ -97,7 +98,8 @@ export class UsersService {
             select: {
               id: true,
               name: true
-            }
+            },
+            cacheStrategy: { swr: 120, ttl: 120 } // 2-minute cache for department details
           })
         }
       }
@@ -140,7 +142,8 @@ export class UsersService {
           select: {
             id: true,
             name: true
-          }
+          },
+          cacheStrategy: { swr: 120, ttl: 120 } // 2-minute cache for department details
         })
       }
 

@@ -18,7 +18,8 @@ export class DepartmentsService {
             }
           }
         },
-        orderBy: { name: 'asc' }
+        orderBy: { name: 'asc' },
+        cacheStrategy: { swr: 300, ttl: 300 } // 5-minute cache for department listings (static data)
       })
 
       return departments
@@ -38,7 +39,8 @@ export class DepartmentsService {
               routingOperations: true
             }
           }
-        }
+        },
+        cacheStrategy: { swr: 300, ttl: 300 } // 5-minute cache for individual department lookups
       })
 
       return department
@@ -95,7 +97,8 @@ export class DepartmentsService {
     try {
       // Check if department has any routing operations
       const operationsCount = await prisma.mESRoutingOperation.count({
-        where: { departmentId: id }
+        where: { departmentId: id },
+        cacheStrategy: { swr: 60, ttl: 60 } // 1-minute cache for count checks
       })
 
       if (operationsCount > 0) {

@@ -105,7 +105,8 @@ export class OrdersService {
             }
           }
         }
-      }
+      },
+      cacheStrategy: { swr: 30, ttl: 30 } // 30-second cache for order lookups
     })
   }
 
@@ -141,7 +142,8 @@ export class OrdersService {
       },
       orderBy: {
         createdAt: 'desc'
-      }
+      },
+      cacheStrategy: { swr: 15, ttl: 15 } // 15-second cache for team order listings
     })
   }
 
@@ -380,10 +382,12 @@ export class OrdersService {
         },
         orderBy,
         skip: filters.offset,
-        take: filters.limit
+        take: filters.limit,
+        cacheStrategy: { swr: 60, ttl: 60 } // 1-minute cache for filtered queries (often used by external APIs)
       }),
       prisma.mESOrder.count({
-        where: whereClause
+        where: whereClause,
+        cacheStrategy: { swr: 60, ttl: 60 } // 1-minute cache for count queries
       })
     ])
 

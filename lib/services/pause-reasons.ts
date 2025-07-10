@@ -29,7 +29,8 @@ export class PauseReasonsService {
       where: {
         id,
         teamId
-      }
+      },
+      cacheStrategy: { swr: 180, ttl: 180 } // 3-minute cache for pause reason lookups
     })
   }
 
@@ -43,7 +44,8 @@ export class PauseReasonsService {
       orderBy: [
         { category: 'asc' },
         { name: 'asc' }
-      ]
+      ],
+      cacheStrategy: { swr: 240, ttl: 240 } // 4-minute cache for pause reason listings
     })
   }
 
@@ -57,14 +59,16 @@ export class PauseReasonsService {
       },
       orderBy: {
         name: 'asc'
-      }
+      },
+      cacheStrategy: { swr: 240, ttl: 240 } // 4-minute cache for categorized pause reasons
     })
   }
 
   // Update pause reason
   static async updatePauseReason(id: string, teamId: string, input: UpdatePauseReasonInput): Promise<MESPauseReason | null> {
     const pauseReason = await prisma.mESPauseReason.findFirst({
-      where: { id, teamId }
+      where: { id, teamId },
+      cacheStrategy: { swr: 180, ttl: 180 } // 3-minute cache for pause reason lookup
     })
 
     if (!pauseReason) {
@@ -83,7 +87,8 @@ export class PauseReasonsService {
   // Delete pause reason (soft delete by setting isActive to false)
   static async deletePauseReason(id: string, teamId: string): Promise<boolean> {
     const pauseReason = await prisma.mESPauseReason.findFirst({
-      where: { id, teamId }
+      where: { id, teamId },
+      cacheStrategy: { swr: 180, ttl: 180 } // 3-minute cache for pause reason lookup
     })
 
     if (!pauseReason) {
@@ -96,7 +101,8 @@ export class PauseReasonsService {
         pauseReasonId: id,
         teamId
       },
-      take: 1
+      take: 1,
+      cacheStrategy: { swr: 60, ttl: 60 } // 1-minute cache for usage checks
     })
 
     if (pauseEvents.length > 0) {
@@ -139,7 +145,8 @@ export class PauseReasonsService {
       where: whereClause,
       include: {
         pauseReason: true
-      }
+      },
+      cacheStrategy: { swr: 60, ttl: 60 } // 1-minute cache for usage statistics
     })
 
     // Group by pause reason and calculate statistics
@@ -221,7 +228,8 @@ export class PauseReasonsService {
       select: {
         category: true,
         isActive: true
-      }
+      },
+      cacheStrategy: { swr: 240, ttl: 240 } // 4-minute cache for category counts
     })
 
     const categories = new Map<string, { count: number, activeCount: number }>()

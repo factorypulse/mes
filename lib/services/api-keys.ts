@@ -106,6 +106,7 @@ export class APIKeysService {
       // Look up the key in the database
       const dbKey = await prisma.mESAPIKey.findUnique({
         where: { keyHash },
+        cacheStrategy: { swr: 300, ttl: 300 } // 5-minute cache for API key lookups (authentication)
       })
 
       if (!dbKey) {
@@ -165,6 +166,7 @@ export class APIKeysService {
     const apiKeys = await prisma.mESAPIKey.findMany({
       where: { teamId },
       orderBy: { createdAt: 'desc' },
+      cacheStrategy: { swr: 180, ttl: 180 } // 3-minute cache for API key listings
     })
 
     return apiKeys.map(key => ({
@@ -182,6 +184,7 @@ export class APIKeysService {
   static async getAPIKeyById(id: string, teamId: string): Promise<APIKey | null> {
     const apiKey = await prisma.mESAPIKey.findFirst({
       where: { id, teamId },
+      cacheStrategy: { swr: 180, ttl: 180 } // 3-minute cache for individual API key lookups
     })
 
     if (!apiKey) {
@@ -385,6 +388,7 @@ export class APIKeysService {
           lte: toDate,
         },
       },
+      cacheStrategy: { swr: 300, ttl: 300 } // 5-minute cache for usage statistics
     })
 
     const totalRequests = usage.length

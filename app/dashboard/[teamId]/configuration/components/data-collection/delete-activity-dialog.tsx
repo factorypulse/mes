@@ -52,8 +52,8 @@ export function DeleteActivityDialog({ activity, teamId, onClose, onSuccess }: D
       <DialogContent className="max-w-md">
         <DialogHeader>
           <div className="flex items-center gap-3">
-            <div className="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-              <AlertTriangle className="h-5 w-5 text-red-600" />
+            <div className="flex-shrink-0 w-10 h-10 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center">
+              <AlertTriangle className="h-5 w-5 text-red-600 dark:text-red-400" />
             </div>
             <div>
               <DialogTitle>Delete Data Collection Activity</DialogTitle>
@@ -71,8 +71,8 @@ export function DeleteActivityDialog({ activity, teamId, onClose, onSuccess }: D
           </p>
           
           {activity.fields.length > 0 && (
-            <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-md">
-              <p className="text-sm text-amber-800">
+            <div className="mt-3 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-md">
+              <p className="text-sm text-amber-800 dark:text-amber-200">
                 This activity has <strong>{activity.fields.length}</strong> field{activity.fields.length !== 1 ? 's' : ''} 
                 that will also be deleted.
               </p>

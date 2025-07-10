@@ -32,7 +32,7 @@ export class RoutingsService {
   // Create a new routing
   static async createRouting(input: CreateRoutingInput): Promise<MESRouting> {
     const { operations, ...routingData } = input
-    
+
     const routing = await prisma.mESRouting.create({
       data: {
         ...routingData,
@@ -54,7 +54,7 @@ export class RoutingsService {
         }
       }
     })
-    
+
     return routing
   }
 
@@ -74,16 +74,17 @@ export class RoutingsService {
             operationNumber: 'asc'
           }
         }
-      }
+      },
+      cacheStrategy: { swr: 300, ttl: 300 } // 5-minute cache for routing lookups (static data)
     })
   }
 
   // Get all routings for a team
-  static async getRoutingsByTeam(teamId: string, activeOnly: boolean = true): Promise<MESRouting[]> {
+  static async getRoutingsByTeam(teamId: string, isActive?: boolean): Promise<MESRouting[]> {
     return await prisma.mESRouting.findMany({
       where: {
         teamId,
-        ...(activeOnly ? { isActive: true } : {})
+        ...(isActive !== undefined ? { isActive } : {})
       },
       include: {
         operations: {
@@ -97,7 +98,8 @@ export class RoutingsService {
       },
       orderBy: {
         createdAt: 'desc'
-      }
+      },
+      cacheStrategy: { swr: 120, ttl: 120 } // 2-minute cache for routing listings
     })
   }
 
@@ -106,7 +108,7 @@ export class RoutingsService {
     const routing = await prisma.mESRouting.findFirst({
       where: { id, teamId }
     })
-    
+
     if (!routing) {
       return null
     }
@@ -135,7 +137,7 @@ export class RoutingsService {
     const routing = await prisma.mESRouting.findFirst({
       where: { id, teamId }
     })
-    
+
     if (!routing) {
       return false
     }
@@ -147,7 +149,7 @@ export class RoutingsService {
         updatedAt: new Date()
       }
     })
-    
+
     return true
   }
 
@@ -156,7 +158,7 @@ export class RoutingsService {
     const routing = await prisma.mESRouting.findFirst({
       where: { id: routingId, teamId }
     })
-    
+
     if (!routing) {
       return null
     }
@@ -178,7 +180,7 @@ export class RoutingsService {
     const operation = await prisma.mESRoutingOperation.findFirst({
       where: { id: operationId, teamId }
     })
-    
+
     if (!operation) {
       return null
     }
@@ -200,7 +202,7 @@ export class RoutingsService {
     const operation = await prisma.mESRoutingOperation.findFirst({
       where: { id: operationId, teamId }
     })
-    
+
     if (!operation) {
       return false
     }
@@ -212,7 +214,7 @@ export class RoutingsService {
         updatedAt: new Date()
       }
     })
-    
+
     return true
   }
 
@@ -259,10 +261,12 @@ export class RoutingsService {
         },
         orderBy,
         skip: filters.offset,
-        take: filters.limit
+        take: filters.limit,
+        cacheStrategy: { swr: 180, ttl: 180 } // 3-minute cache for filtered routing queries
       }),
       prisma.mESRouting.count({
-        where: whereClause
+        where: whereClause,
+        cacheStrategy: { swr: 180, ttl: 180 } // 3-minute cache for routing count queries
       })
     ])
 

@@ -29,12 +29,12 @@ interface PauseReasonDialogProps {
 }
 
 const categoryColors: Record<string, string> = {
-  planned: "bg-blue-100 text-blue-800",
-  unplanned: "bg-red-100 text-red-800",
-  maintenance: "bg-purple-100 text-purple-800",
-  quality: "bg-orange-100 text-orange-800",
-  material: "bg-green-100 text-green-800",
-  other: "bg-gray-100 text-gray-800",
+  planned: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+  unplanned: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+  maintenance: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
+  quality: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
+  material: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+  other: "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200",
 };
 
 const categoryLabels: Record<string, string> = {
@@ -111,10 +111,10 @@ export function PauseReasonDialog({
 
         <div className="space-y-4">
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
               <div className="flex items-center gap-2">
-                <AlertCircle className="h-4 w-4 text-red-600" />
-                <p className="text-red-800">{error}</p>
+                <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
+                <p className="text-red-800 dark:text-red-200">{error}</p>
               </div>
             </div>
           )}
@@ -123,7 +123,7 @@ export function PauseReasonDialog({
             <div className="flex items-center justify-center py-8">
               <div className="text-center">
                 <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
-                <p className="text-gray-600">Loading pause reasons...</p>
+                <p className="text-gray-600 dark:text-gray-300">Loading pause reasons...</p>
               </div>
             </div>
           ) : (
@@ -138,7 +138,7 @@ export function PauseReasonDialog({
                     >
                       {categoryLabels[category] || category}
                     </Badge>
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
                       ({reasons.length} reason{reasons.length !== 1 ? "s" : ""})
                     </span>
                   </div>
@@ -149,8 +149,8 @@ export function PauseReasonDialog({
                         key={reason.id}
                         className={`cursor-pointer transition-all hover:shadow-md ${
                           selectedReasonId === reason.id
-                            ? "ring-2 ring-blue-500 bg-blue-50"
-                            : "hover:bg-gray-50"
+                            ? "ring-2 ring-blue-500 dark:ring-blue-400 bg-blue-50 dark:bg-blue-900/20"
+                            : "hover:bg-gray-50 dark:hover:bg-gray-800"
                         }`}
                         onClick={() => setSelectedReasonId(reason.id)}
                       >
@@ -159,14 +159,14 @@ export function PauseReasonDialog({
                             <div className="flex-1">
                               <h4 className="font-medium">{reason.name}</h4>
                               {reason.description && (
-                                <p className="text-sm text-gray-600 mt-1">
+                                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
                                   {reason.description}
                                 </p>
                               )}
                             </div>
                             {selectedReasonId === reason.id && (
-                              <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center ml-2 mt-0.5">
-                                <div className="w-2 h-2 bg-white rounded-full" />
+                              <div className="w-4 h-4 bg-blue-500 dark:bg-blue-400 rounded-full flex items-center justify-center ml-2 mt-0.5">
+                                <div className="w-2 h-2 bg-white dark:bg-gray-900 rounded-full" />
                               </div>
                             )}
                           </div>
@@ -179,8 +179,8 @@ export function PauseReasonDialog({
 
               {pauseReasons.length === 0 && !fetchLoading && (
                 <div className="text-center py-8">
-                  <p className="text-gray-600">No pause reasons available</p>
-                  <p className="text-sm text-gray-500 mt-1">
+                  <p className="text-gray-600 dark:text-gray-300">No pause reasons available</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                     Contact your administrator to set up pause reasons
                   </p>
                 </div>

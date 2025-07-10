@@ -84,17 +84,17 @@ export function OperatorDashboard({
   const getStatusColor = (status: string) => {
     switch (status) {
       case "pending":
-        return "bg-blue-100 text-blue-800";
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200";
       case "in_progress":
-        return "bg-green-100 text-green-800";
+        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
       case "paused":
-        return "bg-yellow-100 text-yellow-800";
+        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200";
       case "completed":
-        return "bg-gray-100 text-gray-800";
+        return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200";
       case "waiting":
-        return "bg-slate-100 text-slate-800";
+        return "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200";
     }
   };
 
@@ -109,8 +109,8 @@ export function OperatorDashboard({
     return (
       <div className="flex items-center justify-center p-8">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading work orders...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 dark:border-blue-400 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Loading work orders...</p>
         </div>
       </div>
     );
@@ -119,8 +119,8 @@ export function OperatorDashboard({
   return (
     <div className="space-y-6">
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-red-800">{error}</p>
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+          <p className="text-red-800 dark:text-red-200">{error}</p>
         </div>
       )}
 
@@ -156,7 +156,7 @@ export function OperatorDashboard({
                 <h4 className="font-medium">
                   {activeWoo.routingOperation.operationName}
                 </h4>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   Order: {activeWoo.order.orderNumber} • Op #
                   {activeWoo.routingOperation.operationNumber}
                 </p>
@@ -168,7 +168,7 @@ export function OperatorDashboard({
                 </p>
               )}
 
-              <div className="flex items-center gap-4 text-sm text-gray-600">
+              <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-300">
                 <div className="flex items-center gap-1">
                   <Clock className="h-4 w-4" />
                   Setup: {formatTime(activeWoo.routingOperation.setupTime)}
@@ -194,16 +194,16 @@ export function OperatorDashboard({
         {woos.length === 0 ? (
           <Card>
             <CardContent className="text-center py-12">
-              <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-8 w-8 text-gray-400" />
+              <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mx-auto mb-4">
+                <Shield className="h-8 w-8 text-gray-400 dark:text-gray-500" />
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
                 No Work Orders Available
               </h3>
-              <p className="text-gray-600 mb-1">
+              <p className="text-gray-600 dark:text-gray-300 mb-1">
                 No work orders are currently available for your departments
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 Work orders are filtered based on your department access.
                 Contact your supervisor if you need access to additional
                 departments.
@@ -230,7 +230,7 @@ export function OperatorDashboard({
                         </Badge>
                       </div>
 
-                      <p className="text-sm text-gray-600 mb-2">
+                      <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
                         Order: {woo.order.orderNumber} • Op #
                         {woo.routingOperation.operationNumber}
                         {woo.routingOperation.department && (
@@ -245,12 +245,12 @@ export function OperatorDashboard({
                       </p>
 
                       {woo.routingOperation.description && (
-                        <p className="text-sm text-gray-700 mb-2">
+                        <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
                           {woo.routingOperation.description}
                         </p>
                       )}
 
-                      <div className="flex items-center gap-4 text-sm text-gray-600">
+                      <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-300">
                         <div className="flex items-center gap-1">
                           <Clock className="h-4 w-4" />
                           Setup: {formatTime(woo.routingOperation.setupTime)}

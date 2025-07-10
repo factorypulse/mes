@@ -251,7 +251,7 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
           <div key={field.name}>
             <Label htmlFor={field.name}>
               {field.label}
-              {field.required && <span className="text-red-500 ml-1">*</span>}
+              {field.required && <span className="text-red-500 dark:text-red-400 ml-1">*</span>}
             </Label>
             <Input
               id={field.name}
@@ -269,7 +269,7 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
           <div key={field.name}>
             <Label htmlFor={field.name}>
               {field.label}
-              {field.required && <span className="text-red-500 ml-1">*</span>}
+              {field.required && <span className="text-red-500 dark:text-red-400 ml-1">*</span>}
             </Label>
             <Input
               id={field.name}
@@ -292,11 +292,11 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
               type="checkbox"
               checked={value === true}
               onChange={(e) => handleInputChange(field.name, e.target.checked)}
-              className="rounded border-gray-300"
+              className="rounded border-gray-300 dark:border-gray-600 dark:bg-gray-800"
             />
             <Label htmlFor={field.name}>
               {field.label}
-              {field.required && <span className="text-red-500 ml-1">*</span>}
+              {field.required && <span className="text-red-500 dark:text-red-400 ml-1">*</span>}
             </Label>
           </div>
         );
@@ -306,7 +306,7 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
           <div key={field.name}>
             <Label htmlFor={field.name}>
               {field.label}
-              {field.required && <span className="text-red-500 ml-1">*</span>}
+              {field.required && <span className="text-red-500 dark:text-red-400 ml-1">*</span>}
             </Label>
             <Textarea
               id={field.name}
@@ -326,21 +326,21 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
 
   const getTimerColor = () => {
     const targetSeconds = (woo.routingOperation.runTime || 0) * 60;
-    if (targetSeconds === 0) return "text-blue-600";
+    if (targetSeconds === 0) return "text-blue-600 dark:text-blue-400";
 
     const percentage = (elapsedTime / targetSeconds) * 100;
-    if (percentage > 120) return "text-red-600";
-    if (percentage > 100) return "text-orange-600";
-    return "text-green-600";
+    if (percentage > 120) return "text-red-600 dark:text-red-400";
+    if (percentage > 100) return "text-orange-600 dark:text-orange-400";
+    return "text-green-600 dark:text-green-400";
   };
 
   return (
     <div className="space-y-6">
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
           <div className="flex items-center gap-2">
-            <AlertCircle className="h-4 w-4 text-red-600" />
-            <p className="text-red-800">{error}</p>
+            <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
+            <p className="text-red-800 dark:text-red-200">{error}</p>
           </div>
         </div>
       )}
@@ -367,7 +367,7 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
               >
                 {formatDuration(elapsedTime)}
               </div>
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-600 dark:text-gray-300">
                 Target:{" "}
                 {formatDuration((woo.routingOperation.runTime || 0) * 60)}
               </div>
@@ -381,7 +381,7 @@ export function ActiveWOO({ woo, onUpdate, onComplete }: ActiveWOOProps) {
             >
               {woo.status.replace("_", " ")}
             </Badge>
-            <div className="flex items-center gap-1 text-sm text-gray-600">
+            <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-300">
               <Clock className="h-4 w-4" />
               Setup:{" "}
               {formatDuration((woo.routingOperation.setupTime || 0) * 60)}

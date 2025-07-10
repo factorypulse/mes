@@ -75,7 +75,8 @@ export class WorkOrderOperationsService {
             startTime: 'desc'
           }
         }
-      }
+      },
+      cacheStrategy: { swr: 30, ttl: 30 } // 30-second cache for WOO lookups
     })
   }
 
@@ -125,7 +126,8 @@ export class WorkOrderOperationsService {
       orderBy: [
         { order: { scheduledStartDate: 'asc' } },
         { routingOperation: { operationNumber: 'asc' } }
-      ]
+      ],
+      cacheStrategy: { swr: 15, ttl: 15 } // 15-second cache for team WOO listings
     })
   }
 
@@ -177,7 +179,8 @@ export class WorkOrderOperationsService {
         { order: { priority: 'desc' } },
         { order: { scheduledStartDate: 'asc' } },
         { routingOperation: { operationNumber: 'asc' } }
-      ]
+      ],
+      cacheStrategy: { swr: 10, ttl: 10 } // 10-second cache for operator dashboard (needs to be responsive)
     })
   }
 
@@ -238,7 +241,8 @@ export class WorkOrderOperationsService {
         { order: { priority: 'desc' } },
         { order: { scheduledStartDate: 'asc' } },
         { routingOperation: { operationNumber: 'asc' } }
-      ]
+      ],
+      cacheStrategy: { swr: 20, ttl: 20 } // 20-second cache for department-filtered WOOs
     })
   }
 
@@ -658,7 +662,8 @@ export class WorkOrderOperationsService {
             startTime: 'desc'
           }
         }
-      }
+      },
+      cacheStrategy: { swr: 5, ttl: 5 } // 5-second cache for active operator WOO (very responsive)
     })
   }
 
@@ -842,10 +847,12 @@ export class WorkOrderOperationsService {
         },
         orderBy,
         skip: filters.offset,
-        take: filters.limit
+        take: filters.limit,
+        cacheStrategy: { swr: 60, ttl: 60 } // 1-minute cache for filtered WOO queries
       }),
       prisma.mESWorkOrderOperation.count({
-        where: whereClause
+        where: whereClause,
+        cacheStrategy: { swr: 60, ttl: 60 } // 1-minute cache for WOO count queries
       })
     ])
 
