@@ -460,7 +460,7 @@ export class AnalyticsService {
     })
 
     // Transform the data
-    return recentActivity.map(woo => {
+    return recentActivity.map((woo: any) => {
       let status = 'pending'
       let statusColor = 'secondary'
       let activity = 'Pending'
@@ -612,13 +612,13 @@ export class AnalyticsService {
     })
 
     // Calculate cycle times
-    const cycleTimeData = completedOperations.map(op => {
+    const cycleTimeData: any[] = completedOperations.map((op: any) => {
       if (!op.actualStartTime || !op.actualEndTime) return null
 
       const totalTime = op.actualEndTime.getTime() - op.actualStartTime.getTime()
 
       // Subtract pause time
-      const pauseTime = op.pauseEvents.reduce((total, pause) => {
+      const pauseTime = op.pauseEvents.reduce((total: number, pause: any) => {
         if (pause.startTime && pause.endTime) {
           return total + (pause.endTime.getTime() - pause.startTime.getTime())
         }
@@ -645,8 +645,8 @@ export class AnalyticsService {
       : 0
 
     // Calculate cycle time by department
-    const cycleTimeByDepartment = cycleTimeData.reduce((acc, op) => {
-      const dept = acc.find(d => d.departmentId === op.departmentId)
+    const cycleTimeByDepartment = cycleTimeData.reduce((acc: any[], op: any) => {
+      const dept = acc.find((d: any) => d.departmentId === op.departmentId)
       if (dept) {
         dept.totalCycleTime += op.cycleTime
         dept.count++
@@ -699,8 +699,8 @@ export class AnalyticsService {
       : 0
 
     // Calculate efficiency by department
-    const efficiencyByDepartment = efficiencyData.reduce((acc, op) => {
-      const dept = acc.find(d => d.departmentId === op.departmentId)
+    const efficiencyByDepartment = efficiencyData.reduce((acc: any[], op: any) => {
+      const dept = acc.find((d: any) => d.departmentId === op.departmentId)
       if (dept) {
         dept.totalEfficiency += op.efficiency
         dept.count++
@@ -906,8 +906,8 @@ export class AnalyticsService {
     })
 
     // Calculate WIP by status from groupBy result
-    const wipByStatusMap = wipByStatus.reduce((acc, item) => {
-      acc[item.status as keyof typeof acc] = item._count.id || 0
+    const wipByStatusMap = wipByStatus.reduce((acc: any, item: any) => {
+      acc[item.status] = item._count.id || 0
       return acc
     }, {
       pending: 0,
@@ -948,7 +948,7 @@ export class AnalyticsService {
     // Get routing operation details for bottleneck analysis
     const routingOperations = await prisma.mESRoutingOperation.findMany({
       where: {
-        id: { in: wipByDept.map(w => w.routingOperationId) }
+        id: { in: wipByDept.map((w: any) => w.routingOperationId) }
       },
       include: {
         department: {
@@ -961,8 +961,8 @@ export class AnalyticsService {
       cacheStrategy: { swr: 300, ttl: 300 } // 5-minute cache for routing operations (static)
     })
 
-    const bottlenecks = wipByDept.slice(0, 5).map(item => {
-      const routingOp = routingOperations.find(ro => ro.id === item.routingOperationId)
+    const bottlenecks = wipByDept.slice(0, 5).map((item: any) => {
+      const routingOp = routingOperations.find((ro: any) => ro.id === item.routingOperationId)
       const wipCount = item._count.id || 0
       return {
         departmentId: routingOp?.department?.id || '',
@@ -974,7 +974,7 @@ export class AnalyticsService {
     })
 
     // Transform operations board data
-    const boardData = operationsBoard.map(op => ({
+    const boardData = operationsBoard.map((op: any) => ({
       id: op.id,
       orderNumber: op.order.orderNumber,
       routingName: op.order.routing.name,

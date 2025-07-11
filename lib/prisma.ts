@@ -2,7 +2,7 @@ import { PrismaClient } from '@/generated/prisma'
 import { withAccelerate } from '@prisma/extension-accelerate'
 
 declare global {
-  var prisma: PrismaClient | undefined
+  var prisma: ReturnType<typeof createPrismaClient> | undefined
 }
 
 // Create the base Prisma client

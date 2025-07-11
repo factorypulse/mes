@@ -377,7 +377,7 @@ export class ExportService {
       'Updated Date'
     ]
 
-    const rows = wipOperations.map(woo => [
+    const rows = wipOperations.map((woo: any) => [
       woo.order.orderNumber,
       (woo.order as any).productIdentifier || '',
       woo.order.priority,

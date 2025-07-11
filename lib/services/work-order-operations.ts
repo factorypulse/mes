@@ -128,7 +128,7 @@ export class WorkOrderOperationsService {
         { routingOperation: { operationNumber: 'asc' } }
       ],
       cacheStrategy: { swr: 15, ttl: 15 } // 15-second cache for team WOO listings
-    })
+    }) as any
   }
 
   // Get WOOs for operator dashboard (pending and paused)
@@ -181,7 +181,7 @@ export class WorkOrderOperationsService {
         { routingOperation: { operationNumber: 'asc' } }
       ],
       cacheStrategy: { swr: 10, ttl: 10 } // 10-second cache for operator dashboard (needs to be responsive)
-    })
+    }) as any
   }
 
   // Get WOOs filtered by specific departments
@@ -243,7 +243,7 @@ export class WorkOrderOperationsService {
         { routingOperation: { operationNumber: 'asc' } }
       ],
       cacheStrategy: { swr: 20, ttl: 20 } // 20-second cache for department-filtered WOOs
-    })
+    }) as any
   }
 
   // Start WOO
