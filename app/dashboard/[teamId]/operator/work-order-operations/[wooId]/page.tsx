@@ -343,7 +343,7 @@ export default function WorkOrderOperationDetailPage() {
           </div>
 
           <div className="flex items-center gap-4 w-full sm:w-auto justify-end">
-            <Badge 
+            <Badge
               variant={woo.status === "in_progress" ? "active" : woo.status === "paused" ? "paused" : "pending"}
               className="text-base px-3 py-1"
             >
@@ -372,7 +372,7 @@ export default function WorkOrderOperationDetailPage() {
                 onClick={handlePause}
                 disabled={actionLoading === "pause"}
                 variant="outline"
-                className="bg-blue-100 hover:bg-blue-200 min-h-12 text-base font-medium"
+                className="bg-blue-300 hover:bg-blue-400 min-h-12 text-base font-medium"
                 size="lg"
               >
                 <Pause className="h-5 w-5 mr-3" />
@@ -604,8 +604,8 @@ export default function WorkOrderOperationDetailPage() {
                         <CardContent className="p-4">
                           {file.mimeType.startsWith('image/') ? (
                             <div className="space-y-3">
-                              <img 
-                                src={file.url} 
+                              <img
+                                src={file.url}
                                 alt={file.originalName}
                                 className="max-w-full h-64 object-contain rounded-md border mx-auto"
                               />
@@ -707,7 +707,7 @@ export default function WorkOrderOperationDetailPage() {
                   attachmentType="operator"
                 />
               </div>
-              
+
               {/* Operator Uploaded Files */}
               {loadingAttachments ? (
                 <div className="text-center py-8">
